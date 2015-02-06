@@ -15,6 +15,8 @@
 		2FF45B5B1A840A0E00D49057 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FF45B5A1A840A0E00D49057 /* Images.xcassets */; };
 		2FF45B5E1A840A0E00D49057 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FF45B5C1A840A0E00D49057 /* LaunchScreen.xib */; };
 		2FF45B6A1A840A0F00D49057 /* DodgingAstroidsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B691A840A0F00D49057 /* DodgingAstroidsTests.m */; };
+		2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2FF45B781A84487300D49057 /* ExhaustParticle.sks */; };
+		2FF45B7B1A84487300D49057 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FF45B791A84487300D49057 /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		2FF45B631A840A0F00D49057 /* DodgingAstroidsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DodgingAstroidsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FF45B681A840A0F00D49057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FF45B691A840A0F00D49057 /* DodgingAstroidsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DodgingAstroidsTests.m; sourceTree = "<group>"; };
+		2FF45B781A84487300D49057 /* ExhaustParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExhaustParticle.sks; sourceTree = "<group>"; };
+		2FF45B791A84487300D49057 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 				2FF45B5A1A840A0E00D49057 /* Images.xcassets */,
 				2FF45B5C1A840A0E00D49057 /* LaunchScreen.xib */,
 				2FF45B481A840A0E00D49057 /* Supporting Files */,
+				2FF45B781A84487300D49057 /* ExhaustParticle.sks */,
+				2FF45B791A84487300D49057 /* spark.png */,
 			);
 			path = DodgingAstroids;
 			sourceTree = "<group>";
@@ -204,6 +210,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FF45B7B1A84487300D49057 /* spark.png in Resources */,
+				2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */,
 				2FF45B5E1A840A0E00D49057 /* LaunchScreen.xib in Resources */,
 				2FF45B5B1A840A0E00D49057 /* Images.xcassets in Resources */,
 				2FF45B591A840A0E00D49057 /* Main.storyboard in Resources */,
@@ -418,6 +426,7 @@
 				2FF45B6F1A840A0F00D49057 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2FF45B701A840A0F00D49057 /* Build configuration list for PBXNativeTarget "DodgingAstroidsTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +435,7 @@
 				2FF45B721A840A0F00D49057 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
