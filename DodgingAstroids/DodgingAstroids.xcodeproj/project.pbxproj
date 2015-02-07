@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D271A85C103004DA8B3 /* thrusters.caf */; };
+		2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D2A1A85C545004DA8B3 /* rock.caf */; };
+		2F0B6D311A85CF15004DA8B3 /* space.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D301A85CF15004DA8B3 /* space.atlas */; };
 		2FF45B4B1A840A0E00D49057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4A1A840A0E00D49057 /* main.m */; };
 		2FF45B4E1A840A0E00D49057 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4D1A840A0E00D49057 /* AppDelegate.m */; };
 		2FF45B511A840A0E00D49057 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B501A840A0E00D49057 /* GameScene.m */; };
@@ -30,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F0B6D271A85C103004DA8B3 /* thrusters.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrusters.caf; sourceTree = "<group>"; };
+		2F0B6D2A1A85C545004DA8B3 /* rock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rock.caf; sourceTree = "<group>"; };
+		2F0B6D301A85CF15004DA8B3 /* space.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = space.atlas; sourceTree = "<group>"; };
 		2FF45B451A840A0E00D49057 /* DodgingAstroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DodgingAstroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FF45B491A840A0E00D49057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FF45B4A1A840A0E00D49057 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -67,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F0B6D251A85C0D9004DA8B3 /* SFX */ = {
+			isa = PBXGroup;
+			children = (
+				2F0B6D2A1A85C545004DA8B3 /* rock.caf */,
+				2F0B6D271A85C103004DA8B3 /* thrusters.caf */,
+			);
+			name = SFX;
+			sourceTree = "<group>";
+		};
 		2FF45B3C1A840A0E00D49057 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +111,7 @@
 				2FF45B551A840A0E00D49057 /* GameViewController.m */,
 				2FF45B571A840A0E00D49057 /* Main.storyboard */,
 				2FF45B5A1A840A0E00D49057 /* Images.xcassets */,
+				2F0B6D301A85CF15004DA8B3 /* space.atlas */,
 				2FF45B5C1A840A0E00D49057 /* LaunchScreen.xib */,
 				2FF45B481A840A0E00D49057 /* Supporting Files */,
 				2FF45B781A84487300D49057 /* ExhaustParticle.sks */,
@@ -107,6 +123,7 @@
 		2FF45B481A840A0E00D49057 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2F0B6D251A85C0D9004DA8B3 /* SFX */,
 				2FF45B491A840A0E00D49057 /* Info.plist */,
 				2FF45B4A1A840A0E00D49057 /* main.m */,
 			);
@@ -210,6 +227,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */,
+				2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */,
+				2F0B6D311A85CF15004DA8B3 /* space.atlas in Resources */,
 				2FF45B7B1A84487300D49057 /* spark.png in Resources */,
 				2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */,
 				2FF45B5E1A840A0E00D49057 /* LaunchScreen.xib in Resources */,

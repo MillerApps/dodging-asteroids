@@ -14,13 +14,14 @@
     //add spaceship to scene
     SKSpriteNode *spaceShip = [SKSpriteNode spriteNodeWithImageNamed:@"playerShip"];
     spaceShip.position = CGPointMake(self.size.width/2, 100);
+    spaceShip.name = @"ship";
     
     [self addChild:spaceShip];
     
     //add spaceship exhaust
     
     SKEmitterNode *exhaust = [SKEmitterNode nodeWithFileNamed:@"ExhaustParticle.sks"];
-    exhaust.position = CGPointMake(0, -35);
+    exhaust.position = CGPointMake(0, -40);
     [spaceShip addChild:exhaust];
     
     
@@ -32,10 +33,12 @@
     //add astroids to scene
     SKSpriteNode *astroid = [SKSpriteNode spriteNodeWithImageNamed:@"meteorBrown_big1"];
     astroid.position = CGPointMake(50, self.size.height/2);
+    astroid.name = @"astroid";
     [self addChild:astroid];
     
     SKSpriteNode *astroidTwo = [SKSpriteNode spriteNodeWithImageNamed:@"meteorBrown_big3"];
-    astroidTwo.position = CGPointMake(320, self.size.height - 60);
+    astroidTwo.position = CGPointMake(self.size.width - 60, self.size.height - 60);
+    astroidTwo.name = @"astroid";
     [self addChild:astroidTwo];
 }
 
@@ -51,6 +54,23 @@
     
     [self addPlayerShip];
     [self addAstroids];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    //this code will be removed in the coming weeks
+    for (UITouch *touch in touches) {
+        NSArray *nodes = [self nodesAtPoint:[touch locationInNode:self]];
+        for (SKNode *node in nodes) {
+            if ([node.name isEqualToString:@"astroid"]) {
+                
+                [self runAction:[SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO]];
+            }
+            if ([node.name isEqualToString:@"ship"]) {
+                
+                [self runAction:[SKAction playSoundFileNamed:@"thrusters.caf" waitForCompletion:NO]];
+            }
+        }
+    }
 }
 
 
