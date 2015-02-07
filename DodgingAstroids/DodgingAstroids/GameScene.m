@@ -7,23 +7,14 @@
 //
 
 #import "GameScene.h"
+#import "ShipNode.h"
 
 @implementation GameScene
 
 - (void)addPlayerShip {
     //add spaceship to scene
-    SKSpriteNode *spaceShip = [SKSpriteNode spriteNodeWithImageNamed:@"playerShip"];
-    spaceShip.position = CGPointMake(self.size.width/2, 100);
-    spaceShip.name = @"ship";
-    
-    [self addChild:spaceShip];
-    
-    //add spaceship exhaust
-    
-    SKEmitterNode *exhaust = [SKEmitterNode nodeWithFileNamed:@"ExhaustParticle.sks"];
-    exhaust.position = CGPointMake(0, -40);
-    [spaceShip addChild:exhaust];
-    
+    ShipNode *ship = [ShipNode shipAtPostion:CGPointMake(self.size.width/2, 100)];
+    [self addChild:ship];
     
     
 }
