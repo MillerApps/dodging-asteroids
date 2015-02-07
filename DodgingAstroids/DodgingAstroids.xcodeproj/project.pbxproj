@@ -11,6 +11,7 @@
 		2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D2A1A85C545004DA8B3 /* rock.caf */; };
 		2F0B6D311A85CF15004DA8B3 /* space.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D301A85CF15004DA8B3 /* space.atlas */; };
 		2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF09561A85EE3F00A3B295 /* ShipNode.m */; };
+		2FBF09601A86127F00A3B295 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBF095F1A86127F00A3B295 /* AVFoundation.framework */; };
 		2FF45B4B1A840A0E00D49057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4A1A840A0E00D49057 /* main.m */; };
 		2FF45B4E1A840A0E00D49057 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4D1A840A0E00D49057 /* AppDelegate.m */; };
 		2FF45B511A840A0E00D49057 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B501A840A0E00D49057 /* GameScene.m */; };
@@ -39,6 +40,7 @@
 		2F0B6D301A85CF15004DA8B3 /* space.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = space.atlas; sourceTree = "<group>"; };
 		2FBF09551A85EE3F00A3B295 /* ShipNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipNode.h; sourceTree = "<group>"; };
 		2FBF09561A85EE3F00A3B295 /* ShipNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipNode.m; sourceTree = "<group>"; };
+		2FBF095F1A86127F00A3B295 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2FF45B451A840A0E00D49057 /* DodgingAstroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DodgingAstroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FF45B491A840A0E00D49057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FF45B4A1A840A0E00D49057 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FBF09601A86127F00A3B295 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +136,7 @@
 				2FF45B481A840A0E00D49057 /* Supporting Files */,
 				2FF45B781A84487300D49057 /* ExhaustParticle.sks */,
 				2FF45B791A84487300D49057 /* spark.png */,
+				2FBF095F1A86127F00A3B295 /* AVFoundation.framework */,
 			);
 			path = DodgingAstroids;
 			sourceTree = "<group>";

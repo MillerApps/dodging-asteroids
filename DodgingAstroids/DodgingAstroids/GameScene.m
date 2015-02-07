@@ -15,6 +15,8 @@
     //add spaceship to scene
     ShipNode *ship = [ShipNode shipAtPostion:CGPointMake(self.size.width/2, 100)];
     [self addChild:ship];
+    [ship playShipSFXForever];
+   
     
     
 }
@@ -56,10 +58,7 @@
                 
                 [self runAction:[SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO]];
             }
-            if ([node.name isEqualToString:@"ship"]) {
-                
-                [self runAction:[SKAction playSoundFileNamed:@"thrusters.caf" waitForCompletion:NO]];
-            }
+           
         }
     }
 }

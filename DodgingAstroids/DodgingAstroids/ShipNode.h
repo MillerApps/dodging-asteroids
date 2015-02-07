@@ -11,5 +11,6 @@
 @interface ShipNode : SKSpriteNode
 
 +(instancetype)shipAtPostion:(CGPoint)position;
+-(void)playShipSFXForever;
 
 @end
