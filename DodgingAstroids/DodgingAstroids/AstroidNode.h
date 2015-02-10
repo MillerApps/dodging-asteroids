@@ -10,7 +10,8 @@
 
 typedef NS_ENUM(NSUInteger, AstoridType) {
     AstoridTypeA = 0,
-    AstoridTypeB = 1
+    AstoridTypeB = 1,
+    AstoridTypeC = 2
     
 };
 

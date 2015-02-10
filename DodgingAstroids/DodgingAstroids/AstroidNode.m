@@ -16,8 +16,10 @@
     
     if (type == AstoridTypeA) {
         astroid = [self spriteNodeWithImageNamed:@"rock_a"];
-    } else {
+    } else if (type == AstoridTypeB) {
         astroid = [self spriteNodeWithImageNamed:@"rock_b"];
+    } else {
+        astroid = [self spriteNodeWithImageNamed:@"rock_c"];
     }
     
     astroid.name = @"astroid";
