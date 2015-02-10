@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D271A85C103004DA8B3 /* thrusters.caf */; };
 		2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D2A1A85C545004DA8B3 /* rock.caf */; };
-		2F0B6D311A85CF15004DA8B3 /* space.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D301A85CF15004DA8B3 /* space.atlas */; };
+		2F8AA8411A8A2D0C007984E5 /* art.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA8401A8A2D0C007984E5 /* art.atlas */; };
 		2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF09561A85EE3F00A3B295 /* ShipNode.m */; };
 		2FBF09601A86127F00A3B295 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBF095F1A86127F00A3B295 /* AVFoundation.framework */; };
+		2FBF096D1A87338300A3B295 /* AstroidNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096C1A87338300A3B295 /* AstroidNode.m */; };
+		2FBF09701A87341800A3B295 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096F1A87341800A3B295 /* Utils.m */; };
 		2FF45B4B1A840A0E00D49057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4A1A840A0E00D49057 /* main.m */; };
 		2FF45B4E1A840A0E00D49057 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4D1A840A0E00D49057 /* AppDelegate.m */; };
 		2FF45B511A840A0E00D49057 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B501A840A0E00D49057 /* GameScene.m */; };
@@ -37,10 +39,14 @@
 /* Begin PBXFileReference section */
 		2F0B6D271A85C103004DA8B3 /* thrusters.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrusters.caf; sourceTree = "<group>"; };
 		2F0B6D2A1A85C545004DA8B3 /* rock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rock.caf; sourceTree = "<group>"; };
-		2F0B6D301A85CF15004DA8B3 /* space.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = space.atlas; sourceTree = "<group>"; };
+		2F8AA8401A8A2D0C007984E5 /* art.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = art.atlas; sourceTree = "<group>"; };
 		2FBF09551A85EE3F00A3B295 /* ShipNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipNode.h; sourceTree = "<group>"; };
 		2FBF09561A85EE3F00A3B295 /* ShipNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipNode.m; sourceTree = "<group>"; };
 		2FBF095F1A86127F00A3B295 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2FBF096B1A87338300A3B295 /* AstroidNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AstroidNode.h; sourceTree = "<group>"; };
+		2FBF096C1A87338300A3B295 /* AstroidNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AstroidNode.m; sourceTree = "<group>"; };
+		2FBF096E1A87341800A3B295 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		2FBF096F1A87341800A3B295 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		2FF45B451A840A0E00D49057 /* DodgingAstroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DodgingAstroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FF45B491A840A0E00D49057 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FF45B4A1A840A0E00D49057 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -102,6 +108,8 @@
 			children = (
 				2FBF09551A85EE3F00A3B295 /* ShipNode.h */,
 				2FBF09561A85EE3F00A3B295 /* ShipNode.m */,
+				2FBF096B1A87338300A3B295 /* AstroidNode.h */,
+				2FBF096C1A87338300A3B295 /* AstroidNode.m */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -131,12 +139,14 @@
 				2FBF09581A85EE4700A3B295 /* Nodes */,
 				2FF45B571A840A0E00D49057 /* Main.storyboard */,
 				2FF45B5A1A840A0E00D49057 /* Images.xcassets */,
-				2F0B6D301A85CF15004DA8B3 /* space.atlas */,
+				2F8AA8401A8A2D0C007984E5 /* art.atlas */,
 				2FF45B5C1A840A0E00D49057 /* LaunchScreen.xib */,
 				2FF45B481A840A0E00D49057 /* Supporting Files */,
 				2FF45B781A84487300D49057 /* ExhaustParticle.sks */,
 				2FF45B791A84487300D49057 /* spark.png */,
 				2FBF095F1A86127F00A3B295 /* AVFoundation.framework */,
+				2FBF096E1A87341800A3B295 /* Utils.h */,
+				2FBF096F1A87341800A3B295 /* Utils.m */,
 			);
 			path = DodgingAstroids;
 			sourceTree = "<group>";
@@ -254,8 +264,8 @@
 			files = (
 				2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */,
 				2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */,
-				2F0B6D311A85CF15004DA8B3 /* space.atlas in Resources */,
 				2FF45B7B1A84487300D49057 /* spark.png in Resources */,
+				2F8AA8411A8A2D0C007984E5 /* art.atlas in Resources */,
 				2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */,
 				2FF45B5E1A840A0E00D49057 /* LaunchScreen.xib in Resources */,
 				2FF45B5B1A840A0E00D49057 /* Images.xcassets in Resources */,
@@ -281,6 +291,8 @@
 				2FF45B4E1A840A0E00D49057 /* AppDelegate.m in Sources */,
 				2FF45B511A840A0E00D49057 /* GameScene.m in Sources */,
 				2FF45B4B1A840A0E00D49057 /* main.m in Sources */,
+				2FBF096D1A87338300A3B295 /* AstroidNode.m in Sources */,
+				2FBF09701A87341800A3B295 /* Utils.m in Sources */,
 				2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

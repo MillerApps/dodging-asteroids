@@ -8,14 +8,26 @@
 
 #import "GameScene.h"
 #import "ShipNode.h"
+#import "Utils.h"
+#import "AstroidNode.h"
+
+@interface GameScene ()
+
+//allows to control astroid spawn rate
+@property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
+@property (nonatomic) NSTimeInterval timeSinceAdded;
+@property (nonatomic) ShipNode *ship;
+
+
+@end
 
 @implementation GameScene
 
 - (void)addPlayerShip {
     //add spaceship to scene
-    ShipNode *ship = [ShipNode shipAtPostion:CGPointMake(self.size.width/2, 100)];
-    [self addChild:ship];
-    [ship playShipSFXForever];
+     self.ship = [ShipNode shipAtPostion:CGPointMake(self.size.width/2, 100)];
+    [self addChild:self.ship];
+    [self.ship playShipSFXForever];
    
     
     
@@ -24,49 +36,80 @@
 -(void)addAstroids {
     // astroids Will be added to the scene at random positions in the fully functional Game
     //add astroids to scene
-    SKSpriteNode *astroid = [SKSpriteNode spriteNodeWithImageNamed:@"meteorBrown_big1"];
-    astroid.position = CGPointMake(50, self.size.height/2);
-    astroid.name = @"astroid";
-    [self addChild:astroid];
+    NSUInteger randomAstroid = [Utils randomWithMin:0 max:2];
     
-    SKSpriteNode *astroidTwo = [SKSpriteNode spriteNodeWithImageNamed:@"meteorBrown_big3"];
-    astroidTwo.position = CGPointMake(self.size.width - 60, self.size.height - 60);
-    astroidTwo.name = @"astroid";
-    [self addChild:astroidTwo];
+    AstroidNode *astroid = [AstroidNode astroidOfType:randomAstroid];
+    //set restarist for where astroids spawn
+    float y = self.frame.size.height;
+    float x = [Utils randomWithMin:astroid.size.width / 2 max:self.frame.size.width - astroid.size.width /2];
+    
+    //set postion
+    astroid.position = CGPointMake(x, y);
+    [self addChild:astroid];
+   
 }
 
 -(void)didMoveToView:(SKView *)view {
     //Set the background image
-    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"darkPurple"];
+    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"bg"];
     background.position = CGPointMake(self.size.width/2, self.size.height/2);
     background.size = self.size;
     [self addChild:background];
     
     //set physicsbody for scene
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    //physics world gravity
+    self.physicsWorld.gravity = CGVectorMake(0, 0);
+    //contact deleagte
+    self.physicsWorld.contactDelegate = self;
+    
     
     [self addPlayerShip];
+    //called once to have astroid spawn immediately
     [self addAstroids];
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //this code will be removed in the coming weeks
-    for (UITouch *touch in touches) {
-        NSArray *nodes = [self nodesAtPoint:[touch locationInNode:self]];
-        for (SKNode *node in nodes) {
-            if ([node.name isEqualToString:@"astroid"]) {
-                
-                [self runAction:[SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO]];
-            }
-           
-        }
+    //COde for moving ship
+    
+    //get a UITouch object
+    UITouch *touch = [touches anyObject];
+    //get touch loc
+    CGPoint location = [touch locationInNode:self];
+    
+    //detect if the left portion of the scene is touched
+    if (location.x < self.size.width / 2) {
+        //move ship to the left
+        [self.ship runAction:[SKAction moveByX:-20.0 y:0.0 duration:0.0]];
+        
+        
+    }
+    
+    //detec if the right portion of the scene is touched
+    if (location.x > self.size.width / 2) {
+        //move ship to the right
+        [self.ship runAction:[SKAction moveByX:20.0 y:0.0 duration:0.0]];
     }
 }
 
 
 
+
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    if (self.lastUpdateTimeInterval) {
+        self.timeSinceAdded += currentTime - self.lastUpdateTimeInterval;
+    }
+    
+    if (self.timeSinceAdded > 2.25) {
+        [self addAstroids];
+        self.timeSinceAdded = 0;
+    }
+    
+    self.lastUpdateTimeInterval = currentTime;
+   
+
 }
 
 @end

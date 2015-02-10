@@ -18,7 +18,7 @@
 @implementation ShipNode
 
 +(instancetype)shipAtPostion:(CGPoint)position {
-    ShipNode *ship = [self spriteNodeWithImageNamed:@"playerShip"];
+    ShipNode *ship = [self spriteNodeWithImageNamed:@"ship"];
     ship.position = position;
     ship.name = @"ship";
     
