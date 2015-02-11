@@ -17,7 +17,7 @@
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) NSTimeInterval timeSinceAdded;
 @property (nonatomic) ShipNode *ship;
-@property (nonatomic) BOOL canMove;
+
 
 @end
 
@@ -58,6 +58,7 @@
     
     //set physicsbody for scene
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    self.physicsBody.categoryBitMask = CollisionCatEdge;
     //physics world gravity
     self.physicsWorld.gravity = CGVectorMake(0, 0);
     //contact deleagte
@@ -83,7 +84,7 @@
     
     
     //detect if the left portion of the scene is touched
-    if (location.x < self.size.width / 2 && _canMove) {
+    if (location.x < self.size.width / 2) {
         //move ship to the left
         
         
@@ -92,7 +93,7 @@
     }
     
     //detec if the right portion of the scene is touched
-    if (location.x > self.size.width / 2 && _canMove) {
+    if (location.x > self.size.width / 2) {
         //move ship to the right
         
         [self.ship runAction:[SKAction moveByX:moveBy y:0.0 duration:0.0]];
@@ -102,31 +103,27 @@
     
 }
 
+-(void)didBeginContact:(SKPhysicsContact *)contact {
+    SKPhysicsBody *body;
+    
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask) {
+        body = contact.bodyA;
+    } else {
+        body = contact.bodyB;
+    }
+    
+    if (body.categoryBitMask == CollisionCatShip) {
+        NSLog(@"SHip");
+        [self runAction:[SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO]];
+        [body.node removeFromParent];
+    }
+}
+
 
 
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
-    
-    
-    //check ships position to kepp it on screen
-    if (self.ship.position.x < self.ship.size.width / 2) {
-        
-        
-        self.ship.position = CGPointMake(self.ship.size.width / 2, 100);
-        _canMove = NO;
-        
-    } else {
-        _canMove = YES;
-    }
-    
-    if (self.ship.position.x > self.size.width - (self.ship.size.width / 2)) {
-        
-        self.ship.position = CGPointMake(self.size.width - (self.ship.size.width / 2), 100);
-        _canMove = NO;
-    } else {
-        _canMove = YES;
-    }
     
     
     

@@ -8,6 +8,7 @@
 
 #import "ShipNode.h"
 #import <AVFoundation/AVFoundation.h>
+#import "Utils.h"
 
 @interface ShipNode ()
 
@@ -30,6 +31,8 @@
     SKEmitterNode *exhaust = [SKEmitterNode nodeWithFileNamed:@"ExhaustParticle.sks"];
     exhaust.position = CGPointMake(0, -40);
     [ship addChild:exhaust];
+    
+    [ship setUpPhysicsBody];
     
     
 
@@ -56,6 +59,24 @@
     
     
 
+}
+
+-(void)setUpPhysicsBody {
+    
+    //Create a mutable path in the shape of a triangle, using the sprite bounds as a guideline
+    CGMutablePathRef physicsPath = CGPathCreateMutable();
+    CGPathMoveToPoint(physicsPath, nil, -self.size.width/2, -self.size.height/2);
+    CGPathAddLineToPoint(physicsPath, nil, self.size.width/2, -self.size.height/2);
+    CGPathAddLineToPoint(physicsPath, nil, 0, self.size.height/2);
+    CGPathAddLineToPoint(physicsPath, nil, -self.size.width/2, -self.size.height/2);
+    
+    self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:physicsPath];
+    self.physicsBody.categoryBitMask = CollisionCatShip;
+    self.physicsBody.collisionBitMask = CollisionCatEdge;
+    self.physicsBody.contactTestBitMask = CollisionCatAstroid;
+    self.physicsBody.allowsRotation = NO;
+    
+    
 }
 
 @end

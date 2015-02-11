@@ -39,7 +39,7 @@
     self.physicsBody.velocity = CGVectorMake(0, -100);
     self.physicsBody.categoryBitMask = CollisionCatAstroid;
     self.physicsBody.collisionBitMask = 0;
-    self.physicsBody.contactTestBitMask = CollisionCatShip;
+    
 }
 
 @end

@@ -11,6 +11,7 @@
 typedef NS_OPTIONS(uint32_t, CollisionCat) {
     CollisionCatShip = 1 << 0,
     CollisionCatAstroid = 1 << 1,
+    CollisionCatEdge = 1 << 2
     
 };
 
