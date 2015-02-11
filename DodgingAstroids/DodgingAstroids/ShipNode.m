@@ -61,6 +61,10 @@
 
 }
 
+-(void)stopShipSFX {
+    [_playExhaustSFX stop];
+}
+
 -(void)setUpPhysicsBody {
     
     //Create a mutable path in the shape of a triangle, using the sprite bounds as a guideline

@@ -12,5 +12,6 @@
 
 +(instancetype)shipAtPostion:(CGPoint)position;
 -(void)playShipSFXForever;
+-(void)stopShipSFX;
 
 @end

@@ -87,8 +87,9 @@
     if (location.x < self.size.width / 2) {
         //move ship to the left
         
-        
-        [self.ship runAction:[SKAction moveByX:-moveBy y:0.0 duration:0.0]];
+        NSArray *actions = @[[SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO],
+                             [SKAction moveByX:-moveBy y:0.0 duration:0.0]];
+        [self.ship runAction:[SKAction sequence:actions]];
         
     }
     
@@ -96,7 +97,9 @@
     if (location.x > self.size.width / 2) {
         //move ship to the right
         
-        [self.ship runAction:[SKAction moveByX:moveBy y:0.0 duration:0.0]];
+        NSArray *actions = @[[SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO],
+                             [SKAction moveByX:moveBy y:0.0 duration:0.0]];
+        [self.ship runAction:[SKAction sequence:actions]];
         
     }
     
@@ -114,8 +117,11 @@
     
     if (body.categoryBitMask == CollisionCatShip) {
         NSLog(@"SHip");
+        
+        
         [self runAction:[SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO]];
         [body.node removeFromParent];
+        [self.ship stopShipSFX];
     }
 }
 
