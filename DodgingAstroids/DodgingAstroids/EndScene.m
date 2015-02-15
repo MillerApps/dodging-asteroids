@@ -19,7 +19,7 @@
     [self addChild:bg];
     
     //create sklabel
-    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
+    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
     label.text = @"You Lost!";
     
     label.fontSize = 50;

@@ -14,6 +14,7 @@
 		2F8AA8481A9114F0007984E5 /* EndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA8471A9114F0007984E5 /* EndScene.m */; };
 		2F8AA84B1A9149B7007984E5 /* PauseButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA84A1A9149B7007984E5 /* PauseButtonNode.m */; };
 		2F8AA84E1A914FF8007984E5 /* PlayButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA84D1A914FF8007984E5 /* PlayButtonNode.m */; };
+		2F8AA8501A915BA9007984E5 /* kenpixel_blocks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */; };
 		2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF09561A85EE3F00A3B295 /* ShipNode.m */; };
 		2FBF09601A86127F00A3B295 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBF095F1A86127F00A3B295 /* AVFoundation.framework */; };
 		2FBF096D1A87338300A3B295 /* AstroidNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096C1A87338300A3B295 /* AstroidNode.m */; };
@@ -51,6 +52,7 @@
 		2F8AA84A1A9149B7007984E5 /* PauseButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseButtonNode.m; sourceTree = "<group>"; };
 		2F8AA84C1A914FF8007984E5 /* PlayButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonNode.h; sourceTree = "<group>"; };
 		2F8AA84D1A914FF8007984E5 /* PlayButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonNode.m; sourceTree = "<group>"; };
+		2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenpixel_blocks.ttf; sourceTree = "<group>"; };
 		2FBF09551A85EE3F00A3B295 /* ShipNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipNode.h; sourceTree = "<group>"; };
 		2FBF09561A85EE3F00A3B295 /* ShipNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipNode.m; sourceTree = "<group>"; };
 		2FBF095F1A86127F00A3B295 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -172,6 +174,7 @@
 		2FF45B481A840A0E00D49057 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */,
 				2FF45B4C1A840A0E00D49057 /* AppDelegate.h */,
 				2FF45B4D1A840A0E00D49057 /* AppDelegate.m */,
 				2FF45B541A840A0E00D49057 /* GameViewController.h */,
@@ -284,6 +287,7 @@
 				2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */,
 				2FF45B7B1A84487300D49057 /* spark.png in Resources */,
 				2F8AA8411A8A2D0C007984E5 /* art.atlas in Resources */,
+				2F8AA8501A915BA9007984E5 /* kenpixel_blocks.ttf in Resources */,
 				2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */,
 				2F8AA8451A8B77BA007984E5 /* shipMovement.caf in Resources */,
 				2FF45B5E1A840A0E00D49057 /* LaunchScreen.xib in Resources */,
