@@ -11,6 +11,8 @@
 #import "Utils.h"
 #import "AstroidNode.h"
 #import "EndScene.h"
+#import "PauseButtonNode.h"
+#import "PlayButtonNode.h"
 
 @interface GameScene ()
 
@@ -18,6 +20,7 @@
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) NSTimeInterval timeSinceAdded;
 @property (nonatomic) ShipNode *ship;
+@property (nonatomic) BOOL isPaused;
 
 
 @end
@@ -50,12 +53,23 @@
     
 }
 
+- (void)addPauseButton {
+    //add [ause button
+    PauseButtonNode *button = [PauseButtonNode buttonAtPosition:CGPointMake(self.size.width - 65, self.size.height - 30)];
+    [self addChild:button];
+}
+
 -(void)didMoveToView:(SKView *)view {
+    
+    _isPaused = NO;
     //Set the background image
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"bg"];
     background.position = CGPointMake(self.size.width/2, self.size.height/2);
     background.size = self.size;
     [self addChild:background];
+    
+    [self addPauseButton];
+    
     
     //set physicsbody for scene
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
@@ -70,6 +84,8 @@
     //called once to have astroid spawn immediately
     [self addAstroids];
     
+    
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -79,34 +95,69 @@
     UITouch *touch = [touches anyObject];
     //get touch loc
     CGPoint location = [touch locationInNode:self];
+    //get selected node
+    SKNode *node = [self nodeAtPoint:location];
     
     float moveBy = 20.0;
     
     
     
-    //detect if the left portion of the scene is touched
-    if (location.x < self.size.width / 2) {
-        //move ship to the left
+    
+    
+    
+    //checks for pause button
+    if ([node.name isEqualToString:@"pauseButton"]) {
         
-        NSArray *actions = @[[SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO],
-                             [SKAction moveByX:-moveBy y:0.0 duration:0.0]];
-        [self.ship runAction:[SKAction sequence:actions]];
+        [self.ship pauseSFX];
+        [node removeFromParent];
         
+        //setup start/play button
+        PlayButtonNode *play = [PlayButtonNode buttonAtPosition:node.position];
+        [self addChild:play];
+        
+        [self performSelector:@selector(pauseGame) withObject:nil afterDelay:1/60.0];
+        
+        _isPaused = YES;
+        
+    } else if ([node.name isEqualToString:@"playButton"]) {
+        
+        self.scene.view.paused = NO;
+        [self.ship resumeSFX];
+        [node removeFromParent];
+        [self addPauseButton];
+        _isPaused = NO;
+        
+    } else {
+        
+        //detect if the left portion of the scene is touched
+        if (location.x < self.size.width / 2) {
+            //move ship to the left
+            
+            NSArray *actions = @[[SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO],
+                                 [SKAction moveByX:-moveBy y:0.0 duration:0.0]];
+            [self.ship runAction:[SKAction sequence:actions]];
+            
+        }
+        
+        //detec if the right portion of the scene is touched
+        if (location.x > self.size.width / 2) {
+            //move ship to the right
+            
+            NSArray *actions = @[[SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO],
+                                 [SKAction moveByX:moveBy y:0.0 duration:0.0]];
+            [self.ship runAction:[SKAction sequence:actions]];
+            
+        }
     }
     
-    //detec if the right portion of the scene is touched
-    if (location.x > self.size.width / 2) {
-        //move ship to the right
-        
-        NSArray *actions = @[[SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO],
-                             [SKAction moveByX:moveBy y:0.0 duration:0.0]];
-        [self.ship runAction:[SKAction sequence:actions]];
-        
-    }
+    
     
     
 }
 
+-(void)pauseGame {
+    self.scene.view.paused = YES;
+}
 - (void)animateShipExplosion {
     
     SKSpriteNode *explosion = [SKSpriteNode spriteNodeWithImageNamed:@"explosion00"];
@@ -164,19 +215,26 @@
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
     
-    
-    
-    //called for astroid spawning
-    if (self.lastUpdateTimeInterval) {
-        self.timeSinceAdded += currentTime - self.lastUpdateTimeInterval;
+    if (_isPaused) {
+        self.lastUpdateTimeInterval = 0;
+        return;
+    } else {
+        
+        
+        
+        //called for astroid spawning
+        if (self.lastUpdateTimeInterval) {
+            self.timeSinceAdded += currentTime - self.lastUpdateTimeInterval;
+        }
+        
+        if (self.timeSinceAdded > 2.25) {
+            [self addAstroids];
+            self.timeSinceAdded = 0;
+        }
+        
+        
+        self.lastUpdateTimeInterval = currentTime;
     }
-    
-    if (self.timeSinceAdded > 2.25) {
-        [self addAstroids];
-        self.timeSinceAdded = 0;
-    }
-    
-    self.lastUpdateTimeInterval = currentTime;
     
     
 }
