@@ -133,24 +133,29 @@
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact {
-    SKPhysicsBody *body;
+    SKPhysicsBody *firstBody, *sceondBody;
     
     if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask) {
-        body = contact.bodyA;
+        firstBody = contact.bodyA;
+        sceondBody = contact.bodyB;
     } else {
-        body = contact.bodyB;
+        firstBody = contact.bodyB;
+        sceondBody = contact.bodyA;
     }
     
-    if (body.categoryBitMask == CollisionCatShip) {
-        NSLog(@"SHip");
+    if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
+        ShipNode *ship = (ShipNode *)firstBody.node;
+        AstroidNode *asteroid = (AstroidNode *)sceondBody.node;
         
         [self animateShipExplosion];
         
         
         [self runAction:[SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO]];
-        [body.node removeFromParent];
+        [ship removeFromParent];
+        [asteroid removeFromParent];
         [self.ship stopShipSFX];
     }
+    
 }
 
 
