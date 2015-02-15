@@ -10,6 +10,7 @@
 #import "ShipNode.h"
 #import "Utils.h"
 #import "AstroidNode.h"
+#import "EndScene.h"
 
 @interface GameScene ()
 
@@ -106,6 +107,31 @@
     
 }
 
+- (void)animateShipExplosion {
+    
+    SKSpriteNode *explosion = [SKSpriteNode spriteNodeWithImageNamed:@"explosion00"];
+    explosion.position = self.ship.position; //sets the postion to that of the ship's
+    explosion.size = self.ship.size; //sets the size/scale equal tot the ship's
+    [self addChild:explosion];
+    
+    NSArray *shipHitAnimation = @[[SKTexture textureWithImageNamed:@"explosion00"],
+                                  [SKTexture textureWithImageNamed:@"explosion01"],
+                                  [SKTexture textureWithImageNamed:@"explosion02"],
+                                  [SKTexture textureWithImageNamed:@"explosion03"],
+                                  [SKTexture textureWithImageNamed:@"explosion04"],
+                                  [SKTexture textureWithImageNamed:@"explosion05"]];
+    
+    SKAction *animate = [SKAction animateWithTextures:shipHitAnimation timePerFrame:0.50];
+    [explosion runAction:[SKAction repeatAction:animate count:2] completion:^{
+        [explosion removeFromParent];
+        
+        //Transition to end
+        EndScene *gameOver = [EndScene sceneWithSize:self.size];
+        [self.view presentScene:gameOver transition:[SKTransition doorsOpenHorizontalWithDuration:1.0]];
+        
+    }];
+}
+
 -(void)didBeginContact:(SKPhysicsContact *)contact {
     SKPhysicsBody *body;
     
@@ -117,6 +143,8 @@
     
     if (body.categoryBitMask == CollisionCatShip) {
         NSLog(@"SHip");
+        
+        [self animateShipExplosion];
         
         
         [self runAction:[SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO]];
