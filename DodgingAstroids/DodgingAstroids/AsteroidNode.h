@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, AstoridType) {
     
 };
 
-@interface AstroidNode : SKSpriteNode
+@interface AsteroidNode : SKSpriteNode
 
 +(instancetype)astroidOfType:(AstoridType)type;
 

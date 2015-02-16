@@ -9,7 +9,7 @@
 #import "GameScene.h"
 #import "ShipNode.h"
 #import "Utils.h"
-#import "AstroidNode.h"
+#import "AsteroidNode.h"
 #import "EndScene.h"
 #import "PauseButtonNode.h"
 #import "PlayButtonNode.h"
@@ -20,12 +20,19 @@
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) NSTimeInterval timeSinceAdded;
 @property (nonatomic) ShipNode *ship;
+@property (nonatomic) PauseButtonNode *pauseBtn;
 @property (nonatomic) BOOL isPaused;
+@property (nonatomic) BOOL isPausedByResign;
+@property (nonatomic) BOOL isShip;
 
 
 @end
 
 @implementation GameScene
+
+
+
+#pragma mark - Add Nodes
 
 - (void)addPlayerShip {
     //add spaceship to scene
@@ -42,7 +49,7 @@
     //add astroids to scene
     NSUInteger randomAstroid = [Utils randomWithMin:0 max:3];
     
-    AstroidNode *astroid = [AstroidNode astroidOfType:randomAstroid];
+    AsteroidNode *astroid = [AsteroidNode astroidOfType:randomAstroid];
     //set restarist for where astroids spawn
     float y = self.frame.size.height;
     float x = [Utils randomWithMin:astroid.size.width / 2 max:self.frame.size.width - astroid.size.width /2];
@@ -55,17 +62,23 @@
 
 - (void)addPauseButton {
     //add [ause button
-    PauseButtonNode *button = [PauseButtonNode buttonAtPosition:CGPointMake(self.size.width - 65, self.size.height - 30)];
-    [self addChild:button];
+    _pauseBtn = [PauseButtonNode buttonAtPosition:CGPointMake(self.size.width - 65, self.size.height - 30)];
+    [self addChild:_pauseBtn];
 }
+
+
 
 -(void)didMoveToView:(SKView *)view {
     
+    [self registerAppTransitionObservers];
+    
     _isPaused = NO;
+    _isShip = YES;
     //Set the background image
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"bg"];
     background.position = CGPointMake(self.size.width/2, self.size.height/2);
     background.size = self.size;
+    background.zPosition = 0;
     [self addChild:background];
     
     [self addPauseButton];
@@ -88,6 +101,8 @@
     
 }
 
+#pragma mark - Touches
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //COde for moving ship
     
@@ -100,32 +115,46 @@
     
     float moveBy = 20.0;
     
-    
-    
-    
-    
-    
     //checks for pause button
     if ([node.name isEqualToString:@"pauseButton"]) {
         
-        [self.ship pauseSFX];
-        [node removeFromParent];
         
-        //setup start/play button
-        PlayButtonNode *play = [PlayButtonNode buttonAtPosition:node.position];
-        [self addChild:play];
+        if (_isShip) {
+            [self.ship stopShipSFX];
+            [node removeFromParent];
+            
+            //setup start/play button
+            PlayButtonNode *play = [PlayButtonNode buttonAtPosition:node.position];
+            [self addChild:play];
+            
+            
+            
+            [self performSelector:@selector(pauseGame) withObject:nil afterDelay:1/60.0];
+            
+            _isPaused = YES;
+        } else {
+            _isPaused = NO;
+        }
         
-        [self performSelector:@selector(pauseGame) withObject:nil afterDelay:1/60.0];
         
-        _isPaused = YES;
+        
         
     } else if ([node.name isEqualToString:@"playButton"]) {
         
-        self.scene.view.paused = NO;
-        [self.ship resumeSFX];
         [node removeFromParent];
+        
+        
+        
         [self addPauseButton];
         _isPaused = NO;
+        
+        
+        if (_isShip) {
+            [self.ship playShipSFXForever];//only plays sound back if ship still exists
+            
+            
+        }
+        self.scene.paused = NO;
         
     } else {
         
@@ -155,14 +184,37 @@
     
 }
 
+
+#pragma mark - Pause Game
+
 -(void)pauseGame {
-    self.scene.view.paused = YES;
+    
+    if (_isShip) {
+        self.scene.paused = YES;
+        
+        if (_isPausedByResign) {
+            [self.ship stopShipSFX];
+            [_pauseBtn removeFromParent];
+            
+            //setup start/play button
+            PlayButtonNode *play = [PlayButtonNode buttonAtPosition:_pauseBtn.position];
+            [self addChild:play];
+            
+            _isPaused = YES;
+            _isPausedByResign = NO;
+        }
+    }
+    
 }
+
+#pragma mark - Contact Detection 
+
 - (void)animateShipExplosion {
     
     SKSpriteNode *explosion = [SKSpriteNode spriteNodeWithImageNamed:@"explosion00"];
     explosion.position = self.ship.position; //sets the postion to that of the ship's
     explosion.size = self.ship.size; //sets the size/scale equal tot the ship's
+    explosion.zPosition = 1;
     [self addChild:explosion];
     
     NSArray *shipHitAnimation = @[[SKTexture textureWithImageNamed:@"explosion00"],
@@ -183,6 +235,7 @@
     }];
 }
 
+
 -(void)didBeginContact:(SKPhysicsContact *)contact {
     SKPhysicsBody *firstBody, *sceondBody;
     
@@ -196,7 +249,7 @@
     
     if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
         ShipNode *ship = (ShipNode *)firstBody.node;
-        AstroidNode *asteroid = (AstroidNode *)sceondBody.node;
+        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
         
         [self animateShipExplosion];
         
@@ -205,12 +258,14 @@
         [ship removeFromParent];
         [asteroid removeFromParent];
         [self.ship stopShipSFX];
+        
+        _isShip = NO;
     }
     
 }
 
 
-
+#pragma mark - Update Loop
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
@@ -237,6 +292,47 @@
     }
     
     
+}
+
+#pragma mark - NSNotificationCenter for Handleing pauses
+
+-(void)registerAppTransitionObservers {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:Nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidEnterBackground)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:Nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:Nil];
+    
+}
+
+-(void)applicationWillResignActive {
+    _isPausedByResign = YES;
+    if (!_isPaused) {
+        [self pauseGame];
+    }
+}
+
+-(void)applicationDidEnterBackground {
+    self.scene.paused = YES;
+    [_ship stopShipSFX];
+    
+}
+
+-(void)applicationWillEnterForeground {
+    self.scene.paused = NO;
+    if (_isPaused) {
+        self.scene.paused = YES;
+    }
 }
 
 @end

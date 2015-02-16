@@ -13,7 +13,6 @@
 +(instancetype)shipAtPostion:(CGPoint)position;
 -(void)playShipSFXForever;
 -(void)stopShipSFX;
--(void)pauseSFX;
--(void)resumeSFX;
+
 
 @end

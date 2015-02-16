@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Tyler Miller. All rights reserved.
 //
 
-#import "AstroidNode.h"
+#import "AsteroidNode.h"
 #import "Utils.h"
 
-@implementation AstroidNode
+@implementation AsteroidNode
 
 +(instancetype)astroidOfType:(AstoridType)type {
-    AstroidNode *astroid;
+    AsteroidNode *astroid;
     
     if (type == AstoridTypeA) {
         astroid = [self spriteNodeWithImageNamed:@"rock_a"];
@@ -23,6 +23,7 @@
     }
     
     astroid.name = @"astroid";
+    astroid.zPosition = 1;
     
     [astroid setUpPhysicsBody];
     

@@ -17,7 +17,7 @@
 		2F8AA8501A915BA9007984E5 /* kenpixel_blocks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */; };
 		2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF09561A85EE3F00A3B295 /* ShipNode.m */; };
 		2FBF09601A86127F00A3B295 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBF095F1A86127F00A3B295 /* AVFoundation.framework */; };
-		2FBF096D1A87338300A3B295 /* AstroidNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096C1A87338300A3B295 /* AstroidNode.m */; };
+		2FBF096D1A87338300A3B295 /* AsteroidNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096C1A87338300A3B295 /* AsteroidNode.m */; };
 		2FBF09701A87341800A3B295 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096F1A87341800A3B295 /* Utils.m */; };
 		2FF45B4B1A840A0E00D49057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4A1A840A0E00D49057 /* main.m */; };
 		2FF45B4E1A840A0E00D49057 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4D1A840A0E00D49057 /* AppDelegate.m */; };
@@ -56,8 +56,8 @@
 		2FBF09551A85EE3F00A3B295 /* ShipNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipNode.h; sourceTree = "<group>"; };
 		2FBF09561A85EE3F00A3B295 /* ShipNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipNode.m; sourceTree = "<group>"; };
 		2FBF095F1A86127F00A3B295 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		2FBF096B1A87338300A3B295 /* AstroidNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AstroidNode.h; sourceTree = "<group>"; };
-		2FBF096C1A87338300A3B295 /* AstroidNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AstroidNode.m; sourceTree = "<group>"; };
+		2FBF096B1A87338300A3B295 /* AsteroidNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsteroidNode.h; sourceTree = "<group>"; };
+		2FBF096C1A87338300A3B295 /* AsteroidNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsteroidNode.m; sourceTree = "<group>"; };
 		2FBF096E1A87341800A3B295 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		2FBF096F1A87341800A3B295 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		2FF45B451A840A0E00D49057 /* DodgingAstroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DodgingAstroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,8 +124,8 @@
 			children = (
 				2FBF09551A85EE3F00A3B295 /* ShipNode.h */,
 				2FBF09561A85EE3F00A3B295 /* ShipNode.m */,
-				2FBF096B1A87338300A3B295 /* AstroidNode.h */,
-				2FBF096C1A87338300A3B295 /* AstroidNode.m */,
+				2FBF096B1A87338300A3B295 /* AsteroidNode.h */,
+				2FBF096C1A87338300A3B295 /* AsteroidNode.m */,
 				2F8AA8491A9149B7007984E5 /* PauseButtonNode.h */,
 				2F8AA84A1A9149B7007984E5 /* PauseButtonNode.m */,
 				2F8AA84C1A914FF8007984E5 /* PlayButtonNode.h */,
@@ -317,7 +317,7 @@
 				2F8AA8481A9114F0007984E5 /* EndScene.m in Sources */,
 				2FF45B511A840A0E00D49057 /* GameScene.m in Sources */,
 				2FF45B4B1A840A0E00D49057 /* main.m in Sources */,
-				2FBF096D1A87338300A3B295 /* AstroidNode.m in Sources */,
+				2FBF096D1A87338300A3B295 /* AsteroidNode.m in Sources */,
 				2FBF09701A87341800A3B295 /* Utils.m in Sources */,
 				2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */,
 			);

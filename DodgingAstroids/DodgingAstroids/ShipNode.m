@@ -21,7 +21,9 @@
 +(instancetype)shipAtPostion:(CGPoint)position {
     ShipNode *ship = [self spriteNodeWithImageNamed:@"ship"];
     ship.position = position;
+    ship.zPosition = 1;
     ship.name = @"ship";
+    
     
     
     
@@ -30,6 +32,7 @@
     
     SKEmitterNode *exhaust = [SKEmitterNode nodeWithFileNamed:@"ExhaustParticle.sks"];
     exhaust.position = CGPointMake(0, -40);
+    exhaust.zPosition = 1;
     [ship addChild:exhaust];
     
     [ship setUpPhysicsBody];
@@ -65,13 +68,7 @@
     [_playExhaustSFX stop];
 }
 
--(void)pauseSFX {
-    [_playExhaustSFX pause];
-}
 
--(void)resumeSFX {
-    [_playExhaustSFX play];
-}
 
 -(void)setUpPhysicsBody {
     
