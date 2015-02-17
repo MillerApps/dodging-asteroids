@@ -24,7 +24,8 @@
 @property (nonatomic) BOOL isPaused;
 @property (nonatomic) BOOL isPausedByResign;
 @property (nonatomic) BOOL isShip;
-
+@property (nonatomic) SKAction *playExpolsionSFX;
+@property (nonatomic) SKAction *playShipMovementSFX;
 
 @end
 
@@ -68,6 +69,12 @@
 
 
 
+- (void)preLoadSFX {
+    //preload sound actions
+    self.playExpolsionSFX = [SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO];
+    self.playShipMovementSFX = [SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO];
+}
+
 -(void)didMoveToView:(SKView *)view {
     
     [self registerAppTransitionObservers];
@@ -97,6 +104,8 @@
     //called once to have astroid spawn immediately
     [self addAstroids];
     
+    [self preLoadSFX];
+
     
     
 }
@@ -162,9 +171,9 @@
         if (location.x < self.size.width / 2) {
             //move ship to the left
             
-            NSArray *actions = @[[SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO],
-                                 [SKAction moveByX:-moveBy y:0.0 duration:0.0]];
-            [self.ship runAction:[SKAction sequence:actions]];
+            
+            [self.ship runAction:[SKAction sequence:@[self.playShipMovementSFX,
+                                                      [SKAction moveByX:-moveBy y:0.0 duration:0.0]]]];
             
         }
         
@@ -172,10 +181,9 @@
         if (location.x > self.size.width / 2) {
             //move ship to the right
             
-            NSArray *actions = @[[SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO],
-                                 [SKAction moveByX:moveBy y:0.0 duration:0.0]];
-            [self.ship runAction:[SKAction sequence:actions]];
-            
+           
+            [self.ship runAction:[SKAction sequence:@[self.playShipMovementSFX,
+                                                      [SKAction moveByX:moveBy y:0.0 duration:0.0]]]];
         }
     }
     
@@ -254,7 +262,7 @@
         [self animateShipExplosion];
         
         
-        [self runAction:[SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO]];
+        [self runAction:self.playExpolsionSFX];
         [ship removeFromParent];
         [asteroid removeFromParent];
         [self.ship stopShipSFX];
