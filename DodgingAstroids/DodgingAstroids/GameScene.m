@@ -192,7 +192,7 @@
     if (_isShip) {
         self.scene.paused = YES;
         
-        if (_isPausedByResign) {
+        if (_isPausedByResign && !_isPaused) {
             [self.ship stopShipSFX];
             [_pauseBtn removeFromParent];
             
@@ -331,7 +331,7 @@
 -(void)applicationWillEnterForeground {
     self.scene.paused = NO;
     if (_isPaused) {
-        self.scene.paused = YES;
+        [self pauseGame];
     }
 }
 
