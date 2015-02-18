@@ -106,7 +106,7 @@
     [self addAstroids];
     
     [self preLoadSFX];
-
+    
     
     
 }
@@ -183,7 +183,7 @@
         if (location.x > self.size.width / 2) {
             //move ship to the right
             
-           
+            
             [self.ship runAction:[SKAction sequence:@[self.playShipMovementSFX,
                                                       [SKAction moveByX:moveBy y:0.0 duration:0.0]]]];
         }
@@ -217,7 +217,7 @@
     
 }
 
-#pragma mark - Contact Detection 
+#pragma mark - Contact Detection
 
 - (void)animateShipExplosion {
     
@@ -295,15 +295,25 @@
         if (self.lastUpdateTimeInterval) {
             self.timeSinceAdded += currentTime - self.lastUpdateTimeInterval;
         }
-        
-        if (self.timeSinceAdded > 2.25) {
-            [self addAstroids];
-            self.timeSinceAdded = 0;
+        //checks device size then adjusts speeds
+        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+            if (self.timeSinceAdded > 2.0) {
+                [self addAstroids];
+                self.timeSinceAdded = 0;
+            }
+        } else {
+            
+            
+            if (self.timeSinceAdded > 2.25) {
+                [self addAstroids];
+                self.timeSinceAdded = 0;
+            }
         }
         
         
         self.lastUpdateTimeInterval = currentTime;
     }
+    
     
     
     
@@ -353,7 +363,7 @@
     if (_isPaused) {
         [self pauseGame];
     }
-  
+    
 }
 
 @end
