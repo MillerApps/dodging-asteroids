@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Utils.h"
 
+
 @interface ShipNode ()
 
 @property (nonatomic) AVAudioPlayer *playExhaustSFX;
@@ -25,15 +26,18 @@
     ship.name = @"ship";
     
     
-    
-    
-    
     //add spaceship exhaust
     
     SKEmitterNode *exhaust = [SKEmitterNode nodeWithFileNamed:@"ExhaustParticle.sks"];
     exhaust.position = CGPointMake(0, -40);
     exhaust.zPosition = 1;
     [ship addChild:exhaust];
+    
+    //changes ship size for smaller screen sizes and exhaust postion
+    if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+        ship.size = CGSizeMake(ship.size.width/1.5, ship.size.height/1.5);
+        exhaust.position = CGPointMake(0, -30);
+    }
     
     [ship setUpPhysicsBody];
     

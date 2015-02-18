@@ -7,6 +7,7 @@
 //
 
 #import "PauseButtonNode.h"
+#import "Utils.h"
 
 @implementation PauseButtonNode
 
@@ -17,6 +18,12 @@
     pause.name = @"pauseButton";
     pause.alpha = 0.5;
     pause.zPosition = 3;
+    
+    //changes button size for smaller screen sizes and position
+    if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+        pause.size = CGSizeMake(pause.size.width/1.5, pause.size.height/1.5);
+        pause.position = CGPointMake(position.x +15, position.y);
+    }
     
     return pause;
     
