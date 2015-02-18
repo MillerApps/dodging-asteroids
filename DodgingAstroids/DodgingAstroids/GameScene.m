@@ -78,7 +78,7 @@
 
 -(void)didMoveToView:(SKView *)view {
     
-    [self registerAppTransitionObservers];//if this is removed the EXC_BAD_ACCESS never happens
+    [self registerAppTransitionObservers];//if this is removed the EXC_BAD_ACCESS never happens; as it turns out the issue is now a EXC_Breakpoint
     
     _isPaused = NO;
     _isShip = YES;
