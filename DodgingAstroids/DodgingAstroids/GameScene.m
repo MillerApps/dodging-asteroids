@@ -78,7 +78,7 @@
 
 -(void)didMoveToView:(SKView *)view {
     
-    [self registerAppTransitionObservers];//if this is removed the EXC_BAD_ACCESS never happens; with Zombies turned on I get this EXC_Breakpoint
+    [self registerAppTransitionObservers];
     
     _isPaused = NO;
     _isShip = YES;
@@ -110,6 +110,7 @@
     
     
 }
+
 
 #pragma mark - Touches
 
@@ -241,6 +242,9 @@
         EndScene *gameOver = [EndScene sceneWithSize:self.size];
         [self.view presentScene:gameOver transition:[SKTransition doorsOpenHorizontalWithDuration:1.0]];
         
+        //Remove obsever from NSNotificationCenter
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        
         
     }];
 }
@@ -332,11 +336,14 @@
     if (!_isPaused) {
         [self pauseGame];
     }
+    
+    
 }
 
 -(void)applicationDidEnterBackground {
     self.view.paused = YES;
     [_ship stopShipSFX];
+    
     
     
 }
@@ -346,6 +353,7 @@
     if (_isPaused) {
         [self pauseGame];
     }
+  
 }
 
 @end
