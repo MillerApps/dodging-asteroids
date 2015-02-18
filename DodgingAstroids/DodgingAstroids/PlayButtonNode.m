@@ -21,7 +21,7 @@
     
     //changes button size for smaller screen sizes and postion
     if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-        play.size = CGSizeMake(play.size.width/1.5, play.size.height/1.5);
+        play.size = [Utils setNodeSize:play.size];
         
     }
     

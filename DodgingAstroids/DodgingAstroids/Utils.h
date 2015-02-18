@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
@@ -32,5 +33,6 @@ typedef NS_OPTIONS(uint32_t, CollisionCat) {
 
 
 +(NSInteger)randomWithMin:(NSInteger)min max:(NSInteger)max;
++(CGSize)setNodeSize:(CGSize)size;
 
 @end

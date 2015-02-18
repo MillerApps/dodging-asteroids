@@ -27,7 +27,8 @@
     
     //changes asteroid size for smaller screen sizes
     if ( IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-        astroid.size = CGSizeMake(astroid.size.width/1.5, astroid.size.height/1.5);
+        astroid.size = [Utils setNodeSize:astroid.size];
+       
     }
     
     [astroid setUpPhysicsBody];

@@ -16,4 +16,10 @@
     
 }
 
++(CGSize)setNodeSize:(CGSize)size {
+    
+    return CGSizeMake(size.width/1.5, size.height/1.5);
+}
+
+
 @end
