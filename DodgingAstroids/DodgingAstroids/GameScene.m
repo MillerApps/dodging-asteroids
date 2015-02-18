@@ -14,6 +14,7 @@
 #import "PauseButtonNode.h"
 #import "PlayButtonNode.h"
 
+
 @interface GameScene ()
 
 //allows to control astroid spawn rate
@@ -77,7 +78,7 @@
 
 -(void)didMoveToView:(SKView *)view {
     
-    [self registerAppTransitionObservers];
+    [self registerAppTransitionObservers];//if this is removed the EXC_BAD_ACCESS never happens
     
     _isPaused = NO;
     _isShip = YES;
@@ -240,6 +241,7 @@
         EndScene *gameOver = [EndScene sceneWithSize:self.size];
         [self.view presentScene:gameOver transition:[SKTransition doorsOpenHorizontalWithDuration:1.0]];
         
+        
     }];
 }
 
@@ -300,6 +302,8 @@
     }
     
     
+    
+    
 }
 
 #pragma mark - NSNotificationCenter for Handleing pauses
@@ -331,13 +335,14 @@
 }
 
 -(void)applicationDidEnterBackground {
-    self.scene.paused = YES;
+    self.view.paused = YES;
     [_ship stopShipSFX];
+    
     
 }
 
 -(void)applicationWillEnterForeground {
-    self.scene.paused = NO;
+    self.view.paused = NO;
     if (_isPaused) {
         [self pauseGame];
     }
