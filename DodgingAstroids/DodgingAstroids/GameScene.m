@@ -20,6 +20,10 @@
 //allows to control astroid spawn rate
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) NSTimeInterval timeSinceAdded;
+@property (nonatomic) NSTimeInterval totalGameTime;
+@property (nonatomic) NSInteger asteroidSpeed;
+@property (nonatomic) float smallPhoneRate;
+@property (nonatomic) float largePhoneRate;
 @property (nonatomic) ShipNode *ship;
 @property (nonatomic) PauseButtonNode *pauseBtn;
 @property (nonatomic) BOOL isPaused;
@@ -58,13 +62,18 @@
     
     //set postion
     astroid.position = CGPointMake(x, y);
+    
+    astroid.physicsBody.velocity = CGVectorMake(0, self.asteroidSpeed);
+    
+    
     [self addChild:astroid];
     
 }
 
 - (void)addPauseButton {
     //add [ause button
-    _pauseBtn = [PauseButtonNode buttonAtPosition:CGPointMake(self.size.width - 65, self.size.height - 30)];
+    _pauseBtn = [PauseButtonNode buttonAtPosition:CGPointMake(self.size.width - 40, self.size.height - 30)];
+    
     [self addChild:_pauseBtn];
 }
 
@@ -79,6 +88,14 @@
 -(void)didMoveToView:(SKView *)view {
     
     [self registerAppTransitionObservers];
+    
+    self.lastUpdateTimeInterval = 0;
+    self.timeSinceAdded = 0;
+    self.totalGameTime = 0;
+    self.asteroidSpeed = asteroidSpeed;
+    self.smallPhoneRate = 2.0;
+    self.largePhoneRate = 2.25;
+    
     
     _isPaused = NO;
     _isShip = YES;
@@ -167,10 +184,12 @@
         }
         self.scene.paused = NO;
         
-    } else {
+    }
+    
+    if (!_isPaused) {
         
         //detect if the left portion of the scene is touched
-        if (location.x < self.size.width / 2) {
+        if (location.x < self.size.width / 2 && location.y < self.size.height - 50) {
             //move ship to the left
             
             
@@ -180,7 +199,7 @@
         }
         
         //detec if the right portion of the scene is touched
-        if (location.x > self.size.width / 2) {
+        if (location.x > self.size.width / 2 && location.y < self.size.height - 50) {
             //move ship to the right
             
             
@@ -261,20 +280,20 @@
         sceondBody = contact.bodyA;
     }
     
-    if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
-        ShipNode *ship = (ShipNode *)firstBody.node;
-        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
-        
-        [self animateShipExplosion];
-        
-        
-        [self runAction:self.playExpolsionSFX];
-        [ship removeFromParent];
-        [asteroid removeFromParent];
-        [self.ship stopShipSFX];
-        
-        _isShip = NO;
-    }
+    //    if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
+    //        ShipNode *ship = (ShipNode *)firstBody.node;
+    //        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
+    //
+    //        [self animateShipExplosion];
+    //
+    //
+    //        [self runAction:self.playExpolsionSFX];
+    //        [ship removeFromParent];
+    //        [asteroid removeFromParent];
+    //        [self.ship stopShipSFX];
+    //
+    //        _isShip = NO;
+    //    }
     
 }
 
@@ -294,17 +313,18 @@
         //called for astroid spawning
         if (self.lastUpdateTimeInterval) {
             self.timeSinceAdded += currentTime - self.lastUpdateTimeInterval;
+            self.totalGameTime += currentTime - self.lastUpdateTimeInterval;
         }
         //checks device size then adjusts speeds
         if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-            if (self.timeSinceAdded > 2.0) {
+            if (self.timeSinceAdded > self.smallPhoneRate) {
                 [self addAstroids];
                 self.timeSinceAdded = 0;
             }
         } else {
             
             
-            if (self.timeSinceAdded > 2.25) {
+            if (self.timeSinceAdded > self.largePhoneRate) {
                 [self addAstroids];
                 self.timeSinceAdded = 0;
             }
@@ -314,6 +334,50 @@
         self.lastUpdateTimeInterval = currentTime;
     }
     
+    
+    //increase the game difficulty by changing the speed pf asteroids
+    if (self.totalGameTime > 240) {
+        self.asteroidSpeed = -150;
+        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+            self.smallPhoneRate =  1.50;
+        } else {
+            self.largePhoneRate = 1.75;
+        }
+        
+    } else if (self.totalGameTime > 120) {
+        self.asteroidSpeed = -140;
+        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+            self.smallPhoneRate =  1.60;
+        } else {
+            self.largePhoneRate = 1.85;
+        }
+        
+    } else if (self.totalGameTime > 60) {
+        self.asteroidSpeed = -130;
+        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+            self.smallPhoneRate =  1.70;
+        } else {
+            self.largePhoneRate = 1.95;
+        }
+        
+    } else if (self.totalGameTime > 30) {
+        self.asteroidSpeed = -120;
+        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+            self.smallPhoneRate =  1.80;
+        } else {
+            self.largePhoneRate = 2.05;
+        }
+        
+    } else if (self.totalGameTime > 15) {
+        self.asteroidSpeed = -110;
+        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+            self.smallPhoneRate =  1.90;
+        } else {
+            self.largePhoneRate = 2.15;
+        }
+        
+    }
+    NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
     
     
     

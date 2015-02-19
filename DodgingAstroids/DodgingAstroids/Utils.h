@@ -22,6 +22,9 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
+static const int asteroidSpeed = -100;
+
+
 typedef NS_OPTIONS(uint32_t, CollisionCat) {
     CollisionCatShip = 1 << 0,
     CollisionCatAstroid = 1 << 1,

@@ -13,17 +13,12 @@
 
 +(instancetype)buttonAtPosition:(CGPoint)position {
     
-    PlayButtonNode *play = [self spriteNodeWithImageNamed:@"start"];
+    PlayButtonNode *play = [self spriteNodeWithImageNamed:@"play"];
     play.position = position;
     play.name = @"playButton";
     play.alpha = 0.5;
     play.zPosition = 3;
     
-    //changes button size for smaller screen sizes and postion
-    if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-        play.size = [Utils setNodeSize:play.size];
-        
-    }
     
     return play;
     

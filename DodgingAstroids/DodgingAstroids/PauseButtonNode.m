@@ -19,11 +19,7 @@
     pause.alpha = 0.5;
     pause.zPosition = 3;
     
-    //changes button size for smaller screen sizes and position
-    if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-        pause.size = [Utils setNodeSize:pause.size];
-        pause.position = CGPointMake(position.x +15, position.y);
-    }
+    
     
     return pause;
     
