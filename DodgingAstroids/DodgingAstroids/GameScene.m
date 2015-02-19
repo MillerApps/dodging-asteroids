@@ -13,6 +13,7 @@
 #import "EndScene.h"
 #import "PauseButtonNode.h"
 #import "PlayButtonNode.h"
+#import "HudNode.h"
 
 
 @interface GameScene ()
@@ -26,6 +27,7 @@
 @property (nonatomic) float largePhoneRate;
 @property (nonatomic) ShipNode *ship;
 @property (nonatomic) PauseButtonNode *pauseBtn;
+@property (nonatomic) HudNode *hud;
 @property (nonatomic) BOOL isPaused;
 @property (nonatomic) BOOL isPausedByResign;
 @property (nonatomic) BOOL isShip;
@@ -77,7 +79,18 @@
     [self addChild:_pauseBtn];
 }
 
+-(void)addHud {
+    _hud = [HudNode hudAtPostion:CGPointMake(self.size.width / 2, self.size.height - 40)];
+    
+    [self addChild:_hud];
+}
 
+-(void)addBottomEdge {
+    SKNode *bottomEdge = [SKNode node];
+    bottomEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 1) toPoint:CGPointMake(self.size.width, 1)];
+    bottomEdge.physicsBody.categoryBitMask = CollisionCatBottomEdge;
+    [self addChild:bottomEdge];
+}
 
 - (void)preLoadSFX {
     //preload sound actions
@@ -107,6 +120,8 @@
     [self addChild:background];
     
     [self addPauseButton];
+    [self addHud];
+    [self addBottomEdge];
     
     
     //set physicsbody for scene
@@ -279,21 +294,29 @@
         firstBody = contact.bodyB;
         sceondBody = contact.bodyA;
     }
+    NSLog(@"Body: %u", firstBody.categoryBitMask);
     
-    //    if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
-    //        ShipNode *ship = (ShipNode *)firstBody.node;
-    //        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
-    //
-    //        [self animateShipExplosion];
-    //
-    //
-    //        [self runAction:self.playExpolsionSFX];
-    //        [ship removeFromParent];
-    //        [asteroid removeFromParent];
-    //        [self.ship stopShipSFX];
-    //
-    //        _isShip = NO;
-    //    }
+    if (firstBody.categoryBitMask == CollisionCatBottomEdge | sceondBody.categoryBitMask == CollisionCatBottomEdge) {
+        //awrad the player points
+        if (_isShip) {
+            [_hud awardScorePoint:pointsAwradared];
+        }
+        
+        NSLog(@"score");
+    } else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
+            ShipNode *ship = (ShipNode *)firstBody.node;
+            AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
+    
+            [self animateShipExplosion];
+    
+    
+            [self runAction:self.playExpolsionSFX];
+            [ship removeFromParent];
+            [asteroid removeFromParent];
+            [self.ship stopShipSFX];
+    
+            _isShip = NO;
+        }
     
 }
 
@@ -377,7 +400,7 @@
         }
         
     }
-    NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
+    //NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
     
     
     

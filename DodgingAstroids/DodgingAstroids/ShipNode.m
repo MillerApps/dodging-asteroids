@@ -8,8 +8,8 @@
 //
 
 #import "ShipNode.h"
-#import <AVFoundation/AVFoundation.h>
 #import "Utils.h"
+@import AVFoundation;
 
 
 @interface ShipNode ()

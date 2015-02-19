@@ -15,8 +15,8 @@
 		2F8AA84B1A9149B7007984E5 /* PauseButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA84A1A9149B7007984E5 /* PauseButtonNode.m */; };
 		2F8AA84E1A914FF8007984E5 /* PlayButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA84D1A914FF8007984E5 /* PlayButtonNode.m */; };
 		2F8AA8501A915BA9007984E5 /* kenpixel_blocks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */; };
+		2FA2559F1A96525F00D6E07F /* HudNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2559E1A96525F00D6E07F /* HudNode.m */; };
 		2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF09561A85EE3F00A3B295 /* ShipNode.m */; };
-		2FBF09601A86127F00A3B295 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBF095F1A86127F00A3B295 /* AVFoundation.framework */; };
 		2FBF096D1A87338300A3B295 /* AsteroidNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096C1A87338300A3B295 /* AsteroidNode.m */; };
 		2FBF09701A87341800A3B295 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096F1A87341800A3B295 /* Utils.m */; };
 		2FF45B4B1A840A0E00D49057 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B4A1A840A0E00D49057 /* main.m */; };
@@ -53,9 +53,10 @@
 		2F8AA84C1A914FF8007984E5 /* PlayButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonNode.h; sourceTree = "<group>"; };
 		2F8AA84D1A914FF8007984E5 /* PlayButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonNode.m; sourceTree = "<group>"; };
 		2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenpixel_blocks.ttf; sourceTree = "<group>"; };
+		2FA2559D1A96525F00D6E07F /* HudNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudNode.h; sourceTree = "<group>"; };
+		2FA2559E1A96525F00D6E07F /* HudNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudNode.m; sourceTree = "<group>"; };
 		2FBF09551A85EE3F00A3B295 /* ShipNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipNode.h; sourceTree = "<group>"; };
 		2FBF09561A85EE3F00A3B295 /* ShipNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipNode.m; sourceTree = "<group>"; };
-		2FBF095F1A86127F00A3B295 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2FBF096B1A87338300A3B295 /* AsteroidNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsteroidNode.h; sourceTree = "<group>"; };
 		2FBF096C1A87338300A3B295 /* AsteroidNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsteroidNode.m; sourceTree = "<group>"; };
 		2FBF096E1A87341800A3B295 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FBF09601A86127F00A3B295 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +130,8 @@
 				2F8AA84A1A9149B7007984E5 /* PauseButtonNode.m */,
 				2F8AA84C1A914FF8007984E5 /* PlayButtonNode.h */,
 				2F8AA84D1A914FF8007984E5 /* PlayButtonNode.m */,
+				2FA2559D1A96525F00D6E07F /* HudNode.h */,
+				2FA2559E1A96525F00D6E07F /* HudNode.m */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -164,7 +166,6 @@
 				2FF45B481A840A0E00D49057 /* Supporting Files */,
 				2FF45B781A84487300D49057 /* ExhaustParticle.sks */,
 				2FF45B791A84487300D49057 /* spark.png */,
-				2FBF095F1A86127F00A3B295 /* AVFoundation.framework */,
 				2FBF096E1A87341800A3B295 /* Utils.h */,
 				2FBF096F1A87341800A3B295 /* Utils.m */,
 			);
@@ -314,6 +315,7 @@
 				2F8AA84E1A914FF8007984E5 /* PlayButtonNode.m in Sources */,
 				2FF45B561A840A0E00D49057 /* GameViewController.m in Sources */,
 				2FF45B4E1A840A0E00D49057 /* AppDelegate.m in Sources */,
+				2FA2559F1A96525F00D6E07F /* HudNode.m in Sources */,
 				2F8AA8481A9114F0007984E5 /* EndScene.m in Sources */,
 				2FF45B511A840A0E00D49057 /* GameScene.m in Sources */,
 				2FF45B4B1A840A0E00D49057 /* main.m in Sources */,

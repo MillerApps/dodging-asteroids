@@ -46,7 +46,7 @@
     
     self.physicsBody.categoryBitMask = CollisionCatAstroid;
     self.physicsBody.collisionBitMask = 0;
-    self.physicsBody.contactTestBitMask = CollisionCatShip;
+    self.physicsBody.contactTestBitMask = CollisionCatShip | CollisionCatBottomEdge;
     
 }
 
