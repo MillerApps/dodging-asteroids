@@ -23,8 +23,7 @@
 @property (nonatomic) NSTimeInterval timeSinceAdded;
 @property (nonatomic) NSTimeInterval totalGameTime;
 @property (nonatomic) NSInteger asteroidSpeed;
-@property (nonatomic) float smallPhoneRate;
-@property (nonatomic) float largePhoneRate;
+@property (nonatomic) float asteroidRespwanRate;
 @property (nonatomic) ShipNode *ship;
 @property (nonatomic) PauseButtonNode *pauseBtn;
 @property (nonatomic) HudNode *hud;
@@ -65,7 +64,13 @@
     //set postion
     astroid.position = CGPointMake(x, y);
     
-    astroid.physicsBody.velocity = CGVectorMake(0, self.asteroidSpeed);
+    //set velocity of asteroids: large asterod is faster
+    if (astroid.type == AstoridTypeC) {
+        astroid.physicsBody.velocity = CGVectorMake(0, self.asteroidSpeed + 5);
+    } else {
+        astroid.physicsBody.velocity = CGVectorMake(0, self.asteroidSpeed);
+    }
+    
     
     
     [self addChild:astroid];
@@ -106,8 +111,7 @@
     self.timeSinceAdded = 0;
     self.totalGameTime = 0;
     self.asteroidSpeed = asteroidSpeed;
-    self.smallPhoneRate = 2.0;
-    self.largePhoneRate = 2.25;
+    self.asteroidRespwanRate = 2.0;
     
     
     _isPaused = NO;
@@ -269,11 +273,13 @@
                                   [SKTexture textureWithImageNamed:@"explosion05"]];
     
     SKAction *animate = [SKAction animateWithTextures:shipHitAnimation timePerFrame:0.50];
-    [explosion runAction:[SKAction repeatAction:animate count:2] completion:^{
+    [explosion runAction:[SKAction repeatAction:animate count:1] completion:^{
         [explosion removeFromParent];
         
         //Transition to end
         EndScene *gameOver = [EndScene sceneWithSize:self.size];
+        gameOver.userData = [NSMutableDictionary dictionary];
+        [gameOver.userData setObject:[NSString stringWithFormat:@"%ld", _hud.score] forKey:@"currentScore"];
         [self.view presentScene:gameOver transition:[SKTransition doorsOpenHorizontalWithDuration:1.0]];
         
         //Remove obsever from NSNotificationCenter
@@ -300,23 +306,33 @@
         //awrad the player points
         if (_isShip) {
             [_hud awardScorePoint:pointsAwradared];
+           
         }
         
         NSLog(@"score");
     } else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
-            ShipNode *ship = (ShipNode *)firstBody.node;
-            AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
-    
-            [self animateShipExplosion];
-    
-    
-            [self runAction:self.playExpolsionSFX];
-            [ship removeFromParent];
-            [asteroid removeFromParent];
-            [self.ship stopShipSFX];
-    
-            _isShip = NO;
+        ShipNode *ship = (ShipNode *)firstBody.node;
+        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
+        
+        [self animateShipExplosion];
+        
+        
+        [self runAction:self.playExpolsionSFX];
+        [ship removeFromParent];
+        [asteroid removeFromParent];
+        [self.ship stopShipSFX];
+        
+        //save highscore to NSUSERDefaults
+        //TODO: add higscore save
+       
+        NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
+        if ([highScore integerForKey:@"highScore"] < _hud.score) {
+            [highScore setInteger:_hud.score forKey:@"highScore"];
         }
+        
+        
+        _isShip = NO;
+    }
     
 }
 
@@ -338,20 +354,13 @@
             self.timeSinceAdded += currentTime - self.lastUpdateTimeInterval;
             self.totalGameTime += currentTime - self.lastUpdateTimeInterval;
         }
-        //checks device size then adjusts speeds
-        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-            if (self.timeSinceAdded > self.smallPhoneRate) {
-                [self addAstroids];
-                self.timeSinceAdded = 0;
-            }
-        } else {
-            
-            
-            if (self.timeSinceAdded > self.largePhoneRate) {
-                [self addAstroids];
-                self.timeSinceAdded = 0;
-            }
+        
+        
+        if (self.timeSinceAdded > self.asteroidRespwanRate) {
+            [self addAstroids];
+            self.timeSinceAdded = 0;
         }
+        
         
         
         self.lastUpdateTimeInterval = currentTime;
@@ -360,44 +369,32 @@
     
     //increase the game difficulty by changing the speed pf asteroids
     if (self.totalGameTime > 240) {
-        self.asteroidSpeed = -150;
-        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-            self.smallPhoneRate =  1.50;
-        } else {
-            self.largePhoneRate = 1.75;
-        }
+        self.asteroidSpeed = -170;
+        self.asteroidRespwanRate = 1.75;
+        
         
     } else if (self.totalGameTime > 120) {
-        self.asteroidSpeed = -140;
-        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-            self.smallPhoneRate =  1.60;
-        } else {
-            self.largePhoneRate = 1.85;
-        }
+        self.asteroidSpeed = -160;
+        self.asteroidRespwanRate = 1.80;
+        
         
     } else if (self.totalGameTime > 60) {
-        self.asteroidSpeed = -130;
-        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-            self.smallPhoneRate =  1.70;
-        } else {
-            self.largePhoneRate = 1.95;
-        }
+        self.asteroidSpeed = -150;
+        
+        self.asteroidRespwanRate = 1.85;
+        
         
     } else if (self.totalGameTime > 30) {
-        self.asteroidSpeed = -120;
-        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-            self.smallPhoneRate =  1.80;
-        } else {
-            self.largePhoneRate = 2.05;
-        }
+        self.asteroidSpeed = -140;
+        
+        self.asteroidRespwanRate = 1.90;
+        
         
     } else if (self.totalGameTime > 15) {
-        self.asteroidSpeed = -110;
-        if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-            self.smallPhoneRate =  1.90;
-        } else {
-            self.largePhoneRate = 2.15;
-        }
+        self.asteroidSpeed = -130;
+        
+        self.asteroidRespwanRate = 1.95;
+        
         
     }
     //NSLog(@"Speed: %ld", (long)self.asteroidSpeed);

@@ -9,6 +9,7 @@
 #import "GameViewController.h"
 #import "GameScene.h"
 
+
 @implementation SKScene (Unarchive)
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
@@ -34,6 +35,7 @@
 {
     [super viewDidLoad];
 
+
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     skView.showsFPS = YES;
@@ -45,8 +47,15 @@
     GameScene *scene = [GameScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
+
     // Present the scene.
     [skView presentScene:scene];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCreditsView) name:@"showCreditsView" object:nil];
+    
+    
 }
 
 - (BOOL)shouldAutorotate
@@ -71,6 +80,11 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+-(void)showCreditsView {
+    [self performSegueWithIdentifier:@"showCredits" sender:self];
+    NSLog(@"Credits");
 }
 
 @end

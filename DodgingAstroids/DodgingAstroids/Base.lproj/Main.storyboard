@@ -3,6 +3,13 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="kenpixel_blocks.ttf">
+            <string>KenPixel-Blocks</string>
+            <string>KenPixel-Blocks</string>
+            <string>KenPixel-Blocks</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="CtS-rA-C9T">
@@ -17,9 +24,75 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="KtG-hd-gSN" kind="presentation" identifier="showCredits" id="5iM-LZ-3NU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Credits View Controller-->
+        <scene sceneID="0Xk-My-5lE">
+            <objects>
+                <viewController id="KtG-hd-gSN" customClass="CreditsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uH7-TG-thF"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xe5-Y0-GDW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0ML-r8-DZ7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="4TP-yX-OAb">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5O-dK-doD">
+                                <rect key="frame" x="16" y="20" width="69" height="30"/>
+                                <fontDescription key="fontDescription" name="KenPixel-Blocks" family="KenPixel Blocks" pointSize="15"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="KtG-hd-gSN" eventType="touchUpInside" id="WOm-fY-sT4"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer: Tyler Miller" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="83M-rK-EpY">
+                                <rect key="frame" x="156" y="191" width="288" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="288" id="wlp-7d-zBP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KenPixel-Blocks" family="KenPixel Blocks" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Art: www.kenney.nl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NVg-bc-Vce">
+                                <rect key="frame" x="156" y="248" width="288" height="26"/>
+                                <fontDescription key="fontDescription" name="KenPixel-Blocks" family="KenPixel Blocks" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="83M-rK-EpY" firstAttribute="top" secondItem="uH7-TG-thF" secondAttribute="bottom" constant="191" id="6vj-rh-ix7"/>
+                            <constraint firstItem="4TP-yX-OAb" firstAttribute="top" secondItem="uH7-TG-thF" secondAttribute="bottom" id="76p-Tt-gvV"/>
+                            <constraint firstItem="NVg-bc-Vce" firstAttribute="leading" secondItem="83M-rK-EpY" secondAttribute="leading" id="8hi-Oi-Ec4"/>
+                            <constraint firstItem="4TP-yX-OAb" firstAttribute="leading" secondItem="0ML-r8-DZ7" secondAttribute="leading" id="9Hu-Kd-Nw8"/>
+                            <constraint firstItem="NVg-bc-Vce" firstAttribute="top" secondItem="83M-rK-EpY" secondAttribute="bottom" constant="31" id="Av7-tf-vgs"/>
+                            <constraint firstItem="83M-rK-EpY" firstAttribute="centerX" secondItem="0ML-r8-DZ7" secondAttribute="centerX" id="KBw-cA-x9b"/>
+                            <constraint firstItem="4TP-yX-OAb" firstAttribute="bottom" secondItem="Xe5-Y0-GDW" secondAttribute="top" id="VAv-3A-Jfc"/>
+                            <constraint firstItem="4TP-yX-OAb" firstAttribute="centerX" secondItem="83M-rK-EpY" secondAttribute="centerX" id="kkz-le-6SE"/>
+                            <constraint firstItem="NVg-bc-Vce" firstAttribute="trailing" secondItem="83M-rK-EpY" secondAttribute="trailing" id="tH2-xT-jiS"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H86-uv-SmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1166" y="551"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="background" width="256" height="256"/>
+    </resources>
 </document>

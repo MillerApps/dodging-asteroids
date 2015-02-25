@@ -8,6 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+
 @interface EndScene : SKScene
+
 
 @end

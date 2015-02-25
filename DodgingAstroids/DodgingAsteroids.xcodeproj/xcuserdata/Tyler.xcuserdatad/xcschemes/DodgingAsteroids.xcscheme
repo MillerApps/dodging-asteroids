@@ -15,23 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2FF45B441A840A0E00D49057"
-               BuildableName = "DodgingAstroids.app"
-               BlueprintName = "DodgingAstroids"
-               ReferencedContainer = "container:DodgingAstroids.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2FF45B621A840A0F00D49057"
-               BuildableName = "DodgingAstroidsTests.xctest"
-               BlueprintName = "DodgingAstroidsTests"
-               ReferencedContainer = "container:DodgingAstroids.xcodeproj">
+               BuildableName = "DodgingAsteroids.app"
+               BlueprintName = "DodgingAsteroids"
+               ReferencedContainer = "container:DodgingAsteroids.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,24 +28,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2FF45B621A840A0F00D49057"
-               BuildableName = "DodgingAstroidsTests.xctest"
-               BlueprintName = "DodgingAstroidsTests"
-               ReferencedContainer = "container:DodgingAstroids.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FF45B441A840A0E00D49057"
-            BuildableName = "DodgingAstroids.app"
-            BlueprintName = "DodgingAstroids"
-            ReferencedContainer = "container:DodgingAstroids.xcodeproj">
+            BuildableName = "DodgingAsteroids.app"
+            BlueprintName = "DodgingAsteroids"
+            ReferencedContainer = "container:DodgingAsteroids.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,17 +52,12 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FF45B441A840A0E00D49057"
-            BuildableName = "DodgingAstroids.app"
-            BlueprintName = "DodgingAstroids"
-            ReferencedContainer = "container:DodgingAstroids.xcodeproj">
+            BuildableName = "DodgingAsteroids.app"
+            BlueprintName = "DodgingAsteroids"
+            ReferencedContainer = "container:DodgingAsteroids.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -99,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FF45B441A840A0E00D49057"
-            BuildableName = "DodgingAstroids.app"
-            BlueprintName = "DodgingAstroids"
-            ReferencedContainer = "container:DodgingAstroids.xcodeproj">
+            BuildableName = "DodgingAsteroids.app"
+            BlueprintName = "DodgingAsteroids"
+            ReferencedContainer = "container:DodgingAsteroids.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
