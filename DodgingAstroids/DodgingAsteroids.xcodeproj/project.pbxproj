@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D271A85C103004DA8B3 /* thrusters.caf */; };
 		2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D2A1A85C545004DA8B3 /* rock.caf */; };
+		2F4139DA1A9EA57C00851B59 /* EndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4139D91A9EA57C00851B59 /* EndScene.m */; };
 		2F55B6331A997ABF0043EDE2 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */; };
 		2F8AA8411A8A2D0C007984E5 /* art.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA8401A8A2D0C007984E5 /* art.atlas */; };
 		2F8AA8451A8B77BA007984E5 /* shipMovement.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA8441A8B77BA007984E5 /* shipMovement.caf */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		2F0B6D271A85C103004DA8B3 /* thrusters.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrusters.caf; sourceTree = "<group>"; };
 		2F0B6D2A1A85C545004DA8B3 /* rock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rock.caf; sourceTree = "<group>"; };
+		2F4139D91A9EA57C00851B59 /* EndScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndScene.m; sourceTree = "<group>"; };
 		2F55B6311A997ABF0043EDE2 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
 		2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsViewController.m; sourceTree = "<group>"; };
 		2F8AA8401A8A2D0C007984E5 /* art.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = art.atlas; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				2FF45B4F1A840A0E00D49057 /* GameScene.h */,
 				2FF45B501A840A0E00D49057 /* GameScene.m */,
 				2F8AA8461A9114F0007984E5 /* EndScene.h */,
+				2F4139D91A9EA57C00851B59 /* EndScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				2FF45B4B1A840A0E00D49057 /* main.m in Sources */,
 				2FBF096D1A87338300A3B295 /* AsteroidNode.m in Sources */,
 				2FBF09701A87341800A3B295 /* Utils.m in Sources */,
+				2F4139DA1A9EA57C00851B59 /* EndScene.m in Sources */,
 				2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

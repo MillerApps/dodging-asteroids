@@ -103,6 +103,35 @@
     self.playShipMovementSFX = [SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO];
 }
 
+- (void)setUpTut {
+    SKSpriteNode *tap = [SKSpriteNode spriteNodeWithImageNamed:@"tap"];
+    tap.position = CGPointMake(self.size.width/2, 200);
+    tap.zPosition = 4;
+    tap.alpha = 0.75;
+    
+    SKLabelNode *instructions = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
+    instructions.text = @"Tap left or right to move";
+    instructions.fontSize = 11;
+    instructions.position = CGPointMake(self.size.width/2, tap.position.y - 50);
+    [self addChild:instructions];
+    
+    SKAction *scale = [SKAction scaleBy:1.5 duration:1.0];
+    SKAction *sequence = [SKAction sequence:@[scale,[scale reversedAction]]];
+    SKAction *fadeOut = [SKAction fadeOutWithDuration:1.5];
+    
+    [tap runAction:[SKAction repeatAction:sequence count:3] completion:^{
+        [tap runAction:fadeOut completion:^{
+            [tap removeFromParent];
+        }];
+        [instructions runAction:fadeOut completion:^{
+            [instructions removeFromParent];
+        }];
+        
+        
+    }];
+    [self addChild:tap];
+}
+
 -(void)didMoveToView:(SKView *)view {
     
     [self registerAppTransitionObservers];
@@ -126,6 +155,7 @@
     [self addPauseButton];
     [self addHud];
     [self addBottomEdge];
+    [self setUpTut];
     
     
     //set physicsbody for scene
@@ -323,7 +353,7 @@
         [self.ship stopShipSFX];
         
         //save highscore to NSUSERDefaults
-        //TODO: add higscore save
+        
        
         NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
         if ([highScore integerForKey:@"highScore"] < _hud.score) {
