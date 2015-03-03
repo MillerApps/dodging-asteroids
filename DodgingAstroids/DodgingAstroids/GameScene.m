@@ -65,11 +65,16 @@
     astroid.position = CGPointMake(x, y);
     
     //set velocity of asteroids: large asterod is faster
+    NSInteger velcoity =self.asteroidSpeed;
     if (astroid.type == AstoridTypeC) {
-        astroid.physicsBody.velocity = CGVectorMake(0, self.asteroidSpeed + 5);
+        velcoity += 5;
+        astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
+        NSLog(@"Velocioty c: %ld", velcoity);
     } else {
-        astroid.physicsBody.velocity = CGVectorMake(0, self.asteroidSpeed);
+        astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
+        NSLog(@"Velocioty: %ld", velcoity);
     }
+    
     
     
     
@@ -113,6 +118,7 @@
     instructions.text = @"Tap left or right to move";
     instructions.fontSize = 11;
     instructions.position = CGPointMake(self.size.width/2, tap.position.y - 50);
+    instructions.zPosition = 4;
     [self addChild:instructions];
     
     SKAction *scale = [SKAction scaleBy:1.5 duration:1.0];
@@ -379,6 +385,41 @@
         
         
         
+   
+    
+    
+    //increase the game difficulty by changing the speed pf asteroids
+    if (self.totalGameTime > 240) {
+        self.asteroidSpeed = -180;
+        self.asteroidRespwanRate = 1.30;
+        
+        
+    } else if (self.totalGameTime > 120) {
+        self.asteroidSpeed = -170;
+        self.asteroidRespwanRate = 1.45;
+        
+        
+    } else if (self.totalGameTime > 60) {
+        self.asteroidSpeed = -160;
+        
+        self.asteroidRespwanRate = 1.60;
+        
+        
+    } else if (self.totalGameTime > 30) {
+        self.asteroidSpeed = -150;
+        
+        self.asteroidRespwanRate = 1.75;
+        
+        
+    } else if (self.totalGameTime > 15) {
+        self.asteroidSpeed = -140;
+        
+        self.asteroidRespwanRate = 1.85;
+        
+        
+    }
+    //NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
+        
         //called for astroid spawning
         if (self.lastUpdateTimeInterval) {
             self.timeSinceAdded += currentTime - self.lastUpdateTimeInterval;
@@ -395,39 +436,6 @@
         
         self.lastUpdateTimeInterval = currentTime;
     }
-    
-    
-    //increase the game difficulty by changing the speed pf asteroids
-    if (self.totalGameTime > 240) {
-        self.asteroidSpeed = -170;
-        self.asteroidRespwanRate = 1.75;
-        
-        
-    } else if (self.totalGameTime > 120) {
-        self.asteroidSpeed = -160;
-        self.asteroidRespwanRate = 1.80;
-        
-        
-    } else if (self.totalGameTime > 60) {
-        self.asteroidSpeed = -150;
-        
-        self.asteroidRespwanRate = 1.85;
-        
-        
-    } else if (self.totalGameTime > 30) {
-        self.asteroidSpeed = -140;
-        
-        self.asteroidRespwanRate = 1.90;
-        
-        
-    } else if (self.totalGameTime > 15) {
-        self.asteroidSpeed = -130;
-        
-        self.asteroidRespwanRate = 1.95;
-        
-        
-    }
-    //NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
     
     
     
