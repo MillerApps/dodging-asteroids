@@ -30,6 +30,7 @@
 @property (nonatomic) BOOL isPaused;
 @property (nonatomic) BOOL isPausedByResign;
 @property (nonatomic) BOOL isShip;
+@property (nonatomic) BOOL isAsteroidTypeC;
 @property (nonatomic) SKAction *playExpolsionSFX;
 @property (nonatomic) SKAction *playShipMovementSFX;
 
@@ -65,20 +66,25 @@
     astroid.position = CGPointMake(x, y);
     
     //set velocity of asteroids: large asterod is faster
-    NSInteger velcoity =self.asteroidSpeed;
+    NSInteger velcoity = self.asteroidSpeed;
     if (astroid.type == AstoridTypeC) {
+        _isAsteroidTypeC = YES;
         velcoity += 5;
         astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
         NSLog(@"Velocioty c: %ld", velcoity);
+        
     } else {
+        _isAsteroidTypeC = NO;
         astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
         NSLog(@"Velocioty: %ld", velcoity);
+        
     }
     
     
     
     
     [self addChild:astroid];
+    
     
 }
 
@@ -146,7 +152,7 @@
     self.timeSinceAdded = 0;
     self.totalGameTime = 0;
     self.asteroidSpeed = asteroidSpeed;
-    self.asteroidRespwanRate = 2.0;
+    self.asteroidRespwanRate = 1.90;
     
     
     _isPaused = NO;
@@ -342,7 +348,7 @@
         //awrad the player points
         if (_isShip) {
             [_hud awardScorePoint:pointsAwradared];
-           
+            
         }
         
         NSLog(@"score");
@@ -360,7 +366,7 @@
         
         //save highscore to NSUSERDefaults
         
-       
+        
         NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
         if ([highScore integerForKey:@"highScore"] < _hud.score) {
             [highScore setInteger:_hud.score forKey:@"highScore"];
@@ -378,47 +384,66 @@
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
     
+    
     if (_isPaused) {
         self.lastUpdateTimeInterval = 0;
         return;
     } else {
         
-        
-        
-   
     
-    
-    //increase the game difficulty by changing the speed pf asteroids
-    if (self.totalGameTime > 240) {
-        self.asteroidSpeed = -180;
-        self.asteroidRespwanRate = 1.30;
         
-        
-    } else if (self.totalGameTime > 120) {
-        self.asteroidSpeed = -170;
-        self.asteroidRespwanRate = 1.45;
-        
-        
-    } else if (self.totalGameTime > 60) {
-        self.asteroidSpeed = -160;
-        
-        self.asteroidRespwanRate = 1.60;
-        
-        
-    } else if (self.totalGameTime > 30) {
-        self.asteroidSpeed = -150;
-        
-        self.asteroidRespwanRate = 1.75;
-        
-        
-    } else if (self.totalGameTime > 15) {
-        self.asteroidSpeed = -140;
-        
-        self.asteroidRespwanRate = 1.85;
-        
-        
-    }
-    //NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
+        //increase the game difficulty by changing the speed pf asteroids
+        if (self.totalGameTime > 240) {
+            self.asteroidSpeed = -180;
+            if (_isAsteroidTypeC) {
+                self.asteroidRespwanRate = 1.0;
+            } else {
+                self.asteroidRespwanRate = 1.50;
+            }
+            
+            
+        } else if (self.totalGameTime > 120) {
+            self.asteroidSpeed = -170;
+            if (_isAsteroidTypeC) {
+                self.asteroidRespwanRate = 1.05;
+            } else {
+                self.asteroidRespwanRate = 1.55;
+            }
+            
+            
+        } else if (self.totalGameTime > 60) {
+            self.asteroidSpeed = -160;
+            if (_isAsteroidTypeC) {
+                self.asteroidRespwanRate = 1.10;
+            } else {
+                self.asteroidRespwanRate = 1.65;
+            }
+            
+            
+        } else if (self.totalGameTime > 30) {
+            self.asteroidSpeed = -150;
+            if (_isAsteroidTypeC) {
+                self.asteroidRespwanRate = 1.15;
+            } else {
+                self.asteroidRespwanRate = 1.75;
+            }
+            
+            
+            
+        } else if (self.totalGameTime > 15) {
+            self.asteroidSpeed = -140;
+            if (_isAsteroidTypeC) {
+                self.asteroidRespwanRate = 1.20;
+            } else {
+                self.asteroidRespwanRate = 1.85;
+            }
+            
+            
+            
+        }
+        NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
+        NSLog(@"Type c: %@", _isAsteroidTypeC ? @"Yes" : @"No");
+        NSLog(@"SPawnRate: %f", self.asteroidRespwanRate);
         
         //called for astroid spawning
         if (self.lastUpdateTimeInterval) {
