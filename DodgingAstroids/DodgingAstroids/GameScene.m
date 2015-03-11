@@ -14,16 +14,19 @@
 #import "PauseButtonNode.h"
 #import "PlayButtonNode.h"
 #import "HudNode.h"
+#import "SpaceManNode.h"
 
 
 @interface GameScene ()
 
 //allows to control astroid spawn rate
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
-@property (nonatomic) NSTimeInterval timeSinceAdded;
+@property (nonatomic) NSTimeInterval timeSinceAsteroidAdded;
+@property (nonatomic) NSTimeInterval timeSinceSpaceManAdded;
 @property (nonatomic) NSTimeInterval totalGameTime;
 @property (nonatomic) NSInteger asteroidSpeed;
 @property (nonatomic) float asteroidRespwanRate;
+@property (nonatomic) float spaceManSpawnRate;
 @property (nonatomic) ShipNode *ship;
 @property (nonatomic) PauseButtonNode *pauseBtn;
 @property (nonatomic) HudNode *hud;
@@ -84,6 +87,27 @@
     
     
     [self addChild:astroid];
+    
+    
+}
+
+-(void)addSpaceMan {
+    //add spaceman at random postions on the screen
+    SpaceManNode *spaceMan = [SpaceManNode spaceMan];
+    float y = self.frame.size.height;
+    float x = [Utils randomWithMin:spaceMan.size.width /2 max:self.frame.size.width - spaceMan.size.width / 2];
+    
+    //set spaceman position
+    spaceMan.position = CGPointMake(x, y);
+    
+    //checks to see if the postion is equal to an asteroid postion
+    if (!CGPointEqualToPoint([self childNodeWithName:@"astroid"].position, spaceMan.position)) {
+        [self addChild:spaceMan];
+    } else {
+        x = [Utils randomWithMin:spaceMan.size.width /2 max:self.frame.size.width - spaceMan.size.width / 2];
+        spaceMan.position = CGPointMake(x, y);
+    }
+
     
     
 }
@@ -149,10 +173,12 @@
     [self registerAppTransitionObservers];
     
     self.lastUpdateTimeInterval = 0;
-    self.timeSinceAdded = 0;
+    self.timeSinceAsteroidAdded = 0;
+    self.timeSinceSpaceManAdded = 0;
     self.totalGameTime = 0;
     self.asteroidSpeed = asteroidSpeed;
     self.asteroidRespwanRate = 1.90;
+
     
     
     _isPaused = NO;
@@ -180,10 +206,12 @@
     
     
     [self addPlayerShip];
-    //called once to have astroid spawn immediately
+    //called once to have astroid/spaceman spawn immediately
     [self addAstroids];
+    [self addSpaceMan];
     
     [self preLoadSFX];
+    
     
     
     
@@ -352,29 +380,30 @@
         }
         
         NSLog(@"score");
-    } else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
-        ShipNode *ship = (ShipNode *)firstBody.node;
-        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
-        
-        [self animateShipExplosion];
-        
-        
-        [self runAction:self.playExpolsionSFX];
-        [ship removeFromParent];
-        [asteroid removeFromParent];
-        [self.ship stopShipSFX];
-        
-        //save highscore to NSUSERDefaults
-        
-        
-        NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
-        if ([highScore integerForKey:@"highScore"] < _hud.score) {
-            [highScore setInteger:_hud.score forKey:@"highScore"];
-        }
-        
-        
-        _isShip = NO;
     }
+//    else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
+//        ShipNode *ship = (ShipNode *)firstBody.node;
+//        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
+//        
+//        [self animateShipExplosion];
+//        
+//        
+//        [self runAction:self.playExpolsionSFX];
+//        [ship removeFromParent];
+//        [asteroid removeFromParent];
+//        [self.ship stopShipSFX];
+//        
+//        //save highscore to NSUSERDefaults
+//        
+//        
+//        NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
+//        if ([highScore integerForKey:@"highScore"] < _hud.score) {
+//            [highScore setInteger:_hud.score forKey:@"highScore"];
+//        }
+//        
+//        
+//        _isShip = NO;
+//    }
     
 }
 
@@ -447,14 +476,21 @@
         
         //called for astroid spawning
         if (self.lastUpdateTimeInterval) {
-            self.timeSinceAdded += currentTime - self.lastUpdateTimeInterval;
+            self.timeSinceAsteroidAdded += currentTime - self.lastUpdateTimeInterval;
             self.totalGameTime += currentTime - self.lastUpdateTimeInterval;
+            self.timeSinceSpaceManAdded += currentTime - self.lastUpdateTimeInterval;
+            self.spaceManSpawnRate = [Utils randomWithMin:30 max:60];
         }
         
         
-        if (self.timeSinceAdded > self.asteroidRespwanRate) {
+        if (self.timeSinceAsteroidAdded > self.asteroidRespwanRate) {
             [self addAstroids];
-            self.timeSinceAdded = 0;
+            self.timeSinceAsteroidAdded = 0;
+        }
+        
+        if (self.timeSinceSpaceManAdded > self.spaceManSpawnRate) {
+            [self addSpaceMan];
+            self.timeSinceSpaceManAdded = 0;
         }
         
         

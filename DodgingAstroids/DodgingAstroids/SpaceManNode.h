@@ -10,6 +10,6 @@
 
 @interface SpaceManNode : SKSpriteNode
 
-+(instancetype)spaceManAtPostion:(CGPoint)position;
++(instancetype)spaceMan;
 
 @end
