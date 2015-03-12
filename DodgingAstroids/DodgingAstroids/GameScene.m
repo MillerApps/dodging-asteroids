@@ -178,7 +178,7 @@
 
 -(void)setUpHealthCouner {
     SKSpriteNode *health = [SKSpriteNode spriteNodeWithImageNamed:@"playerLife"];
-    health.position = CGPointMake(self.size.width / 2  - 180, self.size.height - 30);
+    health.position = CGPointMake(self.size.width / 11, self.size.height - 30);
     health.zPosition = 4;
     health.alpha = 0.75;
     [health setScale:2.0];
@@ -189,7 +189,7 @@
     _healthCount = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
     _healthCount.text = @"0";
     _healthCount.fontSize = 20;
-    _healthCount.position = CGPointMake(health.size.width + 20, self.size.height - 30);
+    _healthCount.position = CGPointMake(health.size.width + 30, self.size.height - 30);
     _healthCount.zPosition = 4;
     _healthCount.alpha = 0.75;
     [self addChild:_healthCount];
