@@ -24,12 +24,15 @@
 @property (nonatomic) NSTimeInterval timeSinceAsteroidAdded;
 @property (nonatomic) NSTimeInterval timeSinceSpaceManAdded;
 @property (nonatomic) NSTimeInterval totalGameTime;
-@property (nonatomic) NSInteger asteroidSpeed;
+@property (nonatomic) NSInteger objectSpeed;
 @property (nonatomic) float asteroidRespwanRate;
 @property (nonatomic) float spaceManSpawnRate;
+@property (nonatomic) float asteroidX;
+@property (nonatomic) NSInteger numberOfLives;
 @property (nonatomic) ShipNode *ship;
 @property (nonatomic) PauseButtonNode *pauseBtn;
 @property (nonatomic) HudNode *hud;
+@property (nonatomic) SKLabelNode *healthCount;
 @property (nonatomic) BOOL isPaused;
 @property (nonatomic) BOOL isPausedByResign;
 @property (nonatomic) BOOL isShip;
@@ -69,19 +72,22 @@
     astroid.position = CGPointMake(x, y);
     
     //set velocity of asteroids: large asterod is faster
-    NSInteger velcoity = self.asteroidSpeed;
+    NSInteger velcoity = self.objectSpeed;
     if (astroid.type == AstoridTypeC) {
         _isAsteroidTypeC = YES;
         velcoity += 5;
         astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
-        NSLog(@"Velocioty c: %ld", velcoity);
+        //NSLog(@"Velocioty c: %ld", velcoity);
         
     } else {
         _isAsteroidTypeC = NO;
         astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
-        NSLog(@"Velocioty: %ld", velcoity);
+        //NSLog(@"Velocioty: %ld", velcoity);
         
     }
+    NSLog(@"Asteroid x: %f", astroid.position.x);
+    self.asteroidX = astroid.position.x;
+    
     
     
     
@@ -99,15 +105,17 @@
     
     //set spaceman position
     spaceMan.position = CGPointMake(x, y);
+    //set velcoity
+    spaceMan.physicsBody.velocity = CGVectorMake(0, self.objectSpeed);
     
-    //checks to see if the postion is equal to an asteroid postion
-    if (!CGPointEqualToPoint([self childNodeWithName:@"astroid"].position, spaceMan.position)) {
-        [self addChild:spaceMan];
-    } else {
-        x = [Utils randomWithMin:spaceMan.size.width /2 max:self.frame.size.width - spaceMan.size.width / 2];
-        spaceMan.position = CGPointMake(x, y);
-    }
-
+    
+    
+    [self addChild:spaceMan];
+    NSLog(@"Astroid: %f, Spaceman: %f",_asteroidX, spaceMan.position.x);
+    
+    
+    
+    
     
     
 }
@@ -168,6 +176,25 @@
     [self addChild:tap];
 }
 
+-(void)setUpHealthCouner {
+    SKSpriteNode *health = [SKSpriteNode spriteNodeWithImageNamed:@"playerLife"];
+    health.position = CGPointMake(self.size.width / 2  - 180, self.size.height - 30);
+    health.zPosition = 4;
+    health.alpha = 0.75;
+    [health setScale:2.0];
+    
+    [self addChild:health];
+    
+    //add label
+    _healthCount = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
+    _healthCount.text = @"0";
+    _healthCount.fontSize = 20;
+    _healthCount.position = CGPointMake(health.size.width + 20, self.size.height - 30);
+    _healthCount.zPosition = 4;
+    _healthCount.alpha = 0.75;
+    [self addChild:_healthCount];
+}
+
 -(void)didMoveToView:(SKView *)view {
     
     [self registerAppTransitionObservers];
@@ -176,9 +203,10 @@
     self.timeSinceAsteroidAdded = 0;
     self.timeSinceSpaceManAdded = 0;
     self.totalGameTime = 0;
-    self.asteroidSpeed = asteroidSpeed;
+    self.objectSpeed = objectSpeed;
     self.asteroidRespwanRate = 1.90;
-
+    self.numberOfLives = 0;
+    
     
     
     _isPaused = NO;
@@ -194,6 +222,7 @@
     [self addHud];
     [self addBottomEdge];
     [self setUpTut];
+    [self setUpHealthCouner];
     
     
     //set physicsbody for scene
@@ -208,7 +237,6 @@
     [self addPlayerShip];
     //called once to have astroid/spaceman spawn immediately
     [self addAstroids];
-    [self addSpaceMan];
     
     [self preLoadSFX];
     
@@ -370,7 +398,7 @@
         firstBody = contact.bodyB;
         sceondBody = contact.bodyA;
     }
-    NSLog(@"Body: %u", firstBody.categoryBitMask);
+    //NSLog(@"Body: %u", firstBody.categoryBitMask);
     
     if (firstBody.categoryBitMask == CollisionCatBottomEdge | sceondBody.categoryBitMask == CollisionCatBottomEdge) {
         //awrad the player points
@@ -379,32 +407,56 @@
             
         }
         
-        NSLog(@"score");
+        // NSLog(@"score");
+    } else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatSpaceMan) {
+        if (_numberOfLives < 3) {
+            self.numberOfLives += bounsLife;
+            [self updateHealthConter];
+            [_hud awardScorePoint:bounsPoints];
+        }
+        
+        //remove spaceman node
+        SpaceManNode *spaceMan = (SpaceManNode *)sceondBody.node;
+        [spaceMan removeFromParent];
+        
+    } else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
+        
+        ShipNode *ship = (ShipNode *)firstBody.node;
+        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
+        
+        if (_numberOfLives == 0) {
+            
+            
+            [self animateShipExplosion];
+            
+            
+            [self runAction:self.playExpolsionSFX];
+            [ship removeFromParent];
+            [asteroid removeFromParent];
+            [self.ship stopShipSFX];
+            
+            //save highscore to NSUSERDefaults
+            
+            
+            NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
+            if ([highScore integerForKey:@"highScore"] < _hud.score) {
+                [highScore setInteger:_hud.score forKey:@"highScore"];
+            }
+            
+            
+            _isShip = NO;
+        } else {
+            self.numberOfLives --;
+            [self updateHealthConter];
+            [asteroid removeFromParent];
+        }
+        
     }
-//    else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatAstroid) {
-//        ShipNode *ship = (ShipNode *)firstBody.node;
-//        AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
-//        
-//        [self animateShipExplosion];
-//        
-//        
-//        [self runAction:self.playExpolsionSFX];
-//        [ship removeFromParent];
-//        [asteroid removeFromParent];
-//        [self.ship stopShipSFX];
-//        
-//        //save highscore to NSUSERDefaults
-//        
-//        
-//        NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
-//        if ([highScore integerForKey:@"highScore"] < _hud.score) {
-//            [highScore setInteger:_hud.score forKey:@"highScore"];
-//        }
-//        
-//        
-//        _isShip = NO;
-//    }
     
+}
+
+-(void)updateHealthConter {
+    _healthCount.text = [NSString stringWithFormat:@"%ld", (long)_numberOfLives];
 }
 
 
@@ -419,11 +471,11 @@
         return;
     } else {
         
-    
+        
         
         //increase the game difficulty by changing the speed pf asteroids
         if (self.totalGameTime > 240) {
-            self.asteroidSpeed = -180;
+            self.objectSpeed = -180;
             if (_isAsteroidTypeC) {
                 self.asteroidRespwanRate = 1.0;
             } else {
@@ -432,7 +484,7 @@
             
             
         } else if (self.totalGameTime > 120) {
-            self.asteroidSpeed = -170;
+            self.objectSpeed = -170;
             if (_isAsteroidTypeC) {
                 self.asteroidRespwanRate = 1.05;
             } else {
@@ -441,7 +493,7 @@
             
             
         } else if (self.totalGameTime > 60) {
-            self.asteroidSpeed = -160;
+            self.objectSpeed = -160;
             if (_isAsteroidTypeC) {
                 self.asteroidRespwanRate = 1.10;
             } else {
@@ -450,7 +502,7 @@
             
             
         } else if (self.totalGameTime > 30) {
-            self.asteroidSpeed = -150;
+            self.objectSpeed = -150;
             if (_isAsteroidTypeC) {
                 self.asteroidRespwanRate = 1.15;
             } else {
@@ -460,7 +512,7 @@
             
             
         } else if (self.totalGameTime > 15) {
-            self.asteroidSpeed = -140;
+            self.objectSpeed = -140;
             if (_isAsteroidTypeC) {
                 self.asteroidRespwanRate = 1.20;
             } else {
@@ -470,16 +522,16 @@
             
             
         }
-        NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
-        NSLog(@"Type c: %@", _isAsteroidTypeC ? @"Yes" : @"No");
-        NSLog(@"SPawnRate: %f", self.asteroidRespwanRate);
+        //NSLog(@"Speed: %ld", (long)self.asteroidSpeed);
+        //NSLog(@"Type c: %@", _isAsteroidTypeC ? @"Yes" : @"No");
+        //NSLog(@"SPawnRate: %f", self.asteroidRespwanRate);
         
         //called for astroid spawning
         if (self.lastUpdateTimeInterval) {
             self.timeSinceAsteroidAdded += currentTime - self.lastUpdateTimeInterval;
             self.totalGameTime += currentTime - self.lastUpdateTimeInterval;
             self.timeSinceSpaceManAdded += currentTime - self.lastUpdateTimeInterval;
-            self.spaceManSpawnRate = [Utils randomWithMin:30 max:60];
+            self.spaceManSpawnRate = [Utils randomWithMin:20 max:60];
         }
         
         

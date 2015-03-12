@@ -22,9 +22,10 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
-static const int asteroidSpeed = -120;
-static const int spaceManSpeed = -110;
+static const int objectSpeed = -130;
 static const int pointsAwradared = 1;
+static const int bounsPoints = 5;
+static const int bounsLife = 1;
 
 
 typedef NS_OPTIONS(uint32_t, CollisionCat) {

@@ -49,8 +49,6 @@
     self.physicsBody.affectedByGravity = NO;
     self.physicsBody.friction = 0;
     self.physicsBody.linearDamping = 0;
-    self.physicsBody.velocity = CGVectorMake(0, spaceManSpeed);
-    
     self.physicsBody.categoryBitMask = CollisionCatSpaceMan;
     self.physicsBody.collisionBitMask = 0;
     self.physicsBody.contactTestBitMask = CollisionCatShip;
