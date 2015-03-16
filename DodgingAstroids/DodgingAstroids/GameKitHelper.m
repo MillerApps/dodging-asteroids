@@ -74,4 +74,23 @@ NSString *const PresentAuthenticationViewController = @"present_authentication_v
     
 }
 
+- (void)reportScore:(int64_t)score forLeaderboardID:(NSString *)leaderboardID {
+    
+    if (!_enableGameCenter) {
+        NSLog(@"Local play is not authenticated");
+    }
+    
+    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:leaderboardID];
+    
+    scoreReporter.value = score;
+    scoreReporter.context = 0;
+    
+    NSArray *scores = @[scoreReporter];
+    
+    [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
+        [self setLastErrror:error];
+    }];
+
+}
+
 @end

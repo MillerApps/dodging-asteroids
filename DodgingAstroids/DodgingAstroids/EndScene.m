@@ -8,6 +8,7 @@
 
 #import "EndScene.h"
 #import "GameScene.h"
+#import "GameKitHelper.h"
 
 @implementation EndScene
 
@@ -16,6 +17,8 @@
     //get highscore
     NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
     NSInteger highScoreInt = [highScore integerForKey:@"highScore"];
+    
+    [self reportScoreToGameCenter:highScoreInt];
     
     //create current score label
     SKLabelNode *currentScore = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
@@ -94,6 +97,11 @@
     }
     
 
+}
+
+- (void)reportScoreToGameCenter:(NSInteger) score {
+    int64_t scoreToreport = score;
+    [[GameKitHelper sharedGamekitHelper] reportScore:scoreToreport forLeaderboardID:@"com.miller.DodgingAsteroids.high_scores"];
 }
 
 

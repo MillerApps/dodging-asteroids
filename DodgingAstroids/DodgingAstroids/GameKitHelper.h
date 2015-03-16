@@ -18,5 +18,6 @@ extern NSString *const PresentAuthenticationViewController;
 
 + (instancetype)sharedGamekitHelper;
 - (void)authenticateLocalPlayer;
+- (void)reportScore:(int64_t)score forLeaderboardID:(NSString *)leaderboardID;
 
 @end
