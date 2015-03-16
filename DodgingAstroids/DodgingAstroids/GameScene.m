@@ -190,7 +190,7 @@
     _healthCount = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
     _healthCount.text = @"0";
     _healthCount.fontSize = 20;
-    _healthCount.position = CGPointMake(health.size.width + 30, self.size.height - 30);
+    _healthCount.position = CGPointMake(health.size.width + 30, self.size.height - 35);
     _healthCount.zPosition = 4;
     _healthCount.alpha = 0.75;
     [self addChild:_healthCount];
