@@ -11,6 +11,7 @@
 		2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D2A1A85C545004DA8B3 /* rock.caf */; };
 		2F355A7C1AAFFDD0006AD37D /* SpaceManNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F355A7B1AAFFDD0006AD37D /* SpaceManNode.m */; };
 		2F4139DA1A9EA57C00851B59 /* EndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4139D91A9EA57C00851B59 /* EndScene.m */; };
+		2F47C5E41AB6E21800A960B0 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F47C5E31AB6E21800A960B0 /* GameKitHelper.m */; };
 		2F55B6331A997ABF0043EDE2 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */; };
 		2F6AAEBB1A9FA46300AD277A /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AAEBA1A9FA46300AD277A /* TitleScene.m */; };
 		2F8AA8411A8A2D0C007984E5 /* art.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA8401A8A2D0C007984E5 /* art.atlas */; };
@@ -50,6 +51,8 @@
 		2F355A7A1AAFFDD0006AD37D /* SpaceManNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceManNode.h; sourceTree = "<group>"; };
 		2F355A7B1AAFFDD0006AD37D /* SpaceManNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceManNode.m; sourceTree = "<group>"; };
 		2F4139D91A9EA57C00851B59 /* EndScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndScene.m; sourceTree = "<group>"; };
+		2F47C5E21AB6E21800A960B0 /* GameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitHelper.h; sourceTree = "<group>"; };
+		2F47C5E31AB6E21800A960B0 /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
 		2F55B6311A997ABF0043EDE2 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
 		2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsViewController.m; sourceTree = "<group>"; };
 		2F6AAEB91A9FA46300AD277A /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
@@ -117,6 +120,15 @@
 			name = SFX;
 			sourceTree = "<group>";
 		};
+		2F47C5E11AB6E1CB00A960B0 /* Game Center */ = {
+			isa = PBXGroup;
+			children = (
+				2F47C5E21AB6E21800A960B0 /* GameKitHelper.h */,
+				2F47C5E31AB6E21800A960B0 /* GameKitHelper.m */,
+			);
+			name = "Game Center";
+			sourceTree = "<group>";
+		};
 		2FBF09541A85EE0D00A3B295 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +188,7 @@
 				2FF45B5A1A840A0E00D49057 /* Images.xcassets */,
 				2F8AA8401A8A2D0C007984E5 /* art.atlas */,
 				2FF45B5C1A840A0E00D49057 /* LaunchScreen.xib */,
+				2F47C5E11AB6E1CB00A960B0 /* Game Center */,
 				2FF45B481A840A0E00D49057 /* Supporting Files */,
 				2FF45B781A84487300D49057 /* ExhaustParticle.sks */,
 				2FF45B791A84487300D49057 /* spark.png */,
@@ -329,6 +342,7 @@
 				2F8AA84B1A9149B7007984E5 /* PauseButtonNode.m in Sources */,
 				2F8AA84E1A914FF8007984E5 /* PlayButtonNode.m in Sources */,
 				2FF45B561A840A0E00D49057 /* GameViewController.m in Sources */,
+				2F47C5E41AB6E21800A960B0 /* GameKitHelper.m in Sources */,
 				2F55B6331A997ABF0043EDE2 /* CreditsViewController.m in Sources */,
 				2F6AAEBB1A9FA46300AD277A /* TitleScene.m in Sources */,
 				2FF45B4E1A840A0E00D49057 /* AppDelegate.m in Sources */,

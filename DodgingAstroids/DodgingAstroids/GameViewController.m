@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "TitleScene.h"
+#import "GameKitHelper.h"
 
 
 @implementation SKScene (Unarchive)
@@ -51,7 +52,8 @@
     // Present the scene.
     [skView presentScene:scene];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAuthenticationViewController) name:PresentAuthenticationViewController object:nil];
+    [[GameKitHelper sharedGamekitHelper] authenticateLocalPlayer];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCreditsView) name:@"showCreditsView" object:nil];
     
@@ -80,6 +82,16 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+- (void)showAuthenticationViewController {
+    GameKitHelper *gameKitHelper = [GameKitHelper sharedGamekitHelper];
+    
+    [self presentViewController:gameKitHelper.authenticationViewController animated:YES completion:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)showCreditsView {
