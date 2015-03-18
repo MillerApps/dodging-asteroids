@@ -51,10 +51,9 @@
 
 - (void)addPlayerShip {
     //add spaceship to scene
-    self.ship = [ShipNode shipAtPostion:CGPointMake(self.size.width/2, 100)];
+    self.ship = [ShipNode shipAtPostion:CGPointMake(self.size.width/2, 150)];
     [self addChild:self.ship];
     [self.ship playShipSFXForever];
-    
     
     
 }
@@ -149,7 +148,7 @@
 
 - (void)setUpTut {
     SKSpriteNode *tap = [SKSpriteNode spriteNodeWithImageNamed:@"tap"];
-    tap.position = CGPointMake(self.size.width/2, 200);
+    tap.position = CGPointMake(self.size.width/2, 250);
     tap.zPosition = 4;
     tap.alpha = 0.75;
     
@@ -436,7 +435,7 @@
             [asteroid removeFromParent];
             [self.ship stopShipSFX];
             
-            //save highscore to NSUSERDefaults
+            //save highscore to NSUSERDefaults 
             
             
             NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];

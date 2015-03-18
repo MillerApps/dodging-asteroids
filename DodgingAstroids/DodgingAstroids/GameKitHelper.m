@@ -10,7 +10,7 @@
 
 NSString *const PresentAuthenticationViewController = @"present_authentication_view_controller";
 
-@interface GameKitHelper ()
+@interface GameKitHelper () <GKGameCenterControllerDelegate>
 
 @end
 
@@ -92,5 +92,26 @@ NSString *const PresentAuthenticationViewController = @"present_authentication_v
     }];
 
 }
+
+- (void)showGKGameCenterViewController:(UIViewController *)viewController {
+    
+    if (!_enableGameCenter) {
+        NSLog(@"Local play in not authenticated");
+    }
+    
+    GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc] init];
+    
+    gameCenterViewController.gameCenterDelegate = self;
+    
+    gameCenterViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+    
+    [viewController presentViewController:gameCenterViewController animated:YES completion:nil];
+    
+}
+
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController {
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

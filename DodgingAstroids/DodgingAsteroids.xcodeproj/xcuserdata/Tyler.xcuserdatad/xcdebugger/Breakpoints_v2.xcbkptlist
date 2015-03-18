@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameViewController.m"
-            timestampString = "448196359.654269"
+            timestampString = "448387513.089892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "-showCreditsView"
             landmarkType = "5">
          </BreakpointContent>

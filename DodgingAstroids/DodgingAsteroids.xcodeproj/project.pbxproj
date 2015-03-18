@@ -120,6 +120,17 @@
 			name = SFX;
 			sourceTree = "<group>";
 		};
+		2F3D038A1AB88D58007E333F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2FF45B541A840A0E00D49057 /* GameViewController.h */,
+				2FF45B551A840A0E00D49057 /* GameViewController.m */,
+				2F55B6311A997ABF0043EDE2 /* CreditsViewController.h */,
+				2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		2F47C5E11AB6E1CB00A960B0 /* Game Center */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,13 +215,10 @@
 				2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */,
 				2FF45B4C1A840A0E00D49057 /* AppDelegate.h */,
 				2FF45B4D1A840A0E00D49057 /* AppDelegate.m */,
-				2FF45B541A840A0E00D49057 /* GameViewController.h */,
-				2FF45B551A840A0E00D49057 /* GameViewController.m */,
+				2F3D038A1AB88D58007E333F /* Controllers */,
 				2F0B6D251A85C0D9004DA8B3 /* SFX */,
 				2FF45B491A840A0E00D49057 /* Info.plist */,
 				2FF45B4A1A840A0E00D49057 /* main.m */,
-				2F55B6311A997ABF0043EDE2 /* CreditsViewController.h */,
-				2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

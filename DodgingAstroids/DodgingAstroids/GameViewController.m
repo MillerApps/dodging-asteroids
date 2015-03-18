@@ -9,6 +9,7 @@
 #import "GameViewController.h"
 #import "TitleScene.h"
 #import "GameKitHelper.h"
+#import "Utils.h"
 
 
 @implementation SKScene (Unarchive)
@@ -32,6 +33,8 @@
 
 @implementation GameViewController
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,10 +55,7 @@
     // Present the scene.
     [skView presentScene:scene];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAuthenticationViewController) name:PresentAuthenticationViewController object:nil];
-    [[GameKitHelper sharedGamekitHelper] authenticateLocalPlayer];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCreditsView) name:@"showCreditsView" object:nil];
+    [self setupObservers];
     
     
 }
@@ -84,6 +84,16 @@
     return YES;
 }
 
+#pragma mark - AlertView
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    UITextField *alertText = [alertView textFieldAtIndex:0];
+    NSLog(@"%@", alertText.text);
+}
+
+
+#pragma mark - NSNotifcationCenter Selectors
+
 - (void)showAuthenticationViewController {
     GameKitHelper *gameKitHelper = [GameKitHelper sharedGamekitHelper];
     
@@ -94,9 +104,35 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)showGameCenter {
+    [[GameKitHelper sharedGamekitHelper] showGKGameCenterViewController:self];
+}
+
+- (void)showAlertWithTextField {
+    
+    UIAlertView *textPopUp = [[UIAlertView alloc] initWithTitle:@"Enter your name" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Done", nil];
+    textPopUp.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [textPopUp show];
+
+}
+
 -(void)showCreditsView {
     [self performSegueWithIdentifier:@"showCredits" sender:self];
     NSLog(@"Credits");
+}
+
+#pragma mark - NSNotificationCenter Obsevers
+
+- (void)setupObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAuthenticationViewController) name:PresentAuthenticationViewController object:nil];
+    [[GameKitHelper sharedGamekitHelper] authenticateLocalPlayer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCreditsView) name:@"showCreditsView" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameCenter) name:@"showGameCenter" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertWithTextField) name:@"showPopUp" object:nil];
 }
 
 @end

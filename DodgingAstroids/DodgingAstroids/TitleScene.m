@@ -23,7 +23,7 @@
     
     //add spaceship to scene
     SKSpriteNode *ship = [SKSpriteNode spriteNodeWithImageNamed:@"ship"];
-    ship.position = CGPointMake(self.size.width/2, 100);
+    ship.position = CGPointMake(self.size.width/2, 150);
     [self addChild:ship];
     
     //changes ship size for smaller screen sizes and exhaust postion
@@ -43,7 +43,7 @@
     
     
     
-    SKSpriteNode *play = [SKSpriteNode spriteNodeWithImageNamed:@"playgame"];
+    SKSpriteNode *play = [SKSpriteNode spriteNodeWithImageNamed:@"start"];
     play.position = CGPointMake(CGRectGetMidX(self.frame) - 60, CGRectGetMidY(self.frame));
     play.zPosition = 1;
     play.name = @"play";
@@ -54,6 +54,14 @@
     score.zPosition = 1;
     score.name = @"score";
     [self addChild:score];
+    
+    SKSpriteNode *leaderboards = [SKSpriteNode spriteNodeWithImageNamed:@"leaderboards"];
+    leaderboards.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 60);
+    leaderboards.zPosition = 1;
+    leaderboards.name = @"boards";
+    [self addChild:leaderboards];
+    
+   
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -71,6 +79,8 @@
     } else if ([node.name isEqualToString:@"score"]) {
         
         
+    } else if ([node.name isEqualToString:@"boards"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showGameCenter" object:nil];
     }
     
 

@@ -57,6 +57,10 @@
     
     [self setupScoreLabels:label];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showPopUp" object:nil];
+
+    
+    
 
     
 }
@@ -81,20 +85,22 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    //get a UITouch object
-    UITouch *touch = [touches anyObject];
-    //get touch loc
-    CGPoint location = [touch locationInNode:self];
-    //get selected node
-    SKNode *node = [self nodeAtPoint:location];
-    
-    if ([node.name isEqualToString:@"try"]) {
-        GameScene *firstScene = [GameScene sceneWithSize:self.size];
-        [self.view presentScene:firstScene];
-    } else if ([node.name isEqualToString:@"credits"]) {
+        //get a UITouch object
+        UITouch *touch = [touches anyObject];
+        //get touch loc
+        CGPoint location = [touch locationInNode:self];
+        //get selected node
+        SKNode *node = [self nodeAtPoint:location];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showCreditsView" object:nil];
-    }
+        if ([node.name isEqualToString:@"try"]) {
+            GameScene *firstScene = [GameScene sceneWithSize:self.size];
+            [self.view presentScene:firstScene];
+        } else if ([node.name isEqualToString:@"credits"]) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showCreditsView" object:nil];
+        }
+    
+   
     
 
 }
@@ -103,6 +109,7 @@
     int64_t scoreToreport = score;
     [[GameKitHelper sharedGamekitHelper] reportScore:scoreToreport forLeaderboardID:@"com.miller.DodgingAsteroids.high_scores"];
 }
+
 
 
 

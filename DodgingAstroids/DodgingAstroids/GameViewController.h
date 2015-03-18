@@ -11,6 +11,6 @@
 
 
 
-@interface GameViewController : UIViewController 
+@interface GameViewController : UIViewController <UIAlertViewDelegate>
 
 @end
