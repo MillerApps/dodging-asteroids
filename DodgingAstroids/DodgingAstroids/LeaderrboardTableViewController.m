@@ -7,6 +7,7 @@
 //
 
 #import "LeaderrboardTableViewController.h"
+#import "ScoreDetailViewController.h"
 
 @interface LeaderrboardTableViewController ()
 
@@ -61,15 +62,21 @@
 
 
 
-/*
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
+     if ([segue.identifier isEqualToString:@"showDetails"]) {
+         NSIndexPath *path = [self.ScoresTableView indexPathForCell:sender];
+         ScoreDetailViewController *vc = segue.destinationViewController;
+         
+         vc.name = [_scores valueForKey:@"playerName"];
+         vc.score = [NSString stringWithFormat:@"%@", [_highScoresArray objectAtIndex:path.row]];
+     }
+    
  }
- */
+ 
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -79,6 +86,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
+
 - (IBAction)filterTableViewData:(id)sender {
     
     switch (self.segmentedControll.selectedSegmentIndex) {

@@ -78,6 +78,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bge-R3-BGq" kind="show" identifier="showDetails" id="CpW-Zq-V5b"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -111,7 +114,52 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3vh-cr-1vj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1295" y="1072"/>
+            <point key="canvasLocation" x="1132" y="1403"/>
+        </scene>
+        <!--Score Detail View Controller-->
+        <scene sceneID="smv-sI-0gK">
+            <objects>
+                <viewController id="bge-R3-BGq" customClass="ScoreDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G4x-iy-XlF"/>
+                        <viewControllerLayoutGuide type="bottom" id="QFl-ZL-6Ot"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Kf-Z5-m94">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name: Tyler Score: 10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KK-2r-dNY">
+                                <rect key="frame" x="216" y="229" width="169" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xN6-Zk-lkp">
+                                <rect key="frame" x="277" y="285" width="40" height="30"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareScore:" destination="bge-R3-BGq" eventType="touchUpInside" id="9x4-gg-g8h"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="5KK-2r-dNY" secondAttribute="centerY" constant="60.5" id="1tZ-5P-zhJ"/>
+                            <constraint firstAttribute="centerX" secondItem="5KK-2r-dNY" secondAttribute="centerX" constant="-0.5" id="4js-gA-Q4w"/>
+                            <constraint firstAttribute="centerY" secondItem="xN6-Zk-lkp" secondAttribute="centerY" id="LAD-R8-0KT"/>
+                            <constraint firstItem="xN6-Zk-lkp" firstAttribute="top" secondItem="5KK-2r-dNY" secondAttribute="bottom" constant="35" id="dP0-vy-gbQ"/>
+                            <constraint firstAttribute="centerX" secondItem="xN6-Zk-lkp" secondAttribute="centerX" constant="3" id="zmB-PU-Qvb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="infoLabel" destination="5KK-2r-dNY" id="uyh-kE-Xdd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ftd-4g-zdm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1801" y="1403"/>
         </scene>
         <!--Credits View Controller-->
         <scene sceneID="0Xk-My-5lE">
@@ -171,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H86-uv-SmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2198" y="529"/>
+            <point key="canvasLocation" x="1142" y="634"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MpR-0z-m9G">
@@ -189,7 +237,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m7o-9c-F3M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="545" y="1127"/>
+            <point key="canvasLocation" x="413" y="1403"/>
         </scene>
     </scenes>
     <resources>

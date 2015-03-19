@@ -9,6 +9,7 @@
 #import "EndScene.h"
 #import "GameScene.h"
 #import "GameKitHelper.h"
+#import "TitleScene.h"
 
 @implementation EndScene
 
@@ -81,12 +82,21 @@
     tryAgain.name = @"try";
     [self addChild:tryAgain];
     
+    SKLabelNode *home = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
+    home.text = @"Home";
+    home.fontSize = 30;
+    home.position = CGPointMake(tryAgain.position.x, tryAgain.position.y - 60);
+    home.name = @"home";
+    [self addChild:home];
+    
     SKLabelNode *credits = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
     credits.text = @"Credits";
     credits.fontSize = 30;
-    credits.position = CGPointMake(tryAgain.position.x, tryAgain.position.y - 60);
+    credits.position = CGPointMake(home.position.x, home.position.y - 60);
     credits.name = @"credits";
     [self addChild:credits];
+    
+    
     
 }
 
@@ -105,6 +115,9 @@
         } else if ([node.name isEqualToString:@"credits"]) {
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showCreditsView" object:nil];
+        } else if ([node.name isEqualToString:@"home"]) {
+            TitleScene *title = [TitleScene sceneWithSize:self.size];
+            [self.view presentScene:title];
         }
     
    
