@@ -77,7 +77,7 @@
         GameScene *gamePlay = [GameScene sceneWithSize:self.size];
         [self.view presentScene:gamePlay transition:[SKTransition fadeWithDuration:0.5]];
     } else if ([node.name isEqualToString:@"score"]) {
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLeaderBoard" object:nil];
         
     } else if ([node.name isEqualToString:@"boards"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showGameCenter" object:nil];

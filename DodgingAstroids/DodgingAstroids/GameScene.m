@@ -441,7 +441,23 @@
             NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
             if ([highScore integerForKey:@"highScore"] < _hud.score) {
                 [highScore setInteger:_hud.score forKey:@"highScore"];
+                
+                //save highscore array to NSUSerDefaults
+                if (![highScore objectForKey:@"highScoreArray"]) {
+                    //create new if it doesn't exist
+                    NSArray *highScores = [[NSArray alloc] initWithObjects:[NSNumber numberWithInteger:_hud.score], nil];
+                    [highScore setObject:highScores forKey:@"highScoreArray"];
+                } else {
+                    //add to current array
+                    NSMutableArray *scoresArray = [[NSMutableArray alloc] initWithArray:[highScore objectForKey:@"highScoreArray"]];
+                    [scoresArray addObject:[NSNumber numberWithInteger:_hud.score]];
+                    [highScore setObject:scoresArray forKey:@"highScoreArray"];
+                }
+               
             }
+            
+            
+            
             
             
             _isShip = NO;

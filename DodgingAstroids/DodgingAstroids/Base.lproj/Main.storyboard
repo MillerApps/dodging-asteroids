@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D105g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LVB-YS-i5n">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="kenpixel_blocks.ttf">
@@ -26,10 +27,91 @@
                     </view>
                     <connections>
                         <segue destination="KtG-hd-gSN" kind="presentation" identifier="showCredits" id="5iM-LZ-3NU"/>
+                        <segue destination="UqZ-7U-R68" kind="presentation" identifier="showBoards" id="z0w-GH-kSv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--High Scores-->
+        <scene sceneID="X9F-wa-B84">
+            <objects>
+                <viewController id="MCl-AW-6w5" customClass="LeaderrboardTableViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fLb-7f-fo4"/>
+                        <viewControllerLayoutGuide type="bottom" id="40V-E2-FIj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9z9-3j-zbP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Nfq-7j-oXb">
+                                <rect key="frame" x="16" y="105" width="568" height="29"/>
+                                <segments>
+                                    <segment title="Highest to Lowest"/>
+                                    <segment title="Lowest to Highest"/>
+                                </segments>
+                                <connections>
+                                    <action selector="filterTableViewData:" destination="MCl-AW-6w5" eventType="valueChanged" id="LHK-rg-RuR"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fBY-jJ-NF2">
+                                <rect key="frame" x="0.0" y="141" width="600" height="459"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="alV-jK-fvR" detailTextLabel="sEf-VK-EHg" style="IBUITableViewCellStyleValue1" id="Msy-p2-ueT">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Msy-p2-ueT" id="K9T-qg-CDD">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="alV-jK-fvR">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sEf-VK-EHg">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="MCl-AW-6w5" id="dGo-1b-gfs"/>
+                                    <outlet property="delegate" destination="MCl-AW-6w5" id="rtU-GC-uNj"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Nfq-7j-oXb" firstAttribute="top" secondItem="fLb-7f-fo4" secondAttribute="bottom" constant="41" id="JaE-r5-cfj"/>
+                            <constraint firstItem="fBY-jJ-NF2" firstAttribute="centerX" secondItem="Nfq-7j-oXb" secondAttribute="centerX" id="PnJ-4C-2O1"/>
+                            <constraint firstItem="fBY-jJ-NF2" firstAttribute="bottom" secondItem="40V-E2-FIj" secondAttribute="top" id="PwE-Pb-EVQ"/>
+                            <constraint firstItem="fBY-jJ-NF2" firstAttribute="top" secondItem="Nfq-7j-oXb" secondAttribute="bottom" constant="8" symbolic="YES" id="YpG-qj-WbC"/>
+                            <constraint firstItem="Nfq-7j-oXb" firstAttribute="leading" secondItem="9z9-3j-zbP" secondAttribute="leadingMargin" id="eeQ-aW-6zN"/>
+                            <constraint firstItem="fBY-jJ-NF2" firstAttribute="leading" secondItem="9z9-3j-zbP" secondAttribute="leading" id="gmD-Sk-XIr"/>
+                            <constraint firstAttribute="trailing" secondItem="fBY-jJ-NF2" secondAttribute="trailing" id="tom-fa-lEH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="High Scores" id="JdB-NV-E7S">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Sle-cI-kKU">
+                            <connections>
+                                <action selector="done:" destination="MCl-AW-6w5" id="lhn-R2-R1L"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ScoresTableView" destination="fBY-jJ-NF2" id="2ag-Aj-eMi"/>
+                        <outlet property="segmentedControll" destination="Nfq-7j-oXb" id="ntD-Xf-qmH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3vh-cr-1vj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1295" y="1072"/>
         </scene>
         <!--Credits View Controller-->
         <scene sceneID="0Xk-My-5lE">
@@ -89,7 +171,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H86-uv-SmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1386" y="529"/>
+            <point key="canvasLocation" x="2198" y="529"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MpR-0z-m9G">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UqZ-7U-R68" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lpS-Xf-MKE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MCl-AW-6w5" kind="relationship" relationship="rootViewController" id="TUh-vZ-Zq1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m7o-9c-F3M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="545" y="1127"/>
         </scene>
     </scenes>
     <resources>

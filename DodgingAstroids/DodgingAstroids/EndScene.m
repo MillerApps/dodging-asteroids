@@ -57,7 +57,14 @@
     
     [self setupScoreLabels:label];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showPopUp" object:nil];
+    NSUserDefaults *playerName = [NSUserDefaults standardUserDefaults];
+    
+    
+    if (![playerName valueForKey:@"playerName"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showPopUp" object:nil];
+    }
+    
+    
 
     
     
@@ -109,6 +116,8 @@
     int64_t scoreToreport = score;
     [[GameKitHelper sharedGamekitHelper] reportScore:scoreToreport forLeaderboardID:@"com.miller.DodgingAsteroids.high_scores"];
 }
+
+
 
 
 

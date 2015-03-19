@@ -88,6 +88,9 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     UITextField *alertText = [alertView textFieldAtIndex:0];
+    //Save name to NSUserDefaults as the Alert will only be presented if no name is stored
+    NSUserDefaults *playerName = [NSUserDefaults standardUserDefaults];
+    [playerName setValue:alertText.text forKey:@"playerName"];
     NSLog(@"%@", alertText.text);
 }
 
@@ -116,6 +119,10 @@
 
 }
 
+- (void)showLeaderBoard {
+    [self performSegueWithIdentifier:@"showBoards" sender:self];
+}
+
 -(void)showCreditsView {
     [self performSegueWithIdentifier:@"showCredits" sender:self];
     NSLog(@"Credits");
@@ -133,6 +140,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameCenter) name:@"showGameCenter" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertWithTextField) name:@"showPopUp" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLeaderBoard) name:@"showLeaderBoard" object:nil];
 }
 
 @end
