@@ -380,7 +380,7 @@
         //Transition to end
         EndScene *gameOver = [EndScene sceneWithSize:self.size];
         gameOver.userData = [NSMutableDictionary dictionary];
-        [gameOver.userData setObject:[NSString stringWithFormat:@"%ld", _hud.score] forKey:@"currentScore"];
+        [gameOver.userData setObject:[NSString stringWithFormat:@"%ld", (long)_hud.score] forKey:@"currentScore"];
         [self.view presentScene:gameOver transition:[SKTransition doorsOpenHorizontalWithDuration:1.0]];
         
         //Remove obsever from NSNotificationCenter

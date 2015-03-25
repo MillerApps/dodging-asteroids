@@ -23,14 +23,17 @@
     
     //add spaceship to scene
     SKSpriteNode *ship = [SKSpriteNode spriteNodeWithImageNamed:@"ship"];
-    ship.position = CGPointMake(self.size.width/2, 150);
-    [self addChild:ship];
-    
     //changes ship size for smaller screen sizes and exhaust postion
     if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
         ship.size = [Utils setNodeSize:ship.size];
-        
+        ship.position = CGPointMake(self.size.width/2, self.size.height/5);
+    } else {
+        ship.position = CGPointMake(self.size.width/2, self.size.height/4);
     }
+    
+    [self addChild:ship];
+    
+    
     
     //add title label
     SKLabelNode *titleLabel = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
@@ -63,7 +66,7 @@
     leaderboards.name = @"boards";
     [self addChild:leaderboards];
     
-   
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -85,7 +88,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showGameCenter" object:nil];
     }
     
-
+    
     
 }
 

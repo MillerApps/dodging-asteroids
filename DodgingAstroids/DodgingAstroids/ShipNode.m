@@ -37,7 +37,7 @@
     //changes ship size for smaller screen sizes and exhaust postion
     if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
         ship.size = [Utils setNodeSize:ship.size];
-        exhaust.position = CGPointMake(0, -30);
+        exhaust.position = CGPointMake(0, -35);
     }
     
     [ship setUpPhysicsBody];

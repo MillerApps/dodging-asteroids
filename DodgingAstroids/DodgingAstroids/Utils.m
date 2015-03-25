@@ -18,7 +18,7 @@
 
 +(CGSize)setNodeSize:(CGSize)size {
     
-    return CGSizeMake(size.width/1.5, size.height/1.5);
+    return CGSizeMake(size.width/1.2, size.height/1.2);
 }
 
 

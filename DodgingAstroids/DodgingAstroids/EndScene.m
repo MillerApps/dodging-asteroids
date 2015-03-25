@@ -31,7 +31,7 @@
     
     //create high score label
     SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
-    highScoreLabel.text = [NSString stringWithFormat:@"Best: %ld", highScoreInt];
+    highScoreLabel.text = [NSString stringWithFormat:@"Best: %ld", (long)highScoreInt];
     highScoreLabel.fontSize = 30;
     highScoreLabel.position = CGPointMake(self.size.width/2, currentScore.position.y - 40);
     
