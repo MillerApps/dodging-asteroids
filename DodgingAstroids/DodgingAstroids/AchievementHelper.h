@@ -13,6 +13,8 @@
 
 + (GKAchievement *)collectSpacemanAchievement;
 + (GKAchievement *)scoreInOneLife;
++ (GKAchievement *)takeAHitAchievement;
++ (GKAchievement *)incrementalScore:(NSInteger)numberOfPoints;
 
 
 @end

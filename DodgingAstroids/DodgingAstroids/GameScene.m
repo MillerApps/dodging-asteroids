@@ -592,7 +592,7 @@
         
     }
     
-    if (_hud.score == 40 && _numberOfHits == 0) {
+    if (_hud.score >= 40 && _numberOfHits == 0) {
         
         if (![hasShown boolForKey:@"inOneLife"]) {
             [achievements addObject:[AchievementHelper scoreInOneLife]];
@@ -600,6 +600,14 @@
         }
         
     }
+    
+    if (_numberOfHits == 3 && ![hasShown boolForKey:@"takeHit"]) {
+        [achievements addObject:[AchievementHelper takeAHitAchievement]];
+        [hasShown setBool:YES forKey:@"takeHit"];
+    }
+
+    
+    [achievements addObject:[AchievementHelper incrementalScore:_hud.score]];
     
     [[GameKitHelper sharedGamekitHelper] reportAchievements:achievements];
 }
@@ -612,6 +620,11 @@
         NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
         [hasShown setBool:NO forKey:@"inOneLife"];
         [hasShown setBool:NO forKey:@"collectSpaceman"];
+        [hasShown setBool:NO forKey:@"takeHit"];
+        [hasShown setBool:NO forKey:@"partThree"];
+        [hasShown setBool:NO forKey:@"partTwo"];
+        [hasShown setBool:NO forKey:@"partOne"];
+        
     }];
 }
 
