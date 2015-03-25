@@ -586,24 +586,21 @@
     if (_numberOfLives == 1 && ![hasShown boolForKey:@"collectSpaceman"]) {
         
         [achievements addObject:[AchievementHelper collectSpacemanAchievement]];
-        [hasShown setBool:YES forKey:@"collectSpaceman"];
-        
-        
-        
+        [hasShown setBool:YES forKey:@"collectSpaceman"];//makes sure achievement is shown once
     }
     
     if (_hud.score >= 40 && _numberOfHits == 0) {
         
         if (![hasShown boolForKey:@"inOneLife"]) {
             [achievements addObject:[AchievementHelper scoreInOneLife]];
-            [hasShown setBool:YES forKey:@"inOneLife"];
+            [hasShown setBool:YES forKey:@"inOneLife"];//makes sure achievement is shown once
         }
         
     }
     
     if (_numberOfHits == 3 && ![hasShown boolForKey:@"takeHit"]) {
         [achievements addObject:[AchievementHelper takeAHitAchievement]];
-        [hasShown setBool:YES forKey:@"takeHit"];
+        [hasShown setBool:YES forKey:@"takeHit"];//makes sure achievement is shown once
     }
 
     
@@ -612,21 +609,6 @@
     [[GameKitHelper sharedGamekitHelper] reportAchievements:achievements];
 }
 
-- (void)reset {
-    [GKAchievement resetAchievementsWithCompletionHandler:^(NSError *error) {
-        if (error) {
-            NSLog(@"Error ===> %@", error);
-        }
-        NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
-        [hasShown setBool:NO forKey:@"inOneLife"];
-        [hasShown setBool:NO forKey:@"collectSpaceman"];
-        [hasShown setBool:NO forKey:@"takeHit"];
-        [hasShown setBool:NO forKey:@"partThree"];
-        [hasShown setBool:NO forKey:@"partTwo"];
-        [hasShown setBool:NO forKey:@"partOne"];
-        
-    }];
-}
 
 #pragma mark - NSNotificationCenter for Handleing pauses
 

@@ -70,7 +70,7 @@ static NSInteger const kNumberOfPoints = 200;
             if (percent == 25 && ![hasShown boolForKey:@"partOne"]) {
                 incrementalScoreAchievement.showsCompletionBanner = YES;
                 [GKNotificationBanner showBannerWithTitle:@"Score 50, 100. and 200 points: Part 1" message:@"Obtained 50 Points" completionHandler:nil];
-                [hasShown setBool:YES forKey:@"partOne"];
+                [hasShown setBool:YES forKey:@"partOne"];//makes sure achievement is shown once
             }
             
             break;
@@ -78,7 +78,7 @@ static NSInteger const kNumberOfPoints = 200;
             if (percent == 50 && ![hasShown boolForKey:@"partTwo"]) {
                 incrementalScoreAchievement.showsCompletionBanner = YES;
                 [GKNotificationBanner showBannerWithTitle:@"Score 50, 100. and 200 points: Part 2" message:@"Obtained 100 Points" completionHandler:nil];
-                [hasShown setBool:YES forKey:@"partTwo"];
+                [hasShown setBool:YES forKey:@"partTwo"];//makes sure achievement is shown once
             }
             
             break;
@@ -86,7 +86,7 @@ static NSInteger const kNumberOfPoints = 200;
             if (percent == 100 && ![hasShown boolForKey:@"partThree"]) {
                 incrementalScoreAchievement.showsCompletionBanner = YES;
                 [GKNotificationBanner showBannerWithTitle:@"Score 50, 100. and 200 points: Part 3" message:@"Obtained 200 Points" completionHandler:nil];
-                [hasShown setBool:YES forKey:@"partThree"];
+                [hasShown setBool:YES forKey:@"partThree"];//makes sure achievement is shown once
             }
             
             break;
