@@ -43,6 +43,8 @@
     
     
     
+    
+    
     SKSpriteNode *play = [SKSpriteNode spriteNodeWithImageNamed:@"start"];
     play.position = CGPointMake(CGRectGetMidX(self.frame) - 60, CGRectGetMidY(self.frame));
     play.zPosition = 1;

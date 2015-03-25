@@ -20,5 +20,6 @@ extern NSString *const PresentAuthenticationViewController;
 - (void)authenticateLocalPlayer;
 - (void)reportScore:(int64_t)score forLeaderboardID:(NSString *)leaderboardID;
 - (void)showGKGameCenterViewController:(UIViewController *)viewController;
+- (void)reportAchievements:(NSArray *)achievements;
 
 @end

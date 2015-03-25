@@ -15,6 +15,8 @@
 #import "PlayButtonNode.h"
 #import "HudNode.h"
 #import "SpaceManNode.h"
+#import "AchievementHelper.h"
+#import "GameKitHelper.h"
 
 
 
@@ -30,6 +32,7 @@
 @property (nonatomic) float spaceManSpawnRate;
 @property (nonatomic) float asteroidX;
 @property (nonatomic) NSInteger numberOfLives;
+@property (nonatomic) NSInteger numberOfHits;
 @property (nonatomic) ShipNode *ship;
 @property (nonatomic) PauseButtonNode *pauseBtn;
 @property (nonatomic) HudNode *hud;
@@ -462,6 +465,7 @@
             
             _isShip = NO;
         } else {
+            self.numberOfHits ++;
             self.numberOfLives --;
             [self updateHealthConter];
             [asteroid removeFromParent];
@@ -564,11 +568,51 @@
         
         
         self.lastUpdateTimeInterval = currentTime;
+        [self awardAchievements];
+        
     }
     
     
     
     
+}
+
+#pragma mark - Achievements
+
+- (void)awardAchievements {
+    
+    NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *achievements = [NSMutableArray array];
+    if (_numberOfLives == 1 && ![hasShown boolForKey:@"collectSpaceman"]) {
+        
+        [achievements addObject:[AchievementHelper collectSpacemanAchievement]];
+        [hasShown setBool:YES forKey:@"collectSpaceman"];
+        
+        
+        
+    }
+    
+    if (_hud.score == 40 && _numberOfHits == 0) {
+        
+        if (![hasShown boolForKey:@"inOneLife"]) {
+            [achievements addObject:[AchievementHelper scoreInOneLife]];
+            [hasShown setBool:YES forKey:@"inOneLife"];
+        }
+        
+    }
+    
+    [[GameKitHelper sharedGamekitHelper] reportAchievements:achievements];
+}
+
+- (void)reset {
+    [GKAchievement resetAchievementsWithCompletionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Error ===> %@", error);
+        }
+        NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
+        [hasShown setBool:NO forKey:@"inOneLife"];
+        [hasShown setBool:NO forKey:@"collectSpaceman"];
+    }];
 }
 
 #pragma mark - NSNotificationCenter for Handleing pauses

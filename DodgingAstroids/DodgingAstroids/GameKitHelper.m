@@ -93,6 +93,16 @@ NSString *const PresentAuthenticationViewController = @"present_authentication_v
 
 }
 
+- (void)reportAchievements:(NSArray *)achievements {
+    if (!_enableGameCenter) {
+        NSLog(@"Local Play not authenticated");
+    }
+    
+    [GKAchievement reportAchievements:achievements withCompletionHandler:^(NSError *error) {
+        [self setLastErrror:error];
+    }];
+}
+
 - (void)showGKGameCenterViewController:(UIViewController *)viewController {
     
     if (!_enableGameCenter) {
