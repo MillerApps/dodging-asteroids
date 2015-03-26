@@ -158,6 +158,7 @@
     SKLabelNode *instructions = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
     instructions.text = @"Tap left or right to move";
     instructions.fontSize = 11;
+    
     instructions.position = CGPointMake(self.size.width/2, tap.position.y - 50);
     instructions.zPosition = 4;
     [self addChild:instructions];
@@ -192,7 +193,7 @@
     _healthCount = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
     _healthCount.text = @"0";
     _healthCount.fontSize = 20;
-    _healthCount.position = CGPointMake(health.size.width * 2, self.size.height - 35);
+    _healthCount.position = CGPointMake(health.size.width *2.20, self.size.height - 35);
     _healthCount.zPosition = 4;
     _healthCount.alpha = 0.75;
     [self addChild:_healthCount];
