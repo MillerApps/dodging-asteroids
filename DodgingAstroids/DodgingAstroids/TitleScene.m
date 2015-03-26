@@ -42,11 +42,20 @@
     titleLabel.fontSize = 25;
     [self addChild:titleLabel];
     
+    //get highscore
+    NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
+    NSInteger highScoreInt = [highScore integerForKey:@"highScore"];
     
+    SKLabelNode *bestScore = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
+    if (![highScore integerForKey:@"highScore"]) {
+        bestScore.text = @"Best: 0";
+    } else {
+        bestScore.text = [NSString stringWithFormat:@"Best: %ld", (long)highScoreInt];
+    }
     
-    
-    
-    
+    bestScore.position =  CGPointMake(self.size.width/2, titleLabel.position.y - 80);
+    bestScore.fontSize = 20;
+    [self addChild:bestScore];
     
     SKSpriteNode *play = [SKSpriteNode spriteNodeWithImageNamed:@"start"];
     play.position = CGPointMake(CGRectGetMidX(self.frame) - 60, CGRectGetMidY(self.frame));
