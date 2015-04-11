@@ -12,7 +12,7 @@
 
 +(NSInteger)randomWithMin:(NSInteger)min max:(NSInteger)max {
     
-    return arc4random()%(max - min) + min;
+    return arc4random_uniform((uint32_t)max -  (uint32_t)min) + (uint32_t)min;
     
 }
 

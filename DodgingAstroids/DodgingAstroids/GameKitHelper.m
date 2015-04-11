@@ -42,6 +42,7 @@ NSString *const PresentAuthenticationViewController = @"present_authentication_v
 }
 
 - (void)authenticateLocalPlayer {
+    
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
     
     localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error) {
@@ -55,6 +56,7 @@ NSString *const PresentAuthenticationViewController = @"present_authentication_v
             _enableGameCenter = NO;
         }
     };
+    
 }
 
 - (void)setAuthenticationViewController:(UIViewController *)authenticationViewController {
@@ -90,7 +92,7 @@ NSString *const PresentAuthenticationViewController = @"present_authentication_v
     [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
         [self setLastErrror:error];
     }];
-
+    
 }
 
 - (void)reportAchievements:(NSArray *)achievements {

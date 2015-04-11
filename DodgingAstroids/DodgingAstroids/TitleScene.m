@@ -10,37 +10,20 @@
 #import "GameScene.h"
 #import "ShipNode.h"
 #import "Utils.h"
+@import GameKit;
+
 
 @implementation TitleScene
 
--(void)didMoveToView:(SKView *)view {
-    
-    SKSpriteNode *titleBg = [SKSpriteNode spriteNodeWithImageNamed:@"bg"];
-    titleBg.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    titleBg.size = self.size;
-    titleBg.zPosition = 0;
-    [self addChild:titleBg];
-    
-    //add spaceship to scene
-    SKSpriteNode *ship = [SKSpriteNode spriteNodeWithImageNamed:@"ship"];
-    //changes ship size for smaller screen sizes and exhaust postion
-    if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
-        ship.size = [Utils setNodeSize:ship.size];
-        ship.position = CGPointMake(self.size.width/2, self.size.height/5);
-    } else {
-        ship.position = CGPointMake(self.size.width/2, self.size.height/4);
-    }
-    
-    [self addChild:ship];
-    
-    
-    
+
+
+- (void)setupScene {
     //add title label
     SKLabelNode *titleLabel = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
     titleLabel.text = @"Dodging Asteroids";
-    titleLabel.position =  CGPointMake(self.size.width/2, self.size.height - 70);
-    titleLabel.fontSize = 25;
-    [self addChild:titleLabel];
+    titleLabel.position =  CGPointMake(self.frame.size.width / 2, self.frame.size.height - 60);
+    
+    
     
     //get highscore
     NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
@@ -53,30 +36,65 @@
         bestScore.text = [NSString stringWithFormat:@"Best: %ld", (long)highScoreInt];
     }
     
-    bestScore.position =  CGPointMake(self.size.width/2, titleLabel.position.y - 80);
-    bestScore.fontSize = 20;
+    bestScore.position =  CGPointMake(self.size.width / 2, CGRectGetMidY(self.frame) * 1.30);
+    bestScore.fontSize = 22;
     [self addChild:bestScore];
     
-    SKSpriteNode *play = [SKSpriteNode spriteNodeWithImageNamed:@"start"];
-    play.position = CGPointMake(CGRectGetMidX(self.frame) - 60, CGRectGetMidY(self.frame));
-    play.zPosition = 1;
-    play.name = @"play";
-    [self addChild:play];
     
-    SKSpriteNode *score = [SKSpriteNode spriteNodeWithImageNamed:@"scores"];
-    score.position = CGPointMake(CGRectGetMidX(self.frame) + 60, CGRectGetMidY(self.frame));
-    score.zPosition = 1;
-    score.name = @"score";
-    [self addChild:score];
     
-    SKSpriteNode *leaderboards = [SKSpriteNode spriteNodeWithImageNamed:@"leaderboards"];
-    leaderboards.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 60);
-    leaderboards.zPosition = 1;
-    leaderboards.name = @"boards";
-    [self addChild:leaderboards];
+    //add spaceship to scene
+    SKSpriteNode *ship = [SKSpriteNode spriteNodeWithImageNamed:@"ship"];
+    //changes ship size for smaller screen sizes and exhaust postion
+    if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+        ship.size = [Utils setNodeSize:ship.size];
+        ship.position = CGPointMake(self.size.width/2, self.size.height/6);
+        titleLabel.fontSize = 20;
+        
+    } else {
+        ship.position = CGPointMake(self.size.width/2, self.size.height/4);
+        titleLabel.fontSize = 25;
+    }
+    
+    [self addChild:ship];
+    [self addChild:titleLabel];
+}
+
+-(void)didMoveToView:(SKView *)view {
+    
+    SKSpriteNode *titleBg = [SKSpriteNode spriteNodeWithImageNamed:@"bg"];
+    titleBg.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    titleBg.size = self.size;
+    titleBg.zPosition = 0;
+    [self addChild:titleBg];
+    
+    
+   
+    [self setupScene];
+    [self setupStartButton];
+    [self setupLeaderBoardsButton];
+    
+
     
     
 }
+
+- (void)setupStartButton {
+    SKSpriteNode *play = [SKSpriteNode spriteNodeWithImageNamed:@"start"];
+    play.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 20);
+    play.zPosition = 1;
+    play.name = @"play";
+    [self addChild:play];
+}
+
+- (void)setupLeaderBoardsButton {
+    SKSpriteNode *leaderboards = [SKSpriteNode spriteNodeWithImageNamed:@"leaderboards"];
+    leaderboards.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 70);
+    leaderboards.zPosition = 1;
+    leaderboards.name = @"boards";
+    [self addChild:leaderboards];
+}
+
+
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
@@ -88,17 +106,21 @@
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqualToString:@"play"]) {
+        
         GameScene *gamePlay = [GameScene sceneWithSize:self.size];
-        [self.view presentScene:gamePlay transition:[SKTransition fadeWithDuration:0.5]];
-    } else if ([node.name isEqualToString:@"score"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLeaderBoard" object:nil];
+        [self.view presentScene:gamePlay transition:[SKTransition fadeWithDuration:1.0]];
+        
         
     } else if ([node.name isEqualToString:@"boards"]) {
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showGameCenter" object:nil];
+        
     }
     
     
     
 }
+
+
 
 @end

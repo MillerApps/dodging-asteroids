@@ -12,6 +12,7 @@
 #import "Utils.h"
 
 
+
 @implementation SKScene (Unarchive)
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
@@ -31,6 +32,13 @@
 
 @end
 
+@interface GameViewController ()
+
+@property (nonatomic) BOOL isVisable;
+@property (nonatomic) ADBannerView *adBanner;
+
+@end
+
 @implementation GameViewController
 
 
@@ -38,24 +46,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-
+    
+    
     // Configure the view.
     SKView * skView = (SKView *)self.view;
+#ifdef DEBUG
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
+#endif
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = YES;
     
     // Create and configure the scene.
     TitleScene *scene = [TitleScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    scene.scaleMode = SKSceneScaleModeResizeFill;
     
-
+    
     // Present the scene.
     [skView presentScene:scene];
     
     [self setupObservers];
+    
+    _adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 50)];
+    _adBanner.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideAd" object:nil];
     
     
 }
@@ -84,64 +99,114 @@
     return YES;
 }
 
-#pragma mark - AlertView
+#pragma mark - iAD
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    UITextField *alertText = [alertView textFieldAtIndex:0];
-    //Save name to NSUserDefaults as the Alert will only be presented if no name is stored
-    NSUserDefaults *playerName = [NSUserDefaults standardUserDefaults];
-    [playerName setValue:alertText.text forKey:@"playerName"];
-    NSLog(@"%@", alertText.text);
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner {
+    if (!_isVisable) {
+        if (_adBanner.superview == nil) {
+            [self.view addSubview:_adBanner];
+        }
+        
+        [UIView beginAnimations:@"bannerOn" context:nil];
+        
+        banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
+        
+        [UIView commitAnimations];
+        
+        _isVisable = YES;
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+       NSLog(@"Failed to retrieve ad");
+    if (_isVisable) {
+        [UIView beginAnimations:@"bannerOff" context:nil];
+        
+        banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
+        
+        [UIView commitAnimations];
+        
+        _isVisable = NO;
+    }
+    
+}
+
+-(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave {
+    
+    if (!willLeave) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"pause" object:nil];
+        
+        
+    }
+    
+     return YES;
+    
+}
+
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"unPause" object:nil];
+
+    
 }
 
 
 #pragma mark - NSNotifcationCenter Selectors
 
-- (void)showAuthenticationViewController {
-    GameKitHelper *gameKitHelper = [GameKitHelper sharedGamekitHelper];
-    
-    [self presentViewController:gameKitHelper.authenticationViewController animated:YES completion:nil];
-}
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)showGameCenter {
-    [[GameKitHelper sharedGamekitHelper] showGKGameCenterViewController:self];
-}
 
-- (void)showAlertWithTextField {
-    
-    UIAlertView *textPopUp = [[UIAlertView alloc] initWithTitle:@"Enter your name" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Done", nil];
-    textPopUp.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [textPopUp show];
-
-}
-
-- (void)showLeaderBoard {
-    [self performSegueWithIdentifier:@"showBoards" sender:self];
-}
-
--(void)showCreditsView {
-    [self performSegueWithIdentifier:@"showCredits" sender:self];
-    NSLog(@"Credits");
+- (void)handleNotification:(NSNotification *)notification
+{
+    if ([notification.name isEqualToString:PresentAuthenticationViewController]) {
+        GameKitHelper *gameKitHelper = [GameKitHelper sharedGamekitHelper];
+        
+        [self presentViewController:gameKitHelper.authenticationViewController animated:YES completion:nil];
+        
+    } else if ([notification.name isEqualToString:@"showCreditsView"]) {
+        
+        [self performSegueWithIdentifier:@"showCredits" sender:self];
+        
+    } else if ([notification.name isEqualToString:@"showGameCenter"]) {
+        
+        [[GameKitHelper sharedGamekitHelper] showGKGameCenterViewController:self];
+        
+    } else if ([notification.name isEqualToString:@"hideAd"]) {
+        
+        [UIView beginAnimations:@"bannerOff" context:nil];
+        
+        _adBanner.frame = CGRectOffset(_adBanner.frame, 0, _adBanner.frame.size.height);
+        
+        [UIView commitAnimations];
+        
+        
+    } else if ([notification.name isEqualToString:@"showAd"]) {
+        
+        [UIView beginAnimations:@"bannerOn" context:nil];
+        
+        _adBanner.frame = CGRectOffset(_adBanner.frame, 0, -_adBanner.frame.size.height);
+        
+        [UIView commitAnimations];
+        
+    }
 }
 
 #pragma mark - NSNotificationCenter Obsevers
 
 - (void)setupObservers
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAuthenticationViewController) name:PresentAuthenticationViewController object:nil];
-    [[GameKitHelper sharedGamekitHelper] authenticateLocalPlayer];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:PresentAuthenticationViewController object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCreditsView) name:@"showCreditsView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"showCreditsView" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameCenter) name:@"showGameCenter" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"showGameCenter" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertWithTextField) name:@"showPopUp" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"hideAd" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLeaderBoard) name:@"showLeaderBoard" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"showAd" object:nil];
 }
 
 @end

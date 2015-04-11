@@ -41,8 +41,10 @@
     
     [spaceMan setUpPhysicsBody];
     
+    
     return spaceMan;
 }
+
 
 -(void)setUpPhysicsBody {
     self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.size];

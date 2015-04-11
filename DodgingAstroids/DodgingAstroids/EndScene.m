@@ -10,6 +10,14 @@
 #import "GameScene.h"
 #import "GameKitHelper.h"
 #import "TitleScene.h"
+#import "Utils.h"
+@import AVFoundation;
+
+@interface EndScene ()
+
+@property (nonatomic) AVAudioPlayer *bgMusic;
+
+@end
 
 @implementation EndScene
 
@@ -18,8 +26,6 @@
     //get highscore
     NSUserDefaults *highScore = [NSUserDefaults standardUserDefaults];
     NSInteger highScoreInt = [highScore integerForKey:@"highScore"];
-    
-    [self reportScoreToGameCenter:highScoreInt];
     
     //create current score label
     SKLabelNode *currentScore = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
@@ -35,7 +41,13 @@
     highScoreLabel.fontSize = 30;
     highScoreLabel.position = CGPointMake(self.size.width/2, currentScore.position.y - 40);
     
+    
     [self addChild:highScoreLabel];
+    
+    //only reports score if greater than perivous highscore
+    if ((NSInteger)[self.userData valueForKey:@"currentScore"] > highScoreInt) {
+        [self reportScoreToGameCenter:highScoreInt];
+    }
 }
 
 -(void)didMoveToView:(SKView *)view {
@@ -47,10 +59,16 @@
     
     //create sklabel
     SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
-    label.text = @"You Lost!";
-    
-    label.fontSize = 50;
+    label.text = @"Game Over";
     label.position = CGPointMake(self.size.width/2, self.size.height - 70);
+    
+    if (IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
+        label.fontSize = 40;
+        
+    } else {
+        label.fontSize = 50;
+    }
+    
     [self addChild:label];
     
     [self setupButtons];
@@ -58,25 +76,33 @@
     
     [self setupScoreLabels:label];
     
-    NSUserDefaults *playerName = [NSUserDefaults standardUserDefaults];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideAd" object:nil];
+    
+    [self setUpBackgroundMusic];
     
     
-    if (![playerName valueForKey:@"playerName"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showPopUp" object:nil];
-    }
     
     
+    
+    
+    
+}
 
+- (void)setUpBackgroundMusic {
     
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"gameover" withExtension:@"caf"];
     
-
-    
+    self.bgMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    self.bgMusic.numberOfLoops = -1;
+    [self.bgMusic setVolume:0.2];
+    [self.bgMusic prepareToPlay];
+    [self.bgMusic play];
 }
 
 - (void)setupButtons {
     //create lable
     SKLabelNode *tryAgain = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
-    tryAgain.text = @"Try Again!";
+    tryAgain.text = @"Try Again";
     tryAgain.fontSize = 30;
     tryAgain.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     tryAgain.name = @"try";
@@ -102,27 +128,29 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
-        //get a UITouch object
-        UITouch *touch = [touches anyObject];
-        //get touch loc
-        CGPoint location = [touch locationInNode:self];
-        //get selected node
-        SKNode *node = [self nodeAtPoint:location];
+    //get a UITouch object
+    UITouch *touch = [touches anyObject];
+    //get touch loc
+    CGPoint location = [touch locationInNode:self];
+    //get selected node
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"try"]) {
+        GameScene *firstScene = [GameScene sceneWithSize:self.size];
+        [self.view presentScene:firstScene];
+        [self.bgMusic stop];
+    } else if ([node.name isEqualToString:@"credits"]) {
         
-        if ([node.name isEqualToString:@"try"]) {
-            GameScene *firstScene = [GameScene sceneWithSize:self.size];
-            [self.view presentScene:firstScene];
-        } else if ([node.name isEqualToString:@"credits"]) {
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"showCreditsView" object:nil];
-        } else if ([node.name isEqualToString:@"home"]) {
-            TitleScene *title = [TitleScene sceneWithSize:self.size];
-            [self.view presentScene:title];
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showCreditsView" object:nil];
+    } else if ([node.name isEqualToString:@"home"]) {
+        TitleScene *title = [TitleScene sceneWithSize:self.size];
+        [self.view presentScene:title];
+        [self.bgMusic stop];
+    }
     
-   
     
-
+    
+    
 }
 
 - (void)reportScoreToGameCenter:(NSInteger) score {

@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F0747721ABA3F1B0092E387 /* LeaderrboardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0747711ABA3F1B0092E387 /* LeaderrboardTableViewController.m */; };
-		2F0747751ABB3BD50092E387 /* ScoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0747741ABB3BD50092E387 /* ScoreDetailViewController.m */; };
 		2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D271A85C103004DA8B3 /* thrusters.caf */; };
 		2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D2A1A85C545004DA8B3 /* rock.caf */; };
 		2F355A7C1AAFFDD0006AD37D /* SpaceManNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F355A7B1AAFFDD0006AD37D /* SpaceManNode.m */; };
 		2F4139DA1A9EA57C00851B59 /* EndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4139D91A9EA57C00851B59 /* EndScene.m */; };
 		2F47C5E41AB6E21800A960B0 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F47C5E31AB6E21800A960B0 /* GameKitHelper.m */; };
 		2F4DFAF71AC21F0A0066CC0C /* AchievementHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4DFAF61AC21F0A0066CC0C /* AchievementHelper.m */; };
+		2F4DFAFC1ACDFFDC0066CC0C /* gameover.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F4DFAFB1ACDFFDC0066CC0C /* gameover.caf */; };
 		2F55B6331A997ABF0043EDE2 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */; };
+		2F5D13C91AD36E0700D2166A /* powerdown.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D13C71AD36E0700D2166A /* powerdown.caf */; };
+		2F5D13CA1AD36E0700D2166A /* powerup.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D13C81AD36E0700D2166A /* powerup.caf */; };
 		2F6AAEBB1A9FA46300AD277A /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AAEBA1A9FA46300AD277A /* TitleScene.m */; };
 		2F8AA8411A8A2D0C007984E5 /* art.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA8401A8A2D0C007984E5 /* art.atlas */; };
 		2F8AA8451A8B77BA007984E5 /* shipMovement.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA8441A8B77BA007984E5 /* shipMovement.caf */; };
@@ -36,6 +37,7 @@
 		2FF45B6A1A840A0F00D49057 /* DodgingAstroidsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FF45B691A840A0F00D49057 /* DodgingAstroidsTests.m */; };
 		2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2FF45B781A84487300D49057 /* ExhaustParticle.sks */; };
 		2FF45B7B1A84487300D49057 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FF45B791A84487300D49057 /* spark.png */; };
+		2FFA4F1F1AD53105001E9191 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFA4F1E1AD53105001E9191 /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,10 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F0747701ABA3F1B0092E387 /* LeaderrboardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderrboardTableViewController.h; sourceTree = "<group>"; };
-		2F0747711ABA3F1B0092E387 /* LeaderrboardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderrboardTableViewController.m; sourceTree = "<group>"; };
-		2F0747731ABB3BD50092E387 /* ScoreDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreDetailViewController.h; sourceTree = "<group>"; };
-		2F0747741ABB3BD50092E387 /* ScoreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreDetailViewController.m; sourceTree = "<group>"; };
 		2F0B6D271A85C103004DA8B3 /* thrusters.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrusters.caf; sourceTree = "<group>"; };
 		2F0B6D2A1A85C545004DA8B3 /* rock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rock.caf; sourceTree = "<group>"; };
 		2F355A7A1AAFFDD0006AD37D /* SpaceManNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceManNode.h; sourceTree = "<group>"; };
@@ -62,8 +60,11 @@
 		2F47C5E31AB6E21800A960B0 /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
 		2F4DFAF51AC21F0A0066CC0C /* AchievementHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementHelper.h; sourceTree = "<group>"; };
 		2F4DFAF61AC21F0A0066CC0C /* AchievementHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementHelper.m; sourceTree = "<group>"; };
+		2F4DFAFB1ACDFFDC0066CC0C /* gameover.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameover.caf; sourceTree = "<group>"; };
 		2F55B6311A997ABF0043EDE2 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
 		2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsViewController.m; sourceTree = "<group>"; };
+		2F5D13C71AD36E0700D2166A /* powerdown.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = powerdown.caf; sourceTree = "<group>"; };
+		2F5D13C81AD36E0700D2166A /* powerup.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = powerup.caf; sourceTree = "<group>"; };
 		2F6AAEB91A9FA46300AD277A /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
 		2F6AAEBA1A9FA46300AD277A /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = "<group>"; };
 		2F8AA8401A8A2D0C007984E5 /* art.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = art.atlas; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		2FF45B691A840A0F00D49057 /* DodgingAstroidsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DodgingAstroidsTests.m; sourceTree = "<group>"; };
 		2FF45B781A84487300D49057 /* ExhaustParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExhaustParticle.sks; sourceTree = "<group>"; };
 		2FF45B791A84487300D49057 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		2FFA4F1E1AD53105001E9191 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FFA4F1F1AD53105001E9191 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +125,9 @@
 		2F0B6D251A85C0D9004DA8B3 /* SFX */ = {
 			isa = PBXGroup;
 			children = (
+				2F5D13C71AD36E0700D2166A /* powerdown.caf */,
+				2F5D13C81AD36E0700D2166A /* powerup.caf */,
+				2F4DFAFB1ACDFFDC0066CC0C /* gameover.caf */,
 				2F8AA8441A8B77BA007984E5 /* shipMovement.caf */,
 				2F0B6D2A1A85C545004DA8B3 /* rock.caf */,
 				2F0B6D271A85C103004DA8B3 /* thrusters.caf */,
@@ -136,10 +142,6 @@
 				2FF45B551A840A0E00D49057 /* GameViewController.m */,
 				2F55B6311A997ABF0043EDE2 /* CreditsViewController.h */,
 				2F55B6321A997ABF0043EDE2 /* CreditsViewController.m */,
-				2F0747701ABA3F1B0092E387 /* LeaderrboardTableViewController.h */,
-				2F0747711ABA3F1B0092E387 /* LeaderrboardTableViewController.m */,
-				2F0747731ABB3BD50092E387 /* ScoreDetailViewController.h */,
-				2F0747741ABB3BD50092E387 /* ScoreDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -190,6 +192,7 @@
 		2FF45B3C1A840A0E00D49057 = {
 			isa = PBXGroup;
 			children = (
+				2FFA4F1E1AD53105001E9191 /* GameKit.framework */,
 				2FF45B471A840A0E00D49057 /* DodgingAstroids */,
 				2FF45B661A840A0F00D49057 /* DodgingAstroidsTests */,
 				2FF45B461A840A0E00D49057 /* Products */,
@@ -305,6 +308,11 @@
 					2FF45B441A840A0E00D49057 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = N2263DH3H7;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					2FF45B621A840A0F00D49057 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -339,13 +347,16 @@
 				2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */,
 				2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */,
 				2FF45B7B1A84487300D49057 /* spark.png in Resources */,
+				2F4DFAFC1ACDFFDC0066CC0C /* gameover.caf in Resources */,
 				2F8AA8411A8A2D0C007984E5 /* art.atlas in Resources */,
 				2F8AA8501A915BA9007984E5 /* kenpixel_blocks.ttf in Resources */,
+				2F5D13C91AD36E0700D2166A /* powerdown.caf in Resources */,
 				2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */,
 				2F8AA8451A8B77BA007984E5 /* shipMovement.caf in Resources */,
 				2FF45B5E1A840A0E00D49057 /* LaunchScreen.xib in Resources */,
 				2FF45B5B1A840A0E00D49057 /* Images.xcassets in Resources */,
 				2FF45B591A840A0E00D49057 /* Main.storyboard in Resources */,
+				2F5D13CA1AD36E0700D2166A /* powerup.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +381,6 @@
 				2F47C5E41AB6E21800A960B0 /* GameKitHelper.m in Sources */,
 				2F55B6331A997ABF0043EDE2 /* CreditsViewController.m in Sources */,
 				2F6AAEBB1A9FA46300AD277A /* TitleScene.m in Sources */,
-				2F0747751ABB3BD50092E387 /* ScoreDetailViewController.m in Sources */,
 				2FF45B4E1A840A0E00D49057 /* AppDelegate.m in Sources */,
 				2FA2559F1A96525F00D6E07F /* HudNode.m in Sources */,
 				2FF45B511A840A0E00D49057 /* GameScene.m in Sources */,
@@ -379,7 +389,6 @@
 				2FBF096D1A87338300A3B295 /* AsteroidNode.m in Sources */,
 				2FBF09701A87341800A3B295 /* Utils.m in Sources */,
 				2F4139DA1A9EA57C00851B59 /* EndScene.m in Sources */,
-				2F0747721ABA3F1B0092E387 /* LeaderrboardTableViewController.m in Sources */,
 				2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,13 +454,15 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "19d718a2-924c-4179-9fa3-8e803c93fbf6";
 				SDKROOT = iphoneos;
@@ -464,11 +475,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Tyler Miller (N2263DH3H7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tyler Miller (N2263DH3H7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DodgingAstroids/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = DodgingAsteroids;
-				PROVISIONING_PROFILE = "19d718a2-924c-4179-9fa3-8e803c93fbf6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Distribution;
@@ -512,6 +524,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -523,7 +537,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "19d718a2-924c-4179-9fa3-8e803c93fbf6";
@@ -554,13 +568,15 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "19d718a2-924c-4179-9fa3-8e803c93fbf6";
 				SDKROOT = iphoneos;
@@ -575,6 +591,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DodgingAstroids/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = DodgingAsteroids;
 				PROVISIONING_PROFILE = "";
@@ -587,11 +604,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Tyler Miller (N2263DH3H7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tyler Miller (N2263DH3H7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DodgingAstroids/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = DodgingAsteroids;
-				PROVISIONING_PROFILE = "19d718a2-924c-4179-9fa3-8e803c93fbf6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
