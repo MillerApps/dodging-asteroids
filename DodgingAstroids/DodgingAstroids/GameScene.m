@@ -50,6 +50,8 @@
 @property (nonatomic) SKAction *powerupSFX;
 @property (nonatomic) SKAction *powerdownSFX;
 
+@property (nonatomic) NSMutableArray *asteroidArray; // Used to hold an array of created asteroids for copying
+
 @end
 
 @implementation GameScene
@@ -61,6 +63,9 @@
 -(void)didMoveToView:(SKView *)view {
     
     [self registerAppTransitionObservers];
+    
+    // create one asteroid of each type and store in array
+    [self setAsteroidArray:[NSMutableArray arrayWithObjects:[AsteroidNode astroidOfType:AstoridTypeA],[AsteroidNode astroidOfType:AstoridTypeB],[AsteroidNode astroidOfType:AstoridTypeC], nil]];
     
     self.lastUpdateTimeInterval = 0;
     self.timeSinceAsteroidAdded = 0;
@@ -131,7 +136,13 @@
     //add astroids to scene
     NSUInteger randomAstroid = [Utils randomWithMin:0 max:3];
     
-    AsteroidNode *astroid = [AsteroidNode astroidOfType:randomAstroid];
+    // Take asteroid of random type from array and create a copy
+    AsteroidNode *astroid = [[[self asteroidArray] objectAtIndex:randomAstroid] copy];
+    
+    NSLog(@"%lu", randomAstroid);
+    NSLog(@"%ld", astroid.type);
+    
+    //AsteroidNode *astroid = [AsteroidNode astroidOfType:randomAstroid];
     //set restarist for where astroids spawn
     float y = self.frame.size.height;
     float x = [Utils randomWithMin:astroid.size.width / 2 max:self.frame.size.width - astroid.size.width /2];
@@ -433,7 +444,7 @@
         firstBody = contact.bodyB;
         sceondBody = contact.bodyA;
     }
-   
+    
     
     if (firstBody.categoryBitMask == CollisionCatAstroid && sceondBody.categoryBitMask == CollisionCatBottomEdge) {
         //awrad the player points
