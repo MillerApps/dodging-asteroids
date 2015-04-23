@@ -76,15 +76,9 @@
 
 
 -(void)setUpPhysicsBody {
+
     
-    //Create a mutable path in the shape of a triangle, using the sprite bounds as a guideline
-    CGMutablePathRef physicsPath = CGPathCreateMutable();//causes memeory leak, seems to be a bug in SKPhysicsBody
-    CGPathMoveToPoint(physicsPath, nil, -self.size.width/2, -self.size.height/2);
-    CGPathAddLineToPoint(physicsPath, nil, self.size.width/2, -self.size.height/2);
-    CGPathAddLineToPoint(physicsPath, nil, 0, self.size.height/2);
-    CGPathAddLineToPoint(physicsPath, nil, -self.size.width/2, -self.size.height/2);
-    
-    self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:physicsPath];//causes memeory leak, seems to be a bug in SKPhysicsBody
+    self.physicsBody = [SKPhysicsBody bodyWithTexture:self.texture size:self.size];
     self.physicsBody.categoryBitMask = CollisionCatShip;
     self.physicsBody.collisionBitMask = CollisionCatEdge;
     self.physicsBody.contactTestBitMask = CollisionCatAstroid;

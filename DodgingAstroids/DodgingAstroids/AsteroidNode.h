@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger, AstoridType) {
 
 @property (nonatomic) AstoridType type;
 
+
 +(instancetype)astroidOfType:(AstoridType)type;
 
 @end

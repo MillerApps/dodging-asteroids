@@ -100,6 +100,7 @@
     [self preLoadSFX];
     
     
+    
     //set physicsbody for scene
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsBody.categoryBitMask = CollisionCatEdge;
@@ -154,8 +155,6 @@
     }
     
     self.asteroidX = astroid.position.x;
-    
-    
     
     
     
@@ -224,6 +223,8 @@
     self.powerupSFX = [SKAction playSoundFileNamed:@"powerup.caf" waitForCompletion:NO];
     self.powerdownSFX = [SKAction playSoundFileNamed:@"powerdown.caf" waitForCompletion:NO];
 }
+
+
 
 - (void)setUpTut {
     SKSpriteNode *tap = [SKSpriteNode spriteNodeWithImageNamed:@"tap"];
@@ -735,6 +736,7 @@
     
     _isPaused = NO;
     self.scene.paused = NO;
+    [self preLoadSFX]; //possible fix for ad interruprion
     
     [_playBtn removeFromParent];
     
@@ -743,6 +745,7 @@
     
     if (_isShip) {
         [self.ship playShipSFXForever];//only plays sound back if ship still exists
+        
         
         
     }

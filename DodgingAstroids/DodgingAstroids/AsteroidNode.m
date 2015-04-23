@@ -13,21 +13,26 @@
 
 +(instancetype)astroidOfType:(AstoridType)type {
     AsteroidNode *astroid;
+  
     
     if (type == AstoridTypeA) {
         astroid = [self spriteNodeWithImageNamed:@"rock_a"];
         astroid.type = AstoridTypeA;
+       
         
     } else if (type == AstoridTypeB) {
         astroid = [self spriteNodeWithImageNamed:@"rock_b"];
         astroid.type = AstoridTypeB;
+       
     } else {
         astroid = [self spriteNodeWithImageNamed:@"rock_c"];
         astroid.type = AstoridTypeC;
+        
     }
     
     astroid.name = @"astroid";
     astroid.zPosition = 1;
+    
     
     //changes asteroid size for smaller screen sizes
     if ( IS_IPHONE_4_OR_LESS | IS_IPHONE_5) {
@@ -41,8 +46,11 @@
     return astroid;
 }
 
+
+
+
 -(void)setUpPhysicsBody {
-    self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.size.height / 2];
+    self.physicsBody = [SKPhysicsBody bodyWithTexture:self.texture size:self.size];
     self.physicsBody.affectedByGravity = NO;
     self.physicsBody.friction = 0;
     self.physicsBody.linearDamping = 0;

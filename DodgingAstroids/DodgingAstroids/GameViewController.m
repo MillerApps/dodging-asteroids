@@ -53,6 +53,7 @@
 #ifdef DEBUG
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
+    skView.showsPhysics = YES;
 #endif
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = YES;

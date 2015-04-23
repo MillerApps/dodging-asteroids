@@ -56,6 +56,7 @@
     }
     
     [self addChild:ship];
+    NSLog(@"texture name %@", ship.texture);
     [self addChild:titleLabel];
 }
 
