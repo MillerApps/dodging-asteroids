@@ -66,8 +66,8 @@
     [self registerAppTransitionObservers];
     
     _acheveiments = [NSMutableArray array];
-  
- 
+    
+    
     self.lastUpdateTimeInterval = 0;
     self.timeSinceAsteroidAdded = 0;
     self.timeSinceSpaceManAdded = 0;
@@ -631,8 +631,8 @@
         
         
         self.lastUpdateTimeInterval = currentTime;
-       [self awardAchievements];
-        //[self resetAchievements];
+        [self awardAchievements];
+       
         
         [self nodeCleanUp];
         
@@ -646,66 +646,57 @@
     
 }
 
-- (void) resetAchievements
-{
-
-    // Clear all progress saved on Game Center
-    [GKAchievement resetAchievementsWithCompletionHandler:^(NSError *error) {
-        
-         NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
-        [hasShown setBool:NO forKey:@"collectSpaceman"];
-        [hasShown setBool:NO forKey:@"inOneLife"];
-        [hasShown setBool:NO forKey:@"takeHit"];
-    }];
-}
 
 #pragma mark - Achievements
 
 - (void)awardAchievements {
     
-    NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
-    if (_numberOfLives == 1 && ![hasShown boolForKey:@"collectSpaceman"]) {
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
         
-        [_acheveiments addObject:[AchievementHelper collectSpacemanAchievement]];
-        [hasShown setBool:YES forKey:@"collectSpaceman"];//makes sure achievement is shown once
-        
-        //report acheveiments
-        [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
-    }
-    
-    if (_hud.score >= 40 && _numberOfHits == 0) {
-        
-        if (![hasShown boolForKey:@"inOneLife"]) {
-            [_acheveiments addObject:[AchievementHelper scoreInOneLife]];
-            [hasShown setBool:YES forKey:@"inOneLife"];//makes sure achievement is shown once
+        NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
+        if (_numberOfLives == 1 && ![hasShown boolForKey:@"collectSpaceman"]) {
+            
+            [_acheveiments addObject:[AchievementHelper collectSpacemanAchievement]];
+            [hasShown setBool:YES forKey:@"collectSpaceman"];//makes sure achievement is shown once
             
             //report acheveiments
             [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
         }
         
-    }
-    
-    if (_numberOfHits == 3 && ![hasShown boolForKey:@"takeHit"]) {
-        [_acheveiments addObject:[AchievementHelper takeAHitAchievement]];
-        [hasShown setBool:YES forKey:@"takeHit"];//makes sure achievement is shown once
+        if (_hud.score >= 40 && _numberOfHits == 0) {
+            
+            if (![hasShown boolForKey:@"inOneLife"]) {
+                [_acheveiments addObject:[AchievementHelper scoreInOneLife]];
+                [hasShown setBool:YES forKey:@"inOneLife"];//makes sure achievement is shown once
+                
+                //report acheveiments
+                [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
+            }
+            
+        }
         
-        //report acheveiments
-        [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
+        if (_numberOfHits == 3 && ![hasShown boolForKey:@"takeHit"]) {
+            [_acheveiments addObject:[AchievementHelper takeAHitAchievement]];
+            [hasShown setBool:YES forKey:@"takeHit"];//makes sure achievement is shown once
+            
+            //report acheveiments
+            [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
+        }
+        
+        
+        if (![hasShown boolForKey:@"completed"]) {
+            [_acheveiments addObject:[AchievementHelper incrementalScore:_hud.score]];
+        } else {
+            //report acheveiments
+            [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
+        }
     }
     
     
-    if (![hasShown boolForKey:@"completed"]) {
-        [_acheveiments addObject:[AchievementHelper incrementalScore:_hud.score]];
-    } else {
-        //report acheveiments
-        [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
-    }
     
     
     
     
-    
-   
 }
 
 

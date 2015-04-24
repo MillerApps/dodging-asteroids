@@ -25,7 +25,7 @@ static NSInteger const kNumberOfPoints = 200;
     GKAchievement *collectionAchievement = [[GKAchievement alloc] initWithIdentifier:collectSpacemanID];
     collectionAchievement.percentComplete = 100;
     collectionAchievement.showsCompletionBanner =  YES;
-    NSLog(@"Spaceman cloodetced");
+    
     
     
     
