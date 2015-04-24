@@ -10,6 +10,7 @@
 #import "TitleScene.h"
 #import "GameKitHelper.h"
 #import "Utils.h"
+@import AVFoundation;
 
 
 
@@ -60,7 +61,7 @@
     
     // Create and configure the scene.
     TitleScene *scene = [TitleScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeResizeFill;
+    scene.scaleMode = SKSceneScaleModeAspectFill;
     
     
     // Present the scene.
@@ -137,6 +138,7 @@
     if (!willLeave) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"pause" object:nil];
+        [[AVAudioSession sharedInstance] setActive:NO error:nil];
         
         
     }
@@ -148,6 +150,7 @@
 -(void)bannerViewActionDidFinish:(ADBannerView *)banner {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"unPause" object:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
 
     
 }

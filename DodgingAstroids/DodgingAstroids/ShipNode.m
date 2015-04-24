@@ -27,6 +27,7 @@
     ship.name = @"ship";
     
     
+    
     //add spaceship exhaust
     
     SKEmitterNode *exhaust = [SKEmitterNode nodeWithFileNamed:@"ExhaustParticle.sks"];
@@ -78,11 +79,22 @@
 -(void)setUpPhysicsBody {
 
     
-    self.physicsBody = [SKPhysicsBody bodyWithTexture:self.texture size:self.size];
+    //Create a mutable path in the shape of a triangle, using the sprite bounds as a guideline
+    CGMutablePathRef physicsPath = CGPathCreateMutable();
+    CGPathMoveToPoint(physicsPath, nil, -self.size.width/2, -self.size.height/2.5);
+    CGPathAddLineToPoint(physicsPath, nil, self.size.width/2, -self.size.height/2.5);
+    CGPathAddLineToPoint(physicsPath, nil, 0, self.size.height/2.5);
+    CGPathAddLineToPoint(physicsPath, nil, -self.size.width/2, -self.size.height/2.5);
+    
+    CGPathCloseSubpath(physicsPath);
+    
+    self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:physicsPath];
     self.physicsBody.categoryBitMask = CollisionCatShip;
     self.physicsBody.collisionBitMask = CollisionCatEdge;
     self.physicsBody.contactTestBitMask = CollisionCatAstroid;
     self.physicsBody.allowsRotation = NO;
+    
+    
     
     
 }

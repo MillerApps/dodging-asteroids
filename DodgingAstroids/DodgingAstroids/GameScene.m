@@ -50,7 +50,8 @@
 @property (nonatomic) SKAction *powerupSFX;
 @property (nonatomic) SKAction *powerdownSFX;
 
-@property (nonatomic) NSMutableArray *asteroidArray; // Used to hold an array of created asteroids for copying
+@property (nonatomic) NSMutableArray *acheveiments;
+
 
 @end
 
@@ -64,9 +65,9 @@
     
     [self registerAppTransitionObservers];
     
-    // create one asteroid of each type and store in array
-    [self setAsteroidArray:[NSMutableArray arrayWithObjects:[AsteroidNode astroidOfType:AstoridTypeA],[AsteroidNode astroidOfType:AstoridTypeB],[AsteroidNode astroidOfType:AstoridTypeC], nil]];
-    
+    _acheveiments = [NSMutableArray array];
+  
+ 
     self.lastUpdateTimeInterval = 0;
     self.timeSinceAsteroidAdded = 0;
     self.timeSinceSpaceManAdded = 0;
@@ -136,13 +137,7 @@
     //add astroids to scene
     NSUInteger randomAstroid = [Utils randomWithMin:0 max:3];
     
-    // Take asteroid of random type from array and create a copy
-    AsteroidNode *astroid = [[[self asteroidArray] objectAtIndex:randomAstroid] copy];
-    
-    NSLog(@"%lu", randomAstroid);
-    NSLog(@"%ld", astroid.type);
-    
-    //AsteroidNode *astroid = [AsteroidNode astroidOfType:randomAstroid];
+    AsteroidNode *astroid = [AsteroidNode astroidOfType:randomAstroid];
     //set restarist for where astroids spawn
     float y = self.frame.size.height;
     float x = [Utils randomWithMin:astroid.size.width / 2 max:self.frame.size.width - astroid.size.width /2];
@@ -166,6 +161,8 @@
     }
     
     self.asteroidX = astroid.position.x;
+    
+    
     
     
     
@@ -458,10 +455,11 @@
         // NSLog(@"score");
     } else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatSpaceMan) {
         if (_numberOfLives < 3) {
+            [self runAction:self.powerupSFX];
             self.numberOfLives += bounsLife;
             [self updateHealthConter];
             [_hud awardScorePoint:bounsPoints];
-            [self runAction:self.powerupSFX];
+            
         }
         
         //remove spaceman node
@@ -473,7 +471,7 @@
         ShipNode *ship = (ShipNode *)firstBody.node;
         AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
         
-        if (_numberOfLives == 0) {
+        if (_numberOfLives == 0 && sceondBody != nil) {
             
             
             [self animateShipExplosion];
@@ -509,15 +507,17 @@
             
             
             
+            
             _isShip = NO;
             
         } else {
             
+            [self runAction:self.powerdownSFX];
             self.numberOfHits ++;
             self.numberOfLives --;
             [self updateHealthConter];
             [asteroid removeFromParent];
-            [self runAction:self.powerdownSFX];
+            
             
         }
         
@@ -631,7 +631,8 @@
         
         
         self.lastUpdateTimeInterval = currentTime;
-        [self awardAchievements];
+       [self awardAchievements];
+        //[self resetAchievements];
         
         [self nodeCleanUp];
         
@@ -645,37 +646,66 @@
     
 }
 
+- (void) resetAchievements
+{
+
+    // Clear all progress saved on Game Center
+    [GKAchievement resetAchievementsWithCompletionHandler:^(NSError *error) {
+        
+         NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
+        [hasShown setBool:NO forKey:@"collectSpaceman"];
+        [hasShown setBool:NO forKey:@"inOneLife"];
+        [hasShown setBool:NO forKey:@"takeHit"];
+    }];
+}
 
 #pragma mark - Achievements
 
 - (void)awardAchievements {
     
     NSUserDefaults *hasShown = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *achievements = [NSMutableArray array];
     if (_numberOfLives == 1 && ![hasShown boolForKey:@"collectSpaceman"]) {
         
-        [achievements addObject:[AchievementHelper collectSpacemanAchievement]];
+        [_acheveiments addObject:[AchievementHelper collectSpacemanAchievement]];
         [hasShown setBool:YES forKey:@"collectSpaceman"];//makes sure achievement is shown once
+        
+        //report acheveiments
+        [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
     }
     
     if (_hud.score >= 40 && _numberOfHits == 0) {
         
         if (![hasShown boolForKey:@"inOneLife"]) {
-            [achievements addObject:[AchievementHelper scoreInOneLife]];
+            [_acheveiments addObject:[AchievementHelper scoreInOneLife]];
             [hasShown setBool:YES forKey:@"inOneLife"];//makes sure achievement is shown once
+            
+            //report acheveiments
+            [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
         }
         
     }
     
     if (_numberOfHits == 3 && ![hasShown boolForKey:@"takeHit"]) {
-        [achievements addObject:[AchievementHelper takeAHitAchievement]];
+        [_acheveiments addObject:[AchievementHelper takeAHitAchievement]];
         [hasShown setBool:YES forKey:@"takeHit"];//makes sure achievement is shown once
+        
+        //report acheveiments
+        [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
     }
     
     
-    [achievements addObject:[AchievementHelper incrementalScore:_hud.score]];
+    if (![hasShown boolForKey:@"completed"]) {
+        [_acheveiments addObject:[AchievementHelper incrementalScore:_hud.score]];
+    } else {
+        //report acheveiments
+        [[GameKitHelper sharedGamekitHelper] reportAchievements:_acheveiments];
+    }
     
-    [[GameKitHelper sharedGamekitHelper] reportAchievements:achievements];
+    
+    
+    
+    
+   
 }
 
 
