@@ -25,6 +25,7 @@ static NSInteger const kNumberOfPoints = 200;
     GKAchievement *collectionAchievement = [[GKAchievement alloc] initWithIdentifier:collectSpacemanID];
     collectionAchievement.percentComplete = 100;
     collectionAchievement.showsCompletionBanner =  YES;
+    NSLog(@"Spaceman cloodetced");
     
     
     
@@ -86,7 +87,8 @@ static NSInteger const kNumberOfPoints = 200;
             if (percent == 100 && ![hasShown boolForKey:@"partThree"]) {
                 incrementalScoreAchievement.showsCompletionBanner = YES;
                 [GKNotificationBanner showBannerWithTitle:@"Score 50, 100. and 200 points: Part 3" message:@"Obtained 200 Points" completionHandler:nil];
-                [hasShown setBool:YES forKey:@"partThree"];//makes sure achievement is shown once
+                [hasShown setBool:YES forKey:@"partThree"];
+                [hasShown setBool:YES forKey:@"complete"];//makes sure achievement is shown once
             }
             
             break;

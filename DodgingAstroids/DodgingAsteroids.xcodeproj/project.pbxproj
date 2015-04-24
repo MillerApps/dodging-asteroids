@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D271A85C103004DA8B3 /* thrusters.caf */; };
 		2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D2A1A85C545004DA8B3 /* rock.caf */; };
-		2F10DE4C1AE81BBC0057B757 /* ui.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F10DE4B1AE81BBC0057B757 /* ui.atlas */; };
-		2F10DE501AE88BFB0057B757 /* spaceman.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F10DE4F1AE88BFB0057B757 /* spaceman.atlas */; };
-		2F10DE521AE88C200057B757 /* ship.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F10DE511AE88C200057B757 /* ship.atlas */; };
+		2F10DE5C1AEA7CB20057B757 /* asteroid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F10DE5B1AEA7CB20057B757 /* asteroid.atlas */; };
 		2F355A7C1AAFFDD0006AD37D /* SpaceManNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F355A7B1AAFFDD0006AD37D /* SpaceManNode.m */; };
 		2F4139DA1A9EA57C00851B59 /* EndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4139D91A9EA57C00851B59 /* EndScene.m */; };
 		2F47C5E41AB6E21800A960B0 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F47C5E31AB6E21800A960B0 /* GameKitHelper.m */; };
@@ -25,7 +23,6 @@
 		2F8AA84B1A9149B7007984E5 /* PauseButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA84A1A9149B7007984E5 /* PauseButtonNode.m */; };
 		2F8AA84E1A914FF8007984E5 /* PlayButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA84D1A914FF8007984E5 /* PlayButtonNode.m */; };
 		2F8AA8501A915BA9007984E5 /* kenpixel_blocks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */; };
-		2F9F28D91AE8157A0047DBB5 /* asteroid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F9F28D81AE8157A0047DBB5 /* asteroid.atlas */; };
 		2FA2559F1A96525F00D6E07F /* HudNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2559E1A96525F00D6E07F /* HudNode.m */; };
 		2FBF09571A85EE3F00A3B295 /* ShipNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF09561A85EE3F00A3B295 /* ShipNode.m */; };
 		2FBF096D1A87338300A3B295 /* AsteroidNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF096C1A87338300A3B295 /* AsteroidNode.m */; };
@@ -56,9 +53,7 @@
 /* Begin PBXFileReference section */
 		2F0B6D271A85C103004DA8B3 /* thrusters.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrusters.caf; sourceTree = "<group>"; };
 		2F0B6D2A1A85C545004DA8B3 /* rock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rock.caf; sourceTree = "<group>"; };
-		2F10DE4B1AE81BBC0057B757 /* ui.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ui.atlas; sourceTree = "<group>"; };
-		2F10DE4F1AE88BFB0057B757 /* spaceman.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = spaceman.atlas; sourceTree = "<group>"; };
-		2F10DE511AE88C200057B757 /* ship.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ship.atlas; sourceTree = "<group>"; };
+		2F10DE5B1AEA7CB20057B757 /* asteroid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = asteroid.atlas; sourceTree = "<group>"; };
 		2F355A7A1AAFFDD0006AD37D /* SpaceManNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceManNode.h; sourceTree = "<group>"; };
 		2F355A7B1AAFFDD0006AD37D /* SpaceManNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceManNode.m; sourceTree = "<group>"; };
 		2F4139D91A9EA57C00851B59 /* EndScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndScene.m; sourceTree = "<group>"; };
@@ -80,7 +75,6 @@
 		2F8AA84C1A914FF8007984E5 /* PlayButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayButtonNode.h; sourceTree = "<group>"; };
 		2F8AA84D1A914FF8007984E5 /* PlayButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayButtonNode.m; sourceTree = "<group>"; };
 		2F8AA84F1A915BA9007984E5 /* kenpixel_blocks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenpixel_blocks.ttf; sourceTree = "<group>"; };
-		2F9F28D81AE8157A0047DBB5 /* asteroid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = asteroid.atlas; sourceTree = "<group>"; };
 		2FA2559D1A96525F00D6E07F /* HudNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudNode.h; sourceTree = "<group>"; };
 		2FA2559E1A96525F00D6E07F /* HudNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudNode.m; sourceTree = "<group>"; };
 		2FBF09551A85EE3F00A3B295 /* ShipNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipNode.h; sourceTree = "<group>"; };
@@ -139,6 +133,14 @@
 				2F0B6D271A85C103004DA8B3 /* thrusters.caf */,
 			);
 			name = SFX;
+			sourceTree = "<group>";
+		};
+		2F10DE531AE99A010057B757 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				2F10DE5B1AEA7CB20057B757 /* asteroid.atlas */,
+			);
+			name = Textures;
 			sourceTree = "<group>";
 		};
 		2F3D038A1AB88D58007E333F /* Controllers */ = {
@@ -221,10 +223,7 @@
 				2FBF09581A85EE4700A3B295 /* Nodes */,
 				2FF45B571A840A0E00D49057 /* Main.storyboard */,
 				2FF45B5A1A840A0E00D49057 /* Images.xcassets */,
-				2F10DE511AE88C200057B757 /* ship.atlas */,
-				2F10DE4F1AE88BFB0057B757 /* spaceman.atlas */,
-				2F10DE4B1AE81BBC0057B757 /* ui.atlas */,
-				2F9F28D81AE8157A0047DBB5 /* asteroid.atlas */,
+				2F10DE531AE99A010057B757 /* Textures */,
 				2FF45B5C1A840A0E00D49057 /* LaunchScreen.xib */,
 				2F47C5E11AB6E1CB00A960B0 /* Game Center */,
 				2FF45B481A840A0E00D49057 /* Supporting Files */,
@@ -353,18 +352,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F9F28D91AE8157A0047DBB5 /* asteroid.atlas in Resources */,
-				2F10DE521AE88C200057B757 /* ship.atlas in Resources */,
+				2F10DE5C1AEA7CB20057B757 /* asteroid.atlas in Resources */,
 				2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */,
 				2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */,
 				2FF45B7B1A84487300D49057 /* spark.png in Resources */,
 				2F4DFAFC1ACDFFDC0066CC0C /* gameover.caf in Resources */,
-				2F10DE4C1AE81BBC0057B757 /* ui.atlas in Resources */,
 				2F8AA8501A915BA9007984E5 /* kenpixel_blocks.ttf in Resources */,
 				2F5D13C91AD36E0700D2166A /* powerdown.caf in Resources */,
 				2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */,
 				2F8AA8451A8B77BA007984E5 /* shipMovement.caf in Resources */,
-				2F10DE501AE88BFB0057B757 /* spaceman.atlas in Resources */,
 				2FF45B5E1A840A0E00D49057 /* LaunchScreen.xib in Resources */,
 				2FF45B5B1A840A0E00D49057 /* Images.xcassets in Resources */,
 				2FF45B591A840A0E00D49057 /* Main.storyboard in Resources */,
