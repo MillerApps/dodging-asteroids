@@ -471,7 +471,7 @@
         ShipNode *ship = (ShipNode *)firstBody.node;
         AsteroidNode *asteroid = (AsteroidNode *)sceondBody.node;
         
-        if (_numberOfLives == 0 && sceondBody != nil) {
+        if (_numberOfLives == 0 && sceondBody.node != nil) {
             
             
             [self animateShipExplosion];
@@ -510,11 +510,11 @@
             
             _isShip = NO;
             
-        } else {
+        } else if (self.numberOfLives >=1 && sceondBody.node != nil) {
             
             [self runAction:self.powerdownSFX];
-            self.numberOfHits ++;
-            self.numberOfLives --;
+            self.numberOfHits =  self.numberOfHits + 1;
+            self.numberOfLives = self.numberOfLives - 1;
             [self updateHealthConter];
             [asteroid removeFromParent];
             
