@@ -44,4 +44,5 @@ typedef NS_OPTIONS(uint32_t, CollisionCat) {
 +(NSInteger)randomWithMin:(NSInteger)min max:(NSInteger)max;
 +(CGSize)setNodeSize:(CGSize)size;
 
+
 @end

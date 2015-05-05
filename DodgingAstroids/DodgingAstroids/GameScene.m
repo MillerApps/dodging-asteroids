@@ -17,6 +17,7 @@
 #import "SpaceManNode.h"
 #import "AchievementHelper.h"
 #import "GameKitHelper.h"
+#import "OALSimpleAudio.h"
 
 
 
@@ -45,10 +46,10 @@
 @property (nonatomic) BOOL isGameOver;
 @property (nonatomic) BOOL hasGamePlayStarted;
 @property (nonatomic) BOOL wasPausedByTut;
-@property (nonatomic) SKAction *playExpolsionSFX;
-@property (nonatomic) SKAction *playShipMovementSFX;
-@property (nonatomic) SKAction *powerupSFX;
-@property (nonatomic) SKAction *powerdownSFX;
+//@property (nonatomic) SKAction *playExpolsionSFX;
+//@property (nonatomic) SKAction *playShipMovementSFX;
+//@property (nonatomic) SKAction *powerupSFX;
+//@property (nonatomic) SKAction *powerdownSFX;
 
 @property (nonatomic) NSMutableArray *acheveiments;
 
@@ -116,7 +117,7 @@
     self.physicsWorld.contactDelegate = self;
     
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showAd" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"setUpAds" object:nil];
     
     
     
@@ -226,10 +227,17 @@
 
 - (void)preLoadSFX {
     //preload sound actions
-    self.playExpolsionSFX = [SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO];
-    self.playShipMovementSFX = [SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO];
-    self.powerupSFX = [SKAction playSoundFileNamed:@"powerup.caf" waitForCompletion:NO];
-    self.powerdownSFX = [SKAction playSoundFileNamed:@"powerdown.caf" waitForCompletion:NO];
+    //    self.playExpolsionSFX = [SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO];
+    //    self.playShipMovementSFX = [SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO];
+    //    self.powerupSFX = [SKAction playSoundFileNamed:@"powerup.caf" waitForCompletion:NO];
+    //    self.powerdownSFX = [SKAction playSoundFileNamed:@"powerdown.caf" waitForCompletion:NO];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"shipMovement.caf"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"powerup.caf"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"powerdown.caf"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"rock.caf"];
+    
+    
+    
 }
 
 
@@ -361,8 +369,11 @@
                 //move ship to the left if the touch location.y is higer than the banner ad
                 
                 
-                [self.ship runAction:[SKAction sequence:@[self.playShipMovementSFX,
-                                                          [SKAction moveByX:-moveBy y:0.0 duration:0.0]]]];
+                [self.ship runAction:[SKAction moveByX:-moveBy y:0.0 duration:0.0]];
+                if (_isShip) {
+                    [[OALSimpleAudio sharedInstance] playEffect:@"shipMovement.caf"];
+                }
+                
                 
                 
                 
@@ -373,8 +384,10 @@
                 //move ship to the right if the touch location.y is higer than the banner ad
                 
                 
-                [self.ship runAction:[SKAction sequence:@[self.playShipMovementSFX,
-                                                          [SKAction moveByX:moveBy y:0.0 duration:0.0]]]];
+                [self.ship runAction:[SKAction moveByX:moveBy y:0.0 duration:0.0]];
+                if (_isShip) {
+                    [[OALSimpleAudio sharedInstance] playEffect:@"shipMovement.caf"];
+                }
                 
             }
         }
@@ -425,6 +438,8 @@
         
         //Remove obsever from NSNotificationCenter
         [[NSNotificationCenter defaultCenter] removeObserver:self];
+        //remove
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAds" object:nil];
         
         
     }];
@@ -455,7 +470,8 @@
         // NSLog(@"score");
     } else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatSpaceMan) {
         if (_numberOfLives < 3) {
-            [self runAction:self.powerupSFX];
+            // [self runAction:self.powerupSFX];
+            [[OALSimpleAudio sharedInstance] playEffect:@"powerup.caf"];
             self.numberOfLives += bounsLife;
             [self updateHealthConter];
             [_hud awardScorePoint:bounsPoints];
@@ -477,7 +493,8 @@
             [self animateShipExplosion];
             
             
-            [self runAction:self.playExpolsionSFX];
+            //[self runAction:self.playExpolsionSFX];
+            [[OALSimpleAudio sharedInstance] playEffect:@"rock.caf"];
             [ship removeFromParent];
             [asteroid removeFromParent];
             [self.ship stopShipSFX];
@@ -512,7 +529,8 @@
             
         } else if (self.numberOfLives >=1 && sceondBody.node != nil) {
             
-            [self runAction:self.powerdownSFX];
+            //[self runAction:self.powerdownSFX];
+            [[OALSimpleAudio sharedInstance] playEffect:@"powerdown.caf"];
             self.numberOfHits =  self.numberOfHits + 1;
             self.numberOfLives = self.numberOfLives - 1;
             [self updateHealthConter];
@@ -632,7 +650,7 @@
         
         self.lastUpdateTimeInterval = currentTime;
         [self awardAchievements];
-       
+        
         
         [self nodeCleanUp];
         
@@ -741,6 +759,7 @@
         
         if (_isPausedByResign && !_isPaused) {
             [self.ship stopShipSFX];
+            
             [_pauseBtn removeFromParent];
             
             //setup start/play button
@@ -768,7 +787,7 @@
     
     _isPaused = NO;
     self.scene.paused = NO;
-    [self preLoadSFX]; //possible fix for ad interruprion
+    
     
     [_playBtn removeFromParent];
     

@@ -76,7 +76,6 @@
     
     [self setupScoreLabels:label];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideAd" object:nil];
     
     [self setUpBackgroundMusic];
     

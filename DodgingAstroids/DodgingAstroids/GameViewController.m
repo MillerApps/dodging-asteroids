@@ -44,6 +44,8 @@
 
 
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -68,11 +70,6 @@
     [skView presentScene:scene];
     
     [self setupObservers];
-    
-    _adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 50)];
-    _adBanner.delegate = self;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideAd" object:nil];
     
     
 }
@@ -103,8 +100,21 @@
 
 #pragma mark - iAD
 
+- (void)setUpAds
+{
+    _adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 50)];
+    _adBanner.delegate = self;
+}
+
+- (void)removeAds{
+    [_adBanner removeFromSuperview];
+    _adBanner = nil;
+    _adBanner.delegate = nil;
+    _isVisable = NO;
+}
+
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner {
-    if (!_isVisable) {
+    if (!_isVisable && _adBanner != nil) {
         if (_adBanner.superview == nil) {
             [self.view addSubview:_adBanner];
         }
@@ -120,8 +130,8 @@
 }
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-       NSLog(@"Failed to retrieve ad");
-    if (_isVisable) {
+    NSLog(@"Failed to retrieve ad");
+    if (_isVisable && _adBanner != nil) {
         [UIView beginAnimations:@"bannerOff" context:nil];
         
         banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
@@ -138,20 +148,20 @@
     if (!willLeave) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"pause" object:nil];
-        [[AVAudioSession sharedInstance] setActive:NO error:nil];
+        
         
         
     }
     
-     return YES;
+    return YES;
     
 }
 
 -(void)bannerViewActionDidFinish:(ADBannerView *)banner {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"unPause" object:nil];
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
-
+    
+    
     
 }
 
@@ -177,6 +187,16 @@
     } else if ([notification.name isEqualToString:@"showGameCenter"]) {
         
         [[GameKitHelper sharedGamekitHelper] showGKGameCenterViewController:self];
+        
+    } else if ([notification.name isEqualToString:@"setUpAds"]) {
+        
+        
+        [self setUpAds];
+        
+        
+    } else if ([notification.name isEqualToString:@"removeAds"]) {
+        
+        [self removeAds];
         
     } else if ([notification.name isEqualToString:@"hideAd"]) {
         
@@ -211,6 +231,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"hideAd" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"showAd" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"setUpAds" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"removeAds" object:nil];
 }
 
 @end
