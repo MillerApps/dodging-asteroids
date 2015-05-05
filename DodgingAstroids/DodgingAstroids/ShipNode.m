@@ -89,6 +89,7 @@
     CGPathCloseSubpath(physicsPath);
     
     self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:physicsPath];
+    CGPathRelease(physicsPath);
     self.physicsBody.categoryBitMask = CollisionCatShip;
     self.physicsBody.collisionBitMask = CollisionCatEdge;
     self.physicsBody.contactTestBitMask = CollisionCatAstroid;

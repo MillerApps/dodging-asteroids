@@ -77,6 +77,7 @@
             
             
             self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+            CGPathRelease(path);
         } else {
             CGMutablePathRef path = CGPathCreateMutable();
             
@@ -93,6 +94,7 @@
             
             
             self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+            CGPathRelease(path);
         }
         
         
@@ -114,6 +116,7 @@
             CGPathCloseSubpath(path);
             
             self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+            CGPathRelease(path);
             
         } else {
             CGMutablePathRef path = CGPathCreateMutable();
@@ -130,6 +133,7 @@
             CGPathCloseSubpath(path);
             
             self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+            CGPathRelease(path);
         }
     } else {
         
@@ -148,6 +152,7 @@
             
             
             self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+            CGPathRelease(path);
             
             
         } else {
@@ -165,6 +170,7 @@
             
             
             self.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+            CGPathRelease(path);
         }
         
         
