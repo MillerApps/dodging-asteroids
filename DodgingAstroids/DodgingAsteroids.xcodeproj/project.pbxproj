@@ -45,6 +45,10 @@
 		2F82B42C1AF9846500796910 /* NSMutableDictionary+WeakReferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F82B40D1AF9846500796910 /* NSMutableDictionary+WeakReferences.m */; };
 		2F82B42D1AF9846500796910 /* OALAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F82B40F1AF9846500796910 /* OALAudioFile.m */; };
 		2F82B42E1AF9846500796910 /* OALTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F82B4121AF9846500796910 /* OALTools.m */; };
+		2F82B4301AF98E4F00796910 /* LICENSE.ObjectAL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2F82B42F1AF98E4F00796910 /* LICENSE.ObjectAL.txt */; };
+		2F82B4311AF98EAF00796910 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F82B3D01AF97B4B00796910 /* AVFoundation.framework */; };
+		2F82B4321AF98EB900796910 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F82B3CE1AF97B3F00796910 /* AudioToolbox.framework */; };
+		2F82B4331AF98EC200796910 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F82B3CC1AF97B3100796910 /* OpenAL.framework */; };
 		2F8AA8451A8B77BA007984E5 /* shipMovement.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8AA8441A8B77BA007984E5 /* shipMovement.caf */; };
 		2F8AA84B1A9149B7007984E5 /* PauseButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA84A1A9149B7007984E5 /* PauseButtonNode.m */; };
 		2F8AA84E1A914FF8007984E5 /* PlayButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA84D1A914FF8007984E5 /* PlayButtonNode.m */; };
@@ -158,6 +162,7 @@
 		2F82B4121AF9846500796910 /* OALTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OALTools.m; sourceTree = "<group>"; };
 		2F82B4131AF9846500796910 /* ObjectALMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectALMacros.h; sourceTree = "<group>"; };
 		2F82B4141AF9846500796910 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+		2F82B42F1AF98E4F00796910 /* LICENSE.ObjectAL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.ObjectAL.txt; sourceTree = "<group>"; };
 		2F8AA8441A8B77BA007984E5 /* shipMovement.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipMovement.caf; sourceTree = "<group>"; };
 		2F8AA8461A9114F0007984E5 /* EndScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndScene.h; sourceTree = "<group>"; };
 		2F8AA8491A9149B7007984E5 /* PauseButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseButtonNode.h; sourceTree = "<group>"; };
@@ -198,6 +203,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F82B4331AF98EC200796910 /* OpenAL.framework in Frameworks */,
+				2F82B4321AF98EB900796910 /* AudioToolbox.framework in Frameworks */,
+				2F82B4311AF98EAF00796910 /* AVFoundation.framework in Frameworks */,
 				2FFA4F1F1AD53105001E9191 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +266,7 @@
 		2F82B3D21AF9846400796910 /* ObjectAL */ = {
 			isa = PBXGroup;
 			children = (
+				2F82B42F1AF98E4F00796910 /* LICENSE.ObjectAL.txt */,
 				2F82B3D31AF9846400796910 /* Actions */,
 				2F82B3DD1AF9846400796910 /* AudioTrack */,
 				2F82B3E41AF9846400796910 /* OALSimpleAudio.h */,
@@ -561,6 +570,7 @@
 				2F4DFAFC1ACDFFDC0066CC0C /* gameover.caf in Resources */,
 				2F8AA8501A915BA9007984E5 /* kenpixel_blocks.ttf in Resources */,
 				2F5D13C91AD36E0700D2166A /* powerdown.caf in Resources */,
+				2F82B4301AF98E4F00796910 /* LICENSE.ObjectAL.txt in Resources */,
 				2FF45B7A1A84487300D49057 /* ExhaustParticle.sks in Resources */,
 				2F8AA8451A8B77BA007984E5 /* shipMovement.caf in Resources */,
 				2FF45B5E1A840A0E00D49057 /* LaunchScreen.xib in Resources */,
