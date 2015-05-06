@@ -27,7 +27,7 @@
 			<string>com.miller.DodgingAsteroids</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>dodgingasteroids://</string>
+				<string>dodgingasteroids</string>
 			</array>
 		</dict>
 	</array>
