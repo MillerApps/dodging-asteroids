@@ -777,6 +777,7 @@
 -(void)pauseGamePlay {
     _isPausedByResign = YES;
     _wasPausedByTut = YES;
+    [[OALSimpleAudio sharedInstance] unloadAllEffects];
     if (!_isPaused) {
         [self pauseGame];
     }
@@ -787,7 +788,7 @@
     
     _isPaused = NO;
     self.scene.paused = NO;
-    
+    [self preLoadSFX];
     
     [_playBtn removeFromParent];
     
