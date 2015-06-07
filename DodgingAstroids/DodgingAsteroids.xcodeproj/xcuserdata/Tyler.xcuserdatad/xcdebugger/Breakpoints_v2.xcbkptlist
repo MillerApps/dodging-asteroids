@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameViewController.m"
-            timestampString = "452550358.455336"
+            timestampString = "455410416.217275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "-setUpAds"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameViewController.m"
-            timestampString = "452551473.489095"
+            timestampString = "455410416.217275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "-bannerViewDidLoadAd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameViewController.m"
-            timestampString = "452551473.489095"
+            timestampString = "455410416.217275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "-bannerView:didFailToReceiveAdWithError:"
             landmarkType = "5">
          </BreakpointContent>

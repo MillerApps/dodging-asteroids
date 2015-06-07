@@ -46,9 +46,9 @@
 
 
 
-- (void)viewDidLoad
+- (void)viewWillLayoutSubviews
 {
-    [super viewDidLoad];
+    [super viewWillLayoutSubviews];
     
     
     // Configure the view.
@@ -61,15 +61,18 @@
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = YES;
     
-    // Create and configure the scene.
-    TitleScene *scene = [TitleScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    if (!skView.scene) {
+        
+        // Create and configure the scene.
+        TitleScene *scene = [TitleScene sceneWithSize:skView.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        
+        // Present the scene.
+        [skView presentScene:scene];
+    }
     
     
-    // Present the scene.
-    [skView presentScene:scene];
-    
-    [self setupObservers];
     
     
 }
