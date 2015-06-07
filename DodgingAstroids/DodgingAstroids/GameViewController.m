@@ -72,6 +72,7 @@
         [skView presentScene:scene];
     }
     
+    [self setupObservers];
     
     
     
