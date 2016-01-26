@@ -31,6 +31,7 @@
     SKLabelNode *currentScore = [SKLabelNode labelNodeWithFontNamed:@"KenPixel Blocks"];
     currentScore.text = [NSString stringWithFormat:@"Score: %@", [self.userData valueForKey:@"currentScore"]];
     currentScore.fontSize = 30;
+    currentScore.zPosition = 1;
     currentScore.position = CGPointMake(self.size.width/2, label.position.y - 40);
     
     [self addChild:currentScore];
@@ -40,6 +41,7 @@
     highScoreLabel.text = [NSString stringWithFormat:@"Best: %ld", (long)highScoreInt];
     highScoreLabel.fontSize = 30;
     highScoreLabel.position = CGPointMake(self.size.width/2, currentScore.position.y - 40);
+    highScoreLabel.zPosition = 1;
     
     
     [self addChild:highScoreLabel];
@@ -55,6 +57,7 @@
     SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:@"bg"];
     bg.position = CGPointMake(self.size.width/2, self.size.height/2);
     bg.size = self.size;
+    bg.zPosition = -1;
     [self addChild:bg];
     
     //create sklabel
@@ -104,6 +107,7 @@
     tryAgain.text = @"Try Again";
     tryAgain.fontSize = 30;
     tryAgain.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    tryAgain.zPosition = 1;
     tryAgain.name = @"try";
     [self addChild:tryAgain];
     
@@ -111,6 +115,7 @@
     home.text = @"Home";
     home.fontSize = 30;
     home.position = CGPointMake(tryAgain.position.x, tryAgain.position.y - 60);
+    home.zPosition = 1;
     home.name = @"home";
     [self addChild:home];
     
@@ -118,6 +123,7 @@
     credits.text = @"Credits";
     credits.fontSize = 30;
     credits.position = CGPointMake(home.position.x, home.position.y - 60);
+    credits.zPosition = 1;
     credits.name = @"credits";
     [self addChild:credits];
     

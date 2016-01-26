@@ -17,7 +17,6 @@
 #import "SpaceManNode.h"
 #import "AchievementHelper.h"
 #import "GameKitHelper.h"
-#import "OALSimpleAudio.h"
 
 
 
@@ -46,10 +45,12 @@
 @property (nonatomic) BOOL isGameOver;
 @property (nonatomic) BOOL hasGamePlayStarted;
 @property (nonatomic) BOOL wasPausedByTut;
-//@property (nonatomic) SKAction *playExpolsionSFX;
-//@property (nonatomic) SKAction *playShipMovementSFX;
-//@property (nonatomic) SKAction *powerupSFX;
-//@property (nonatomic) SKAction *powerdownSFX;
+@property (nonatomic) AsteroidNode *astroid;
+@property (nonatomic) SKNode *gameLayer;
+@property (nonatomic) SKAction *playExpolsionSFX;
+@property (nonatomic) SKAction *playShipMovementSFX;
+@property (nonatomic) SKAction *powerupSFX;
+@property (nonatomic) SKAction *powerdownSFX;
 
 @property (nonatomic) NSMutableArray *acheveiments;
 
@@ -98,6 +99,9 @@
     getReady.name = @"getReady";
     [self addChild:getReady];
     
+    _gameLayer = [SKNode new];
+    [self addChild:_gameLayer];
+    
     [self addPauseButton];
     [self addHud];
     [self addBottomEdge];
@@ -127,7 +131,7 @@
 - (void)addPlayerShip {
     //add spaceship to scene
     self.ship = [ShipNode shipAtPostion:CGPointMake(self.size.width/2, 150)];
-    [self addChild:self.ship];
+    [_gameLayer addChild:self.ship];
     [self.ship playShipSFXForever];
     
     
@@ -138,36 +142,37 @@
     //add astroids to scene
     NSUInteger randomAstroid = [Utils randomWithMin:0 max:3];
     
-    AsteroidNode *astroid = [AsteroidNode astroidOfType:randomAstroid];
+    _astroid = [AsteroidNode astroidOfType:randomAstroid];
     //set restarist for where astroids spawn
     float y = self.frame.size.height;
-    float x = [Utils randomWithMin:astroid.size.width / 2 max:self.frame.size.width - astroid.size.width /2];
+    float x = [Utils randomWithMin:_astroid.size.width / 2 max:self.frame.size.width - _astroid.size.width /2];
     
     //set postion
-    astroid.position = CGPointMake(x, y);
+    _astroid.position = CGPointMake(x, y);
     
     //set velocity of asteroids: large asterod is faster
     NSInteger velcoity = self.objectSpeed;
-    if (astroid.type == AstoridTypeC) {
+    if (_astroid.type == AstoridTypeC) {
         _isAsteroidTypeC = YES;
         velcoity += 5;
-        astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
+        _astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
         //NSLog(@"Velocioty c: %ld", velcoity);
         
     } else {
         _isAsteroidTypeC = NO;
-        astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
+        _astroid.physicsBody.velocity = CGVectorMake(0, velcoity);
         //NSLog(@"Velocioty: %ld", velcoity);
         
     }
     
-    self.asteroidX = astroid.position.x;
+    self.asteroidX = _astroid.position.x;
     
     
     
     
     
-    [self addChild:astroid];
+    
+    [_gameLayer addChild:_astroid];
     
     
 }
@@ -185,7 +190,7 @@
     
     
     
-    [self addChild:spaceMan];
+    [_gameLayer addChild:spaceMan];
     
     //shows a brief tut only on the fisrt instance of a spaceman
     NSUserDefaults *spaceTutShown = [NSUserDefaults standardUserDefaults];
@@ -227,15 +232,10 @@
 
 - (void)preLoadSFX {
     //preload sound actions
-    //    self.playExpolsionSFX = [SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO];
-    //    self.playShipMovementSFX = [SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO];
-    //    self.powerupSFX = [SKAction playSoundFileNamed:@"powerup.caf" waitForCompletion:NO];
-    //    self.powerdownSFX = [SKAction playSoundFileNamed:@"powerdown.caf" waitForCompletion:NO];
-    [[OALSimpleAudio sharedInstance] preloadEffect:@"shipMovement.caf"];
-    [[OALSimpleAudio sharedInstance] preloadEffect:@"powerup.caf"];
-    [[OALSimpleAudio sharedInstance] preloadEffect:@"powerdown.caf"];
-    [[OALSimpleAudio sharedInstance] preloadEffect:@"rock.caf"];
-    
+        self.playExpolsionSFX = [SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO];
+        self.playShipMovementSFX = [SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO];
+        self.powerupSFX = [SKAction playSoundFileNamed:@"powerup.caf" waitForCompletion:NO];
+        self.powerdownSFX = [SKAction playSoundFileNamed:@"powerdown.caf" waitForCompletion:NO];
     
     
 }
@@ -309,6 +309,7 @@
     
     float moveBy = 20.0;
     float toucable = location.y < self.size.height - 60 && location.y > 50;
+   
     
     
     
@@ -332,6 +333,10 @@
                 [self performSelector:@selector(pauseGame) withObject:nil afterDelay:1/60.0];
                 
                 _isPaused = YES;
+      
+                
+               
+        
             } else {
                 _isPaused = NO;
             }
@@ -341,20 +346,8 @@
             
         } else if ([node.name isEqualToString:@"playButton"]) {
             
-            [node removeFromParent];
             
-            
-            
-            [self addPauseButton];
-            _isPaused = NO;
-            
-            
-            if (_isShip) {
-                [self.ship playShipSFXForever];//only plays sound back if ship still exists
-                
-                
-            }
-            self.scene.paused = NO;
+            [self unPauseGamePlay];
             
         } else if ([node.name isEqualToString:@"spaceTut"]) {
             [node removeFromParent];
@@ -368,11 +361,8 @@
             if (location.x < self.size.width / 2 && toucable) {
                 //move ship to the left if the touch location.y is higer than the banner ad
                 
-                
-                [self.ship runAction:[SKAction moveByX:-moveBy y:0.0 duration:0.0]];
-                if (_isShip) {
-                    [[OALSimpleAudio sharedInstance] playEffect:@"shipMovement.caf"];
-                }
+                [self.ship runAction:[SKAction sequence:@[self.playShipMovementSFX,
+                                                          [SKAction moveByX:-moveBy y:0.0 duration:0.0]]]];
                 
                 
                 
@@ -383,11 +373,9 @@
             if (location.x > self.size.width / 2 && toucable) {
                 //move ship to the right if the touch location.y is higer than the banner ad
                 
-                
-                [self.ship runAction:[SKAction moveByX:moveBy y:0.0 duration:0.0]];
-                if (_isShip) {
-                    [[OALSimpleAudio sharedInstance] playEffect:@"shipMovement.caf"];
-                }
+                [self.ship runAction:[SKAction sequence:@[self.playShipMovementSFX,
+                                                          [SKAction moveByX:moveBy y:0.0 duration:0.0]]]];
+              
                 
             }
         }
@@ -459,19 +447,22 @@
     
     
     if (firstBody.categoryBitMask == CollisionCatAstroid && sceondBody.categoryBitMask == CollisionCatBottomEdge) {
-        //awrad the player points
-        if (_isShip) {
+        //award the player points
+        if (_isShip && firstBody.node != nil) {
             
             [_hud awardScorePoint:pointsAwradared];
+            [firstBody.node removeFromParent];
             
             
         }
+       
         
-        // NSLog(@"score");
+        NSLog(@"score + node: %ld, %@", (long)_hud.score, firstBody.node);
+        
+        NSLog(@"points: %ld", (long)pointsAwradared);
     } else if (firstBody.categoryBitMask == CollisionCatShip && sceondBody.categoryBitMask == CollisionCatSpaceMan) {
         if (_numberOfLives < 3) {
-            // [self runAction:self.powerupSFX];
-            [[OALSimpleAudio sharedInstance] playEffect:@"powerup.caf"];
+            [self runAction:self.powerupSFX];
             self.numberOfLives += bounsLife;
             [self updateHealthConter];
             [_hud awardScorePoint:bounsPoints];
@@ -493,8 +484,7 @@
             [self animateShipExplosion];
             
             
-            //[self runAction:self.playExpolsionSFX];
-            [[OALSimpleAudio sharedInstance] playEffect:@"rock.caf"];
+            [self runAction:self.playExpolsionSFX];
             [ship removeFromParent];
             [asteroid removeFromParent];
             [self.ship stopShipSFX];
@@ -529,8 +519,7 @@
             
         } else if (self.numberOfLives >=1 && sceondBody.node != nil) {
             
-            //[self runAction:self.powerdownSFX];
-            [[OALSimpleAudio sharedInstance] playEffect:@"powerdown.caf"];
+            [self runAction:self.powerdownSFX];
             self.numberOfHits =  self.numberOfHits + 1;
             self.numberOfLives = self.numberOfLives - 1;
             [self updateHealthConter];
@@ -567,8 +556,10 @@
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
     
+    
     if (_isPaused | _isGameOver) {
         self.lastUpdateTimeInterval = 0;
+        
         return;
     } else if (_hasGamePlayStarted) {
         
@@ -755,7 +746,14 @@
 -(void)pauseGame {
     
     if (_isShip && _hasGamePlayStarted) {
-        self.scene.paused = YES;
+        self.gameLayer.scene.view.paused = YES;
+        
+        
+        //NSLog(@"Point before %@",  NSStringFromCGPoint(self.astroid.position));
+    
+        self.lastUpdateTimeInterval = 0;
+        
+        
         
         if (_isPausedByResign && !_isPaused) {
             [self.ship stopShipSFX];
@@ -777,7 +775,7 @@
 -(void)pauseGamePlay {
     _isPausedByResign = YES;
     _wasPausedByTut = YES;
-    [[OALSimpleAudio sharedInstance] unloadAllEffects];
+    
     if (!_isPaused) {
         [self pauseGame];
     }
@@ -787,7 +785,10 @@
 -(void)unPauseGamePlay {
     
     _isPaused = NO;
-    self.scene.paused = NO;
+    self.gameLayer.scene.view.paused = NO;
+    //NSLog(@"Time after pause %f", self.totalGameTime);
+    //NSLog(@"Update int %f", self.lastUpdateTimeInterval);
+     //NSLog(@"Point %@",  NSStringFromCGPoint(self.astroid.position));
     [self preLoadSFX];
     
     [_playBtn removeFromParent];

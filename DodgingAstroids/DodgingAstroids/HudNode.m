@@ -30,6 +30,7 @@
 
 -(void)awardScorePoint:(NSInteger)points {
     self.score += points;
+    NSLog(@"Points passed: %ld", (long)points);
     //get label
     SKLabelNode *scoreLabel = (SKLabelNode*) [self childNodeWithName:@"score"];
     scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.score];

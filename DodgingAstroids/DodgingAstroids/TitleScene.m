@@ -38,6 +38,7 @@
     
     bestScore.position =  CGPointMake(self.size.width / 2, CGRectGetMidY(self.frame) * 1.30);
     bestScore.fontSize = 22;
+    bestScore.zPosition = 1;
     [self addChild:bestScore];
     
     
@@ -54,6 +55,8 @@
         ship.position = CGPointMake(self.size.width/2, self.size.height/4);
         titleLabel.fontSize = 25;
     }
+    ship.zPosition = 1;
+    titleLabel.zPosition = 1;
     
     [self addChild:ship];
     NSLog(@"texture name %@", ship.texture);
@@ -65,7 +68,7 @@
     SKSpriteNode *titleBg = [SKSpriteNode spriteNodeWithImageNamed:@"bg"];
     titleBg.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     titleBg.size = self.size;
-    titleBg.zPosition = 0;
+    titleBg.zPosition = -1;
     [self addChild:titleBg];
     
     
