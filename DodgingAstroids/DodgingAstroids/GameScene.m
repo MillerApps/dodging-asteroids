@@ -232,10 +232,10 @@
 
 - (void)preLoadSFX {
     //preload sound actions
-        self.playExpolsionSFX = [SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO];
-        self.playShipMovementSFX = [SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO];
-        self.powerupSFX = [SKAction playSoundFileNamed:@"powerup.caf" waitForCompletion:NO];
-        self.powerdownSFX = [SKAction playSoundFileNamed:@"powerdown.caf" waitForCompletion:NO];
+    self.playExpolsionSFX = [SKAction playSoundFileNamed:@"rock.caf" waitForCompletion:NO];
+    self.playShipMovementSFX = [SKAction playSoundFileNamed:@"shipMovement.caf" waitForCompletion:NO];
+    self.powerupSFX = [SKAction playSoundFileNamed:@"powerup.caf" waitForCompletion:NO];
+    self.powerdownSFX = [SKAction playSoundFileNamed:@"powerdown.caf" waitForCompletion:NO];
     
     
 }
@@ -309,7 +309,7 @@
     
     float moveBy = 20.0;
     float toucable = location.y < self.size.height - 60 && location.y > 50;
-   
+    
     
     
     
@@ -333,10 +333,10 @@
                 [self performSelector:@selector(pauseGame) withObject:nil afterDelay:1/60.0];
                 
                 _isPaused = YES;
-      
                 
-               
-        
+                
+                
+                
             } else {
                 _isPaused = NO;
             }
@@ -375,7 +375,7 @@
                 
                 [self.ship runAction:[SKAction sequence:@[self.playShipMovementSFX,
                                                           [SKAction moveByX:moveBy y:0.0 duration:0.0]]]];
-              
+                
                 
             }
         }
@@ -455,7 +455,7 @@
             
             
         }
-       
+        
         
         NSLog(@"score + node: %ld, %@", (long)_hud.score, firstBody.node);
         
@@ -746,11 +746,12 @@
 -(void)pauseGame {
     
     if (_isShip && _hasGamePlayStarted) {
-        self.gameLayer.scene.view.paused = YES;
+        
+        self.gameLayer.scene.paused = YES;
         
         
         //NSLog(@"Point before %@",  NSStringFromCGPoint(self.astroid.position));
-    
+        
         self.lastUpdateTimeInterval = 0;
         
         
@@ -785,10 +786,10 @@
 -(void)unPauseGamePlay {
     
     _isPaused = NO;
-    self.gameLayer.scene.view.paused = NO;
+    self.gameLayer.scene.paused = NO;
     //NSLog(@"Time after pause %f", self.totalGameTime);
     //NSLog(@"Update int %f", self.lastUpdateTimeInterval);
-     //NSLog(@"Point %@",  NSStringFromCGPoint(self.astroid.position));
+    //NSLog(@"Point %@",  NSStringFromCGPoint(self.astroid.position));
     [self preLoadSFX];
     
     [_playBtn removeFromParent];
@@ -806,6 +807,7 @@
 
 -(void)applicationWillResignActive {
     _isPausedByResign = YES;
+    NSLog(@"Application Did Resign Active");
     if (!_isPaused) {
         [self pauseGame];
     }

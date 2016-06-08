@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183CEC818E7B876F98D4514C /* Pods_DodgingAsteroidsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1062AEA7A4F14B24013C75 /* Pods_DodgingAsteroidsTests.framework */; };
+		2E0B39574998BAF5C855478B /* Pods_DodgingAsteroids.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 580A39501D707C0E02AC502A /* Pods_DodgingAsteroids.framework */; };
 		2F0B6D291A85C103004DA8B3 /* thrusters.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D271A85C103004DA8B3 /* thrusters.caf */; };
 		2F0B6D2B1A85C545004DA8B3 /* rock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B6D2A1A85C545004DA8B3 /* rock.caf */; };
 		2F10DE5C1AEA7CB20057B757 /* asteroid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2F10DE5B1AEA7CB20057B757 /* asteroid.atlas */; };
+		2F31C0111D066A88009D7E30 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F31C0101D066A88009D7E30 /* GoogleService-Info.plist */; };
 		2F355A7C1AAFFDD0006AD37D /* SpaceManNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F355A7B1AAFFDD0006AD37D /* SpaceManNode.m */; };
 		2F4139DA1A9EA57C00851B59 /* EndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4139D91A9EA57C00851B59 /* EndScene.m */; };
 		2F47C5E41AB6E21800A960B0 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F47C5E31AB6E21800A960B0 /* GameKitHelper.m */; };
@@ -53,9 +56,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1AAC415D242D77737B8C660D /* Pods-DodgingAsteroids.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DodgingAsteroids.release.xcconfig"; path = "Pods/Target Support Files/Pods-DodgingAsteroids/Pods-DodgingAsteroids.release.xcconfig"; sourceTree = "<group>"; };
+		1FBFF9F9CE3A9BA2F450F94E /* Pods-DodgingAsteroidsTests.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DodgingAsteroidsTests.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-DodgingAsteroidsTests/Pods-DodgingAsteroidsTests.distribution.xcconfig"; sourceTree = "<group>"; };
 		2F0B6D271A85C103004DA8B3 /* thrusters.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrusters.caf; sourceTree = "<group>"; };
 		2F0B6D2A1A85C545004DA8B3 /* rock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rock.caf; sourceTree = "<group>"; };
 		2F10DE5B1AEA7CB20057B757 /* asteroid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = asteroid.atlas; sourceTree = "<group>"; };
+		2F31C0101D066A88009D7E30 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F355A7A1AAFFDD0006AD37D /* SpaceManNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceManNode.h; sourceTree = "<group>"; };
 		2F355A7B1AAFFDD0006AD37D /* SpaceManNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceManNode.m; sourceTree = "<group>"; };
 		2F4139D91A9EA57C00851B59 /* EndScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndScene.m; sourceTree = "<group>"; };
@@ -105,6 +111,12 @@
 		2FF45B781A84487300D49057 /* ExhaustParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExhaustParticle.sks; sourceTree = "<group>"; };
 		2FF45B791A84487300D49057 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		2FFA4F1E1AD53105001E9191 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		580A39501D707C0E02AC502A /* Pods_DodgingAsteroids.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DodgingAsteroids.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F652405331BEF93C2EB8E93 /* Pods-DodgingAsteroids.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DodgingAsteroids.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-DodgingAsteroids/Pods-DodgingAsteroids.distribution.xcconfig"; sourceTree = "<group>"; };
+		BE1062AEA7A4F14B24013C75 /* Pods_DodgingAsteroidsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DodgingAsteroidsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA76297F0D48FAF3DD7AEE95 /* Pods-DodgingAsteroids.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DodgingAsteroids.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DodgingAsteroids/Pods-DodgingAsteroids.debug.xcconfig"; sourceTree = "<group>"; };
+		D1F5632FE28CBA2B3E182F0B /* Pods-DodgingAsteroidsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DodgingAsteroidsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DodgingAsteroidsTests/Pods-DodgingAsteroidsTests.release.xcconfig"; sourceTree = "<group>"; };
+		DBA7C0A06717E8CD5B3CA8DD /* Pods-DodgingAsteroidsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DodgingAsteroidsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DodgingAsteroidsTests/Pods-DodgingAsteroidsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +127,7 @@
 				2F82B4321AF98EB900796910 /* AudioToolbox.framework in Frameworks */,
 				2F82B4311AF98EAF00796910 /* AVFoundation.framework in Frameworks */,
 				2FFA4F1F1AD53105001E9191 /* GameKit.framework in Frameworks */,
+				2E0B39574998BAF5C855478B /* Pods_DodgingAsteroids.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183CEC818E7B876F98D4514C /* Pods_DodgingAsteroidsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +226,8 @@
 				2FF45B471A840A0E00D49057 /* DodgingAstroids */,
 				2FF45B661A840A0F00D49057 /* DodgingAstroidsTests */,
 				2FF45B461A840A0E00D49057 /* Products */,
+				B15148377A731597CD2E2682 /* Pods */,
+				8A51BE0A5408EF7E53808B92 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -227,6 +243,7 @@
 		2FF45B471A840A0E00D49057 /* DodgingAstroids */ = {
 			isa = PBXGroup;
 			children = (
+				2F31C0101D066A88009D7E30 /* GoogleService-Info.plist */,
 				2FBF09541A85EE0D00A3B295 /* Scenes */,
 				2FBF09581A85EE4700A3B295 /* Nodes */,
 				2FF45B571A840A0E00D49057 /* Main.storyboard */,
@@ -274,6 +291,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8A51BE0A5408EF7E53808B92 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				580A39501D707C0E02AC502A /* Pods_DodgingAsteroids.framework */,
+				BE1062AEA7A4F14B24013C75 /* Pods_DodgingAsteroidsTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B15148377A731597CD2E2682 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CA76297F0D48FAF3DD7AEE95 /* Pods-DodgingAsteroids.debug.xcconfig */,
+				1AAC415D242D77737B8C660D /* Pods-DodgingAsteroids.release.xcconfig */,
+				9F652405331BEF93C2EB8E93 /* Pods-DodgingAsteroids.distribution.xcconfig */,
+				DBA7C0A06717E8CD5B3CA8DD /* Pods-DodgingAsteroidsTests.debug.xcconfig */,
+				D1F5632FE28CBA2B3E182F0B /* Pods-DodgingAsteroidsTests.release.xcconfig */,
+				1FBFF9F9CE3A9BA2F450F94E /* Pods-DodgingAsteroidsTests.distribution.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -281,9 +320,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2FF45B6D1A840A0F00D49057 /* Build configuration list for PBXNativeTarget "DodgingAsteroids" */;
 			buildPhases = (
+				A7FC63E3D9C7AE4CC9FD9F1A /* Check Pods Manifest.lock */,
 				2FF45B411A840A0E00D49057 /* Sources */,
 				2FF45B421A840A0E00D49057 /* Frameworks */,
 				2FF45B431A840A0E00D49057 /* Resources */,
+				E1510A8CFBF3C575370E574D /* Embed Pods Frameworks */,
+				FF6F35E3EB2706AC6496EDA0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -298,9 +340,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2FF45B701A840A0F00D49057 /* Build configuration list for PBXNativeTarget "DodgingAsteroidsTests" */;
 			buildPhases = (
+				66B10D2FACCD4A5B9F41A34F /* Check Pods Manifest.lock */,
 				2FF45B5F1A840A0F00D49057 /* Sources */,
 				2FF45B601A840A0F00D49057 /* Frameworks */,
 				2FF45B611A840A0F00D49057 /* Resources */,
+				57598005FE31185B490AF447 /* Embed Pods Frameworks */,
+				E6CB60C5A4F3F7793487B962 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -373,6 +418,7 @@
 				2FF45B5B1A840A0E00D49057 /* Images.xcassets in Resources */,
 				2FF45B591A840A0E00D49057 /* Main.storyboard in Resources */,
 				2F5D13CA1AD36E0700D2166A /* powerup.caf in Resources */,
+				2F31C0111D066A88009D7E30 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +430,99 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		57598005FE31185B490AF447 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DodgingAsteroidsTests/Pods-DodgingAsteroidsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		66B10D2FACCD4A5B9F41A34F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A7FC63E3D9C7AE4CC9FD9F1A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E1510A8CFBF3C575370E574D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DodgingAsteroids/Pods-DodgingAsteroids-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6CB60C5A4F3F7793487B962 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DodgingAsteroidsTests/Pods-DodgingAsteroidsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF6F35E3EB2706AC6496EDA0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DodgingAsteroids/Pods-DodgingAsteroids-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2FF45B411A840A0E00D49057 /* Sources */ = {
@@ -488,6 +627,7 @@
 		};
 		2FA255A11A9950BA00D6E07F /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F652405331BEF93C2EB8E93 /* Pods-DodgingAsteroids.distribution.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Tyler Miller (N2263DH3H7)";
@@ -504,6 +644,7 @@
 		};
 		2FA255A21A9950BA00D6E07F /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FBFF9F9CE3A9BA2F450F94E /* Pods-DodgingAsteroidsTests.distribution.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -605,6 +746,7 @@
 		};
 		2FF45B6E1A840A0F00D49057 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA76297F0D48FAF3DD7AEE95 /* Pods-DodgingAsteroids.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -621,6 +763,7 @@
 		};
 		2FF45B6F1A840A0F00D49057 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AAC415D242D77737B8C660D /* Pods-DodgingAsteroids.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Tyler Miller (N2263DH3H7)";
@@ -637,6 +780,7 @@
 		};
 		2FF45B711A840A0F00D49057 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBA7C0A06717E8CD5B3CA8DD /* Pods-DodgingAsteroidsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -657,6 +801,7 @@
 		};
 		2FF45B721A840A0F00D49057 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1F5632FE28CBA2B3E182F0B /* Pods-DodgingAsteroidsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

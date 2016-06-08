@@ -14,7 +14,11 @@
 
 
 
+
 @implementation SKScene (Unarchive)
+
+NSString * const GADAppId = @"ca-app-pub-7850459461103641/9817632241";
+NSString * const TestId = @"c41c0eb76e7cc7f29b2f877a9c736813";
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
     /* Retrieve scene file path from the application bundle */
@@ -36,7 +40,7 @@
 @interface GameViewController ()
 
 @property (nonatomic) BOOL isVisable;
-@property (nonatomic) ADBannerView *adBanner;
+@property (nonatomic) GADBannerView *adBanner;
 
 @end
 
@@ -57,6 +61,7 @@
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     skView.showsPhysics = YES;
+    [GADRequest request].testDevices = @[ kGADSimulatorID,TestId ];
 #endif
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = NO;
@@ -106,9 +111,13 @@
 
 - (void)setUpAds
 {
-    _adBanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 50)];
+    _adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait origin:CGPointMake(0, self.view.frame.size.height)];
     _adBanner.delegate = self;
+    _adBanner.adUnitID = GADAppId;
+    _adBanner.rootViewController = self;
+    [_adBanner loadRequest:[GADRequest request]];
 }
+
 
 - (void)removeAds{
     [_adBanner removeFromSuperview];
@@ -117,7 +126,8 @@
     _isVisable = NO;
 }
 
--(void)bannerViewDidLoadAd:(ADBannerView *)banner {
+
+- (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
     if (!_isVisable && _adBanner != nil) {
         if (_adBanner.superview == nil) {
             [self.view addSubview:_adBanner];
@@ -125,20 +135,21 @@
         
         [UIView beginAnimations:@"bannerOn" context:nil];
         
-        banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
+        bannerView.frame = CGRectOffset(bannerView.frame, 0, -bannerView.frame.size.height);
         
         [UIView commitAnimations];
         
         _isVisable = YES;
     }
 }
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-    NSLog(@"Failed to retrieve ad");
+- (void)adView:(GADBannerView *)bannerView
+didFailToReceiveAdWithError:(GADRequestError *)error {
+    
+    NSLog(@"Failed to retrieve ad, error: %@", error);
     if (_isVisable && _adBanner != nil) {
         [UIView beginAnimations:@"bannerOff" context:nil];
         
-        banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
+        bannerView.frame = CGRectOffset(bannerView.frame, 0, bannerView.frame.size.height);
         
         [UIView commitAnimations];
         
@@ -147,21 +158,14 @@
     
 }
 
--(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave {
+- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
     
-    if (!willLeave) {
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"pause" object:nil];
-        
-        
-        
-    }
-    
-    return YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"pause" object:nil];
     
 }
 
--(void)bannerViewActionDidFinish:(ADBannerView *)banner {
+- (void)adViewDidDismissScreen:(GADBannerView *)bannerView {
+    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"unPause" object:nil];
     

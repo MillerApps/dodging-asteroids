@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
-@import iAd;
+@import GoogleMobileAds;
 
 
 
-@interface GameViewController : UIViewController <UIAlertViewDelegate, ADBannerViewDelegate>
+@interface GameViewController : UIViewController <UIAlertViewDelegate, GADBannerViewDelegate>
 
 @end

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "Utils.h"
 #import "GameKitHelper.h"
+@import Firebase;
 
 @interface AppDelegate ()
 
@@ -21,7 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-         [[GameKitHelper sharedGamekitHelper] authenticateLocalPlayer];
+    [[GameKitHelper sharedGamekitHelper] authenticateLocalPlayer];
+    [FIRApp configure];
     
    
     

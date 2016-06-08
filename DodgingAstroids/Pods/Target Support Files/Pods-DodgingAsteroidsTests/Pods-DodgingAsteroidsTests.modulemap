@@ -1,0 +1,6 @@
+framework module Pods_DodgingAsteroidsTests {
+  umbrella header "Pods-DodgingAsteroidsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
