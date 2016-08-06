@@ -77,6 +77,8 @@
     [self setupStartButton];
     [self setupLeaderBoardsButton];
     
+    
+    
 
     
     
@@ -112,7 +114,7 @@
     if ([node.name isEqualToString:@"play"]) {
         
         GameScene *gamePlay = [GameScene sceneWithSize:self.size];
-        [self.view presentScene:gamePlay transition:[SKTransition fadeWithDuration:1.0]];
+        [self.view presentScene:gamePlay transition:[SKTransition pushWithDirection:SKTransitionDirectionLeft duration:2.0]];
         
         
     } else if ([node.name isEqualToString:@"boards"]) {

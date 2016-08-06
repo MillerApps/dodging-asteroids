@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameScene.m"
-            timestampString = "474265618.881443"
+            timestampString = "488013647.979575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "491"
-            endingLineNumber = "491"
+            startingLineNumber = "493"
+            endingLineNumber = "493"
             landmarkName = "-didBeginContact:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameScene.m"
-            timestampString = "486982065.326963"
+            timestampString = "488422835.318579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "820"
@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/TitleScene.m"
-            timestampString = "473626107.37394"
+            timestampString = "487986882.41222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "-touchesBegan:withEvent:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameScene.m"
-            timestampString = "473624062.08655"
+            timestampString = "488013647.979575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "-addPlayerShip"
             landmarkType = "5">
          </BreakpointContent>
@@ -80,7 +80,7 @@
             startingLineNumber = "23"
             endingLineNumber = "23"
             landmarkName = "+shipAtPostion:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameScene.m"
-            timestampString = "474265618.881443"
+            timestampString = "488422835.318579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "633"
-            endingLineNumber = "633"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
             landmarkName = "-update:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameScene.m"
-            timestampString = "486982065.326963"
+            timestampString = "488422835.318579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "786"
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DodgingAstroids/GameScene.m"
-            timestampString = "474265618.881443"
+            timestampString = "488422835.318579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "560"
-            endingLineNumber = "560"
+            startingLineNumber = "562"
+            endingLineNumber = "562"
             landmarkName = "-update:"
             landmarkType = "5">
          </BreakpointContent>

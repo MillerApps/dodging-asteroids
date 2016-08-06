@@ -11,6 +11,7 @@
 #import "GameKitHelper.h"
 #import "TitleScene.h"
 #import "Utils.h"
+#import "CreditsViewController.h"
 @import AVFoundation;
 
 @interface EndScene ()
@@ -50,9 +51,13 @@
     if ((NSInteger)[self.userData valueForKey:@"currentScore"] > highScoreInt) {
         [self reportScoreToGameCenter:highScoreInt];
     }
+    
+    
 }
 
 -(void)didMoveToView:(SKView *)view {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"setUpAds" object:nil];
     
     SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:@"bg"];
     bg.position = CGPointMake(self.size.width/2, self.size.height/2);
@@ -83,12 +88,8 @@
     [self setUpBackgroundMusic];
     
     
-    
-    
-    
-    
-    
 }
+
 
 - (void)setUpBackgroundMusic {
     
@@ -141,16 +142,18 @@
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqualToString:@"try"]) {
-        GameScene *firstScene = [GameScene sceneWithSize:self.size];
-        [self.view presentScene:firstScene];
+        GameScene *gameScene = [GameScene sceneWithSize:self.size];
+        [self.view presentScene:gameScene transition:[SKTransition pushWithDirection:SKTransitionDirectionUp duration:2.0]];
         [self.bgMusic stop];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAds" object:nil];
     } else if ([node.name isEqualToString:@"credits"]) {
+        [self.view.window.rootViewController performSegueWithIdentifier:@"showCredits" sender:self];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showCreditsView" object:nil];
     } else if ([node.name isEqualToString:@"home"]) {
         TitleScene *title = [TitleScene sceneWithSize:self.size];
-        [self.view presentScene:title];
+        [self.view presentScene:title transition:[SKTransition pushWithDirection:SKTransitionDirectionRight duration:2.0]];
         [self.bgMusic stop];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAds" object:nil];
     }
     
     

@@ -10,15 +10,13 @@
 #import "TitleScene.h"
 #import "GameKitHelper.h"
 #import "Utils.h"
+#import "CreditsViewController.h"
 @import AVFoundation;
 
 
 
 
 @implementation SKScene (Unarchive)
-
-NSString * const GADAppId = @"ca-app-pub-7850459461103641/9817632241";
-NSString * const TestId = @"c41c0eb76e7cc7f29b2f877a9c736813";
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
     /* Retrieve scene file path from the application bundle */
@@ -40,11 +38,14 @@ NSString * const TestId = @"c41c0eb76e7cc7f29b2f877a9c736813";
 @interface GameViewController ()
 
 @property (nonatomic) BOOL isVisable;
-@property (nonatomic) GADBannerView *adBanner;
+@property (nonatomic, strong) GADBannerView *adBanner;
 
 @end
 
 @implementation GameViewController
+
+NSString * const GADAppId = @"ca-app-pub-7850459461103641/9817632241";
+NSArray * testsIds;
 
 
 
@@ -54,14 +55,21 @@ NSString * const TestId = @"c41c0eb76e7cc7f29b2f877a9c736813";
 {
     [super viewWillLayoutSubviews];
     
+    //Setup testids array
+    testsIds = @[@"449d8db2d1246b7b48c60e1e5d268ad8", @"c41c0eb76e7cc7f29b2f877a9c736813"];
+    
+    // Confiure AdMob
+    if (_adBanner == nil) {
+        [self initalizeBanner];
+    }
+    
     
     // Configure the view.
     SKView * skView = (SKView *)self.view;
 #ifdef DEBUG
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    skView.showsPhysics = YES;
-    [GADRequest request].testDevices = @[ kGADSimulatorID,TestId ];
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
+    skView.showsPhysics = NO;
 #endif
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = NO;
@@ -83,6 +91,8 @@ NSString * const TestId = @"c41c0eb76e7cc7f29b2f877a9c736813";
     
 }
 
+
+
 - (BOOL)shouldAutorotate
 {
     return YES;
@@ -97,33 +107,37 @@ NSString * const TestId = @"c41c0eb76e7cc7f29b2f877a9c736813";
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
-#pragma mark - iAD
+#pragma mark - AdMob
 
-- (void)setUpAds
-{
+- (void)initalizeBanner {
+    
     _adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait origin:CGPointMake(0, self.view.frame.size.height)];
+    _adBanner.hidden = YES;
     _adBanner.delegate = self;
     _adBanner.adUnitID = GADAppId;
     _adBanner.rootViewController = self;
-    [_adBanner loadRequest:[GADRequest request]];
+    [self.view addSubview:_adBanner];
+   
+    GADRequest *request = [GADRequest request];
+#ifdef DEBUG
+    request.testDevices = @[ kGADSimulatorID,testsIds ];
+#endif
+    [_adBanner loadRequest:request];
+
+}
+
+- (void)setUpAds {
+    _adBanner.hidden = NO;
 }
 
 
-- (void)removeAds{
-    [_adBanner removeFromSuperview];
-    _adBanner = nil;
-    _adBanner.delegate = nil;
-    _isVisable = NO;
+- (void)removeAds {
+    _adBanner.hidden = YES;
 }
 
 
@@ -158,21 +172,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     
 }
 
-- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"pause" object:nil];
-    
-}
-
-- (void)adViewDidDismissScreen:(GADBannerView *)bannerView {
-    
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"unPause" object:nil];
-    
-    
-    
-}
-
 
 #pragma mark - NSNotifcationCenter Selectors
 
@@ -188,10 +187,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
         
         [self presentViewController:gameKitHelper.authenticationViewController animated:YES completion:nil];
         
-    } else if ([notification.name isEqualToString:@"showCreditsView"]) {
-        
-        [self performSegueWithIdentifier:@"showCredits" sender:self];
-        
     } else if ([notification.name isEqualToString:@"showGameCenter"]) {
         
         [[GameKitHelper sharedGamekitHelper] showGKGameCenterViewController:self];
@@ -206,23 +201,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
         
         [self removeAds];
         
-    } else if ([notification.name isEqualToString:@"hideAd"]) {
-        
-        [UIView beginAnimations:@"bannerOff" context:nil];
-        
-        _adBanner.frame = CGRectOffset(_adBanner.frame, 0, _adBanner.frame.size.height);
-        
-        [UIView commitAnimations];
-        
-        
-    } else if ([notification.name isEqualToString:@"showAd"]) {
-        
-        [UIView beginAnimations:@"bannerOn" context:nil];
-        
-        _adBanner.frame = CGRectOffset(_adBanner.frame, 0, -_adBanner.frame.size.height);
-        
-        [UIView commitAnimations];
-        
     }
 }
 
@@ -232,13 +210,7 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:PresentAuthenticationViewController object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"showCreditsView" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"showGameCenter" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"hideAd" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"showAd" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"setUpAds" object:nil];
     

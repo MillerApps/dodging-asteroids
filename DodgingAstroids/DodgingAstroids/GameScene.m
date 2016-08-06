@@ -75,7 +75,7 @@
     self.timeSinceSpaceManAdded = 0;
     self.totalGameTime = 0;
     self.objectSpeed = objectSpeed;
-    self.asteroidRespwanRate = 1.90;
+    self.asteroidRespwanRate = 1.30;
     self.numberOfLives = 0;
     
     
@@ -121,12 +121,11 @@
     self.physicsWorld.contactDelegate = self;
     
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"setUpAds" object:nil];
-    
-    
     
     
 }
+
+
 
 - (void)addPlayerShip {
     //add spaceship to scene
@@ -308,7 +307,7 @@
     SKNode *node = [self nodeAtPoint:location];
     
     float moveBy = 20.0;
-    float toucable = location.y < self.size.height - 60 && location.y > 50;
+    float toucable = location.y < self.size.height - 60 && location.y > 10;
     
     
     
@@ -329,8 +328,7 @@
                 [self addChild:_playBtn];
                 
                 
-                
-                [self performSelector:@selector(pauseGame) withObject:nil afterDelay:1/60.0];
+                [self pauseGame];
                 
                 _isPaused = YES;
                 
@@ -422,12 +420,14 @@
         EndScene *gameOver = [EndScene sceneWithSize:self.size];
         gameOver.userData = [NSMutableDictionary dictionary];
         [gameOver.userData setObject:[NSString stringWithFormat:@"%ld", (long)_hud.score] forKey:@"currentScore"];
-        [self.view presentScene:gameOver transition:[SKTransition fadeWithDuration:0.5]];
+
+        [self.view presentScene:gameOver transition:[SKTransition pushWithDirection:SKTransitionDirectionDown duration:2.0]];
+        
+        
         
         //Remove obsever from NSNotificationCenter
         [[NSNotificationCenter defaultCenter] removeObserver:self];
-        //remove
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAds" object:nil];
+        
         
         
     }];
@@ -569,48 +569,48 @@
         
         //increase the game difficulty by changing the speed pf asteroids
         if (self.totalGameTime > 240) {
-            self.objectSpeed = -180;
+            self.objectSpeed = -225;
             if (_isAsteroidTypeC) {
-                self.asteroidRespwanRate = 1.0;
+                self.asteroidRespwanRate = 0.90;
             } else {
-                self.asteroidRespwanRate = 1.50;
+                self.asteroidRespwanRate = 1.05;
             }
             
             
         } else if (self.totalGameTime > 120) {
-            self.objectSpeed = -170;
+            self.objectSpeed = -220;
             if (_isAsteroidTypeC) {
-                self.asteroidRespwanRate = 1.05;
+                self.asteroidRespwanRate = 0.95;
             } else {
-                self.asteroidRespwanRate = 1.55;
+                self.asteroidRespwanRate = 1.10;
             }
             
             
         } else if (self.totalGameTime > 60) {
-            self.objectSpeed = -160;
+            self.objectSpeed = -215;
             if (_isAsteroidTypeC) {
-                self.asteroidRespwanRate = 1.10;
+                self.asteroidRespwanRate = 1.00;
             } else {
-                self.asteroidRespwanRate = 1.65;
+                self.asteroidRespwanRate = 1.15;
             }
             
             
         } else if (self.totalGameTime > 30) {
-            self.objectSpeed = -150;
+            self.objectSpeed = -210;
             if (_isAsteroidTypeC) {
-                self.asteroidRespwanRate = 1.15;
+                self.asteroidRespwanRate = 1.05;
             } else {
-                self.asteroidRespwanRate = 1.75;
+                self.asteroidRespwanRate = 1.20;
             }
             
             
             
         } else if (self.totalGameTime > 15) {
-            self.objectSpeed = -140;
+            self.objectSpeed = -205;
             if (_isAsteroidTypeC) {
-                self.asteroidRespwanRate = 1.20;
+                self.asteroidRespwanRate = 1.10;
             } else {
-                self.asteroidRespwanRate = 1.85;
+                self.asteroidRespwanRate = 1.25;
             }
             
             
@@ -750,8 +750,6 @@
         self.gameLayer.scene.paused = YES;
         
         
-        //NSLog(@"Point before %@",  NSStringFromCGPoint(self.astroid.position));
-        
         self.lastUpdateTimeInterval = 0;
         
         
@@ -777,6 +775,7 @@
     _isPausedByResign = YES;
     _wasPausedByTut = YES;
     
+    
     if (!_isPaused) {
         [self pauseGame];
     }
@@ -799,7 +798,7 @@
     
     if (_isShip) {
         [self.ship playShipSFXForever];//only plays sound back if ship still exists
-        
+     
         
         
     }
